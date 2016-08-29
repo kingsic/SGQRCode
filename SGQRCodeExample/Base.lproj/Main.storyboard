@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="r0T-6M-Xj5">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pf-aj-vwR">
+                                <rect key="frame" x="250" y="164" width="100" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.80584417500000005" blue="0.37902437550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="r30-qM-Vde"/>
+                                </constraints>
+                                <state key="normal" title="生成二维码"/>
+                                <connections>
+                                    <action selector="generateQRCode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7b2-zo-u5C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3e-DC-AUh">
+                                <rect key="frame" x="250" y="244" width="100" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.80584417500000005" blue="0.37902437550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="IYk-qH-qRv"/>
+                                </constraints>
+                                <state key="normal" title="扫描二维码"/>
+                                <connections>
+                                    <action selector="scanningQRCode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PBr-tm-0Ma"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="h3e-DC-AUh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="07O-5D-H8o"/>
+                            <constraint firstItem="6pf-aj-vwR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="SUO-sT-pqU"/>
+                            <constraint firstItem="6pf-aj-vwR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UHy-Hy-eOL"/>
+                            <constraint firstItem="h3e-DC-AUh" firstAttribute="top" secondItem="6pf-aj-vwR" secondAttribute="bottom" constant="50" id="yd2-Y0-QVX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="IgM-iT-AVL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1140" y="145"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Hgq-Rt-UOd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r0T-6M-Xj5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gEE-2Q-jU6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="VyO-hL-OTp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0iq-1T-OVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="336" y="1034"/>
+        </scene>
+    </scenes>
+</document>
