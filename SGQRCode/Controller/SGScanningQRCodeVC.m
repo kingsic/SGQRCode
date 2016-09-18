@@ -78,7 +78,7 @@
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     
     // 设置扫描范围(每一个取值0～1，以屏幕右上角为坐标原点)
-    output.rectOfInterest = CGRectMake(0.14, 0.15, 0.42, 0.7);
+    output.rectOfInterest = CGRectMake(0.15, 0.24, 0.7, 0.52);
     
     // 5、 初始化链接对象（会话对象）
     self.session = [[AVCaptureSession alloc] init];

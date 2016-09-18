@@ -115,12 +115,12 @@
 		96CBCB3E1D75D46900F5EAD6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				96CBCB3F1D75D46900F5EAD6 /* ScanSuccessJumpVC.h */,
-				96CBCB401D75D46900F5EAD6 /* ScanSuccessJumpVC.m */,
 				96CBCB411D75D46900F5EAD6 /* SGGenerateQRCodeVC.h */,
 				96CBCB421D75D46900F5EAD6 /* SGGenerateQRCodeVC.m */,
 				96CBCB431D75D46900F5EAD6 /* SGScanningQRCodeVC.h */,
 				96CBCB441D75D46900F5EAD6 /* SGScanningQRCodeVC.m */,
+				96CBCB3F1D75D46900F5EAD6 /* ScanSuccessJumpVC.h */,
+				96CBCB401D75D46900F5EAD6 /* ScanSuccessJumpVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
