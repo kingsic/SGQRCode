@@ -3,13 +3,13 @@
 
 ## iOS原生二维码的生成与扫描
 
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle.gif) 
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle.png) 
 
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle2.gif) 
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle2.png) 
 
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle3.gif) 
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle3.png) 
 
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle4.gif) 
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle4.png) 
 
 ### * `普通二维码生成`<br>
 
