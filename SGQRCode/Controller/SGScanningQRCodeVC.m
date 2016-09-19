@@ -117,13 +117,24 @@
      // 3. 设置界面显示扫描结果
     if (metadataObjects.count > 0) {
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
-        // 提示：如果需要对url或者名片等信息进行扫描，可以在此进行扩展！
-        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-        jumpVC.jump_URL = obj.stringValue;
-        NSLog(@"stringValue = = %@", obj.stringValue);
-        [self.navigationController pushViewController:jumpVC animated:YES];
+        
+        NSLog(@"metadataObjects = %@", metadataObjects);
+        
+        if ([obj.stringValue hasPrefix:@"http"]) {
+            // 提示：如果需要对url或者名片等信息进行扫描，可以在此进行扩展！
+            ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+            jumpVC.jump_URL = obj.stringValue;
+            NSLog(@"stringValue = = %@", obj.stringValue);
+            [self.navigationController pushViewController:jumpVC animated:YES];
+            
+        } else { // 扫描结果为条形码
+        
+            ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+            jumpVC.jump_bar_code = obj.stringValue;
+            NSLog(@"stringValue = = %@", obj.stringValue);
+            [self.navigationController pushViewController:jumpVC animated:YES];
+        }
     }
-    
 }
 
 
