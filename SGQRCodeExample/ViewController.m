@@ -14,6 +14,8 @@
 #import "ViewController.h"
 #import "SGGenerateQRCodeVC.h"
 #import "SGScanningQRCodeVC.h"
+#import <AVFoundation/AVFoundation.h>
+#import "SGAlertView.h"
 
 @interface ViewController ()
 
@@ -39,9 +41,25 @@
 }
 
 - (IBAction)scanningQRCode:(id)sender {
-    SGScanningQRCodeVC *VC = [[SGScanningQRCodeVC alloc] init];
-    
-    [self.navigationController pushViewController:VC animated:YES];
+    // 1、 获取摄像设备
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device) {
+        SGScanningQRCodeVC *VC = [[SGScanningQRCodeVC alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
+    } else {
+        // 1、初始化UIAlertController
+        UIAlertController *aC = [UIAlertController alertControllerWithTitle:@"⚠️ 警告" message:@"未检测到您的摄像头, 请在真机上测试" preferredStyle:UIAlertControllerStyleAlert];
+        
+        // 2.设置UIAlertAction样式
+        UIAlertAction *sureAc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+        }];
+        
+        [aC addAction:sureAc];
+        // 3.显示alertController:presentViewController
+        [self presentViewController:aC animated:YES completion:nil];
+    }
 }
+
 
 @end

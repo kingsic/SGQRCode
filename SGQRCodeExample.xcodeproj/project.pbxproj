@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96977ADC1D997E3E00E96216 /* SGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96977AD81D997E3E00E96216 /* SGAlertView.m */; };
+		96977ADD1D997E3E00E96216 /* SGBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96977ADA1D997E3E00E96216 /* SGBottomView.m */; };
+		96977ADE1D997E3E00E96216 /* SGBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96977ADB1D997E3E00E96216 /* SGBottomView.xib */; };
 		96CBCB481D75D46900F5EAD6 /* CIImage+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB3D1D75D46900F5EAD6 /* CIImage+SGExtension.m */; };
 		96CBCB491D75D46900F5EAD6 /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB401D75D46900F5EAD6 /* ScanSuccessJumpVC.m */; };
 		96CBCB4A1D75D46900F5EAD6 /* SGGenerateQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB421D75D46900F5EAD6 /* SGGenerateQRCodeVC.m */; };
@@ -40,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		96977AD71D997E3E00E96216 /* SGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAlertView.h; sourceTree = "<group>"; };
+		96977AD81D997E3E00E96216 /* SGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAlertView.m; sourceTree = "<group>"; };
+		96977AD91D997E3E00E96216 /* SGBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGBottomView.h; sourceTree = "<group>"; };
+		96977ADA1D997E3E00E96216 /* SGBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGBottomView.m; sourceTree = "<group>"; };
+		96977ADB1D997E3E00E96216 /* SGBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGBottomView.xib; sourceTree = "<group>"; };
 		96CBCB3C1D75D46900F5EAD6 /* CIImage+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CIImage+SGExtension.h"; sourceTree = "<group>"; };
 		96CBCB3D1D75D46900F5EAD6 /* CIImage+SGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CIImage+SGExtension.m"; sourceTree = "<group>"; };
 		96CBCB3F1D75D46900F5EAD6 /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
@@ -93,9 +101,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96977AD61D997E1E00E96216 /* SGAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				96977AD71D997E3E00E96216 /* SGAlertView.h */,
+				96977AD81D997E3E00E96216 /* SGAlertView.m */,
+				96977AD91D997E3E00E96216 /* SGBottomView.h */,
+				96977ADA1D997E3E00E96216 /* SGBottomView.m */,
+				96977ADB1D997E3E00E96216 /* SGBottomView.xib */,
+			);
+			path = SGAlertView;
+			sourceTree = "<group>";
+		};
 		96CBCB3A1D75D46900F5EAD6 /* SGQRCode */ = {
 			isa = PBXGroup;
 			children = (
+				96977AD61D997E1E00E96216 /* SGAlertView */,
 				96CBCB3B1D75D46900F5EAD6 /* Category */,
 				96CBCB3E1D75D46900F5EAD6 /* Controller */,
 				96CBCB451D75D46900F5EAD6 /* View */,
@@ -304,6 +325,7 @@
 				DFA7295E1D70D7FA005FA8D1 /* LaunchScreen.storyboard in Resources */,
 				DFA7295B1D70D7FA005FA8D1 /* Assets.xcassets in Resources */,
 				DFA729951D70D8F0005FA8D1 /* Main.storyboard in Resources */,
+				96977ADE1D997E3E00E96216 /* SGBottomView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,9 +355,11 @@
 				96CBCB491D75D46900F5EAD6 /* ScanSuccessJumpVC.m in Sources */,
 				96CBCB481D75D46900F5EAD6 /* CIImage+SGExtension.m in Sources */,
 				DFA729501D70D7FA005FA8D1 /* main.m in Sources */,
+				96977ADD1D997E3E00E96216 /* SGBottomView.m in Sources */,
 				96CBCB4C1D75D46900F5EAD6 /* SGScanningQRCodeView.m in Sources */,
 				DFA7298E1D70D86F005FA8D1 /* ViewController.m in Sources */,
 				96CBCB4A1D75D46900F5EAD6 /* SGGenerateQRCodeVC.m in Sources */,
+				96977ADC1D997E3E00E96216 /* SGAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

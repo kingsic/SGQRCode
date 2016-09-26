@@ -5,11 +5,14 @@
 //  Created by Sorgle on 16/8/25.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
-
-// 欢迎来GitHub下载最新Demo
-// GitHub地址:https://github.com/kingsic/SGQRCode.git
-// 交流邮箱:kingsic@126.com
-
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+//
+//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于kingsic@126.com邮箱联系 - - - - - //
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//  - - GitHub下载地址 https://github.com/kingsic/SGQRCode.git - - - - - - - - - //
+//
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 /*
  

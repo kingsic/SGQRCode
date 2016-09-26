@@ -1,8 +1,8 @@
 //
-//  ScanSuccessJumpVC.h
-//  SGQRCodeExample
+//  SGBottomView.h
+//  SGAlertViewExample
 //
-//  Created by Sorgle on 16/8/29.
+//  Created by Sorgle on 2016/9/25.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -10,17 +10,16 @@
 //  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于kingsic@126.com邮箱联系 - - - - - //
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  - - GitHub下载地址 https://github.com/kingsic/SGQRCode.git - - - - - - - - - //
+//  - - GitHub下载地址 https://github.com/kingsic/SGActionSheet.git - - - - - - //
 //
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import <UIKit/UIKit.h>
 
-@interface ScanSuccessJumpVC : UIViewController
-
-/** 接收扫描的二维码信息 */
-@property (nonatomic, copy) NSString *jump_URL;
-/** 接收扫描的条形码信息 */
-@property (nonatomic, copy) NSString *jump_bar_code;
+@interface SGBottomView : UIView
+/** 取消按钮的点击事件 */
+- (void)addTargetCancelBtn:(id)target action:(SEL)action;
+/** 确定按钮的点击事件 */
+- (void)addTargetSureBtn:(id)target action:(SEL)action;
 
 @end
