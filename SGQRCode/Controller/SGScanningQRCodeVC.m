@@ -34,7 +34,7 @@
 #import "SGScanningQRCodeView.h"
 #import "ScanSuccessJumpVC.h"
 
-@interface SGScanningQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate>
+@interface SGScanningQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 /** 会话对象 */
 @property (nonatomic, strong) AVCaptureSession *session;
 /** 图层类 */
@@ -42,6 +42,7 @@
 @property (nonatomic, strong) SGScanningQRCodeView *scanningView;
 
 @property (nonatomic, strong) UIButton *right_Button;
+
 @end
 
 @implementation SGScanningQRCodeVC
@@ -57,7 +58,49 @@
     self.scanningView = [[SGScanningQRCodeView alloc] initWithFrame:self.view.frame outsideViewLayer:self.view.layer];
     [self.view addSubview:self.scanningView];
     
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:(UIBarButtonItemStyleDone) target:self action:@selector(rightBarButtonItenAction)];
 }
+
+#pragma mark - - - rightBarButtonItenAction 的点击事件
+- (void)rightBarButtonItenAction {
+    [self readImageFromAlbum];
+}
+#pragma mark - - - 从相册中读取照片
+- (void)readImageFromAlbum {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];//创建对象
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//（选择类型）表示仅仅从相册中选取照片
+    imagePicker.delegate = self;//指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议
+    imagePicker.allowsEditing = NO;//设置在相册选完照片后，是否跳到编辑模式进行图片剪裁。(允许用户编辑)
+    [self presentViewController:imagePicker animated:YES completion:nil];//显示相册
+}
+#pragma mark - - - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self scanQRCodeFromPhotosInTheAlbum:image];
+    }];
+}
+
+/** 从相册中识别二维码, 并进行界面跳转 */
+- (void)scanQRCodeFromPhotosInTheAlbum:(UIImage *)image {
+    // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
+    // 声明一个CIDetector，并设定识别类型 CIDetectorTypeQRCode
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
+    
+    // 取得识别结果
+    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+    for (int index = 0; index < [features count]; index ++) {
+        CIQRCodeFeature *feature = [features objectAtIndex:index];
+        NSString *scannedResult = feature.messageString;
+        NSLog(@"result:%@",scannedResult);
+        
+        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+        jumpVC.jump_URL = scannedResult;
+        [self.navigationController pushViewController:jumpVC animated:YES];
+    }
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -66,6 +109,7 @@
     [self setupScanningQRCode];
 
 }
+
 #pragma mark - - - 二维码扫描
 - (void)setupScanningQRCode {
     // 1、 获取摄像设备
@@ -139,7 +183,6 @@
         }
     }
 }
-
 
 // 移除定时器
 - (void)viewDidDisappear:(BOOL)animated {
