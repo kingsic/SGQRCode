@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96214FC71D9EC2BB0093BDC2 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 96214FC61D9EC2BB0093BDC2 /* sound.caf */; };
 		96977ADC1D997E3E00E96216 /* SGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96977AD81D997E3E00E96216 /* SGAlertView.m */; };
 		96977ADD1D997E3E00E96216 /* SGBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96977ADA1D997E3E00E96216 /* SGBottomView.m */; };
 		96977ADE1D997E3E00E96216 /* SGBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96977ADB1D997E3E00E96216 /* SGBottomView.xib */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		96214FC61D9EC2BB0093BDC2 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
 		96977AD71D997E3E00E96216 /* SGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAlertView.h; sourceTree = "<group>"; };
 		96977AD81D997E3E00E96216 /* SGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAlertView.m; sourceTree = "<group>"; };
 		96977AD91D997E3E00E96216 /* SGBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGBottomView.h; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		96CBCB3A1D75D46900F5EAD6 /* SGQRCode */ = {
 			isa = PBXGroup;
 			children = (
+				96214FC61D9EC2BB0093BDC2 /* sound.caf */,
 				96977AD61D997E1E00E96216 /* SGAlertView */,
 				96CBCB3B1D75D46900F5EAD6 /* Category */,
 				96CBCB3E1D75D46900F5EAD6 /* Controller */,
@@ -324,6 +327,7 @@
 			files = (
 				DFA7295E1D70D7FA005FA8D1 /* LaunchScreen.storyboard in Resources */,
 				DFA7295B1D70D7FA005FA8D1 /* Assets.xcassets in Resources */,
+				96214FC71D9EC2BB0093BDC2 /* sound.caf in Resources */,
 				DFA729951D70D8F0005FA8D1 /* Main.storyboard in Resources */,
 				96977ADE1D997E3E00E96216 /* SGBottomView.xib in Resources */,
 			);
@@ -507,7 +511,7 @@
 				INFOPLIST_FILE = SGQRCodeExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Jason.SGQRCodeExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aaa.DDQRCode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -522,7 +526,7 @@
 				INFOPLIST_FILE = SGQRCodeExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Jason.SGQRCodeExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aaa.DDQRCode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
