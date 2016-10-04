@@ -69,11 +69,10 @@
 
 #pragma mark - - - 从相册中读取照片
 - (void)readImageFromAlbum {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];//创建对象
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//（选择类型）表示仅仅从相册中选取照片
-    imagePicker.delegate = self;//指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议
-    imagePicker.allowsEditing = NO;//设置在相册选完照片后，是否跳到编辑模式进行图片剪裁。(允许用户编辑)
-    [self presentViewController:imagePicker animated:YES completion:nil];//显示相册
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init]; // 创建对象
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
+    imagePicker.delegate = self; // 指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议
+    [self presentViewController:imagePicker animated:YES completion:nil]; // 显示相册
 }
 
 #pragma mark - - - UIImagePickerControllerDelegate
@@ -114,24 +113,25 @@
 
 #pragma mark - - - 二维码扫描
 - (void)setupScanningQRCode {
-    // 1、 获取摄像设备
+    // 1、获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
-    // 2、 创建输入流
+    // 2、创建输入流
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
     
-    // 3、 创建输出流
+    // 3、创建输出流
     AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc] init];
     
     // 4、设置代理 在主线程里刷新
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     
     // 设置扫描范围(每一个取值0～1，以屏幕右上角为坐标原点)
+    // 注：微信二维码的扫描范围是整个屏幕， 这里并没有做处理（可不用设置）
     output.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     
     // 5、 初始化链接对象（会话对象）
     self.session = [[AVCaptureSession alloc] init];
-    //高质量采集率
+    // 高质量采集率
     [_session setSessionPreset:AVCaptureSessionPresetHigh];
     
     // 5.1 添加会话输入
