@@ -180,7 +180,7 @@
 * 2016. 10. 1 --> 新增扫描成功之后提示音
 
 
-## 效果图如下:
+## 效果图
 
 ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle.png) 
 
