@@ -230,7 +230,6 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
     
     // 2.播放音频
     AudioServicesPlaySystemSound(soundID);//播放音效
-    //    AudioServicesPlayAlertSound(soundID);//播放音效并震动
 }
 
 
