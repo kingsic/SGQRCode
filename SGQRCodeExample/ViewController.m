@@ -6,11 +6,6 @@
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
-// 欢迎来GitHub下载最新Demo
-// GitHub地址:https://github.com/kingsic/SGQRCode.git
-// 交流邮箱:kingsic@126.com
-
-
 #import "ViewController.h"
 #import "SGGenerateQRCodeVC.h"
 #import "SGScanningQRCodeVC.h"
@@ -46,18 +41,23 @@
     if (device) {
         SGScanningQRCodeVC *VC = [[SGScanningQRCodeVC alloc] init];
         [self.navigationController pushViewController:VC animated:YES];
+        
     } else {
-        // 1、初始化UIAlertController
-        UIAlertController *aC = [UIAlertController alertControllerWithTitle:@"⚠️ 警告" message:@"未检测到您的摄像头, 请在真机上测试" preferredStyle:UIAlertControllerStyleAlert];
         
-        // 2.设置UIAlertAction样式
-        UIAlertAction *sureAc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-        }];
+        SGAlertView *alertView = [SGAlertView alertViewWithTitle:@"⚠️ 警告" delegate:nil contentTitle:@"未检测到您的摄像头, 请在真机上测试" alertViewBottomViewType:(SGAlertViewBottomViewTypeOne)];
+        [alertView show];
         
-        [aC addAction:sureAc];
-        // 3.显示alertController:presentViewController
-        [self presentViewController:aC animated:YES completion:nil];
+//        // 1、初始化UIAlertController
+//        UIAlertController *aC = [UIAlertController alertControllerWithTitle:@"⚠️ 警告" message:@"未检测到您的摄像头, 请在真机上测试" preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        // 2.设置UIAlertAction样式
+//        UIAlertAction *sureAc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//            
+//        }];
+//        
+//        [aC addAction:sureAc];
+//        // 3.显示alertController:presentViewController
+//        [self presentViewController:aC animated:YES completion:nil];
     }
 }
 

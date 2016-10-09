@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		96214FCA1D9EC87C0093BDC2 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 96214FC91D9EC87C0093BDC2 /* sound.caf */; };
+		96222AC71DAA895C002BA0E5 /* SGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96222AC61DAA895C002BA0E5 /* SGAlertView.m */; };
 		96CBCB481D75D46900F5EAD6 /* CIImage+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB3D1D75D46900F5EAD6 /* CIImage+SGExtension.m */; };
 		96CBCB491D75D46900F5EAD6 /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB401D75D46900F5EAD6 /* ScanSuccessJumpVC.m */; };
 		96CBCB4A1D75D46900F5EAD6 /* SGGenerateQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB421D75D46900F5EAD6 /* SGGenerateQRCodeVC.m */; };
@@ -42,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		96214FC91D9EC87C0093BDC2 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
+		96222AC51DAA895C002BA0E5 /* SGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAlertView.h; sourceTree = "<group>"; };
+		96222AC61DAA895C002BA0E5 /* SGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAlertView.m; sourceTree = "<group>"; };
 		96CBCB3C1D75D46900F5EAD6 /* CIImage+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CIImage+SGExtension.h"; sourceTree = "<group>"; };
 		96CBCB3D1D75D46900F5EAD6 /* CIImage+SGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CIImage+SGExtension.m"; sourceTree = "<group>"; };
 		96CBCB3F1D75D46900F5EAD6 /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
@@ -103,9 +106,19 @@
 			path = Sound;
 			sourceTree = "<group>";
 		};
+		96222AC41DAA895C002BA0E5 /* SGAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				96222AC51DAA895C002BA0E5 /* SGAlertView.h */,
+				96222AC61DAA895C002BA0E5 /* SGAlertView.m */,
+			);
+			path = SGAlertView;
+			sourceTree = "<group>";
+		};
 		96CBCB3A1D75D46900F5EAD6 /* SGQRCode */ = {
 			isa = PBXGroup;
 			children = (
+				96222AC41DAA895C002BA0E5 /* SGAlertView */,
 				96214FC81D9EC85E0093BDC2 /* Sound */,
 				96CBCB3B1D75D46900F5EAD6 /* Category */,
 				96CBCB3E1D75D46900F5EAD6 /* Controller */,
@@ -348,6 +361,7 @@
 				96CBCB4C1D75D46900F5EAD6 /* SGScanningQRCodeView.m in Sources */,
 				DFA7298E1D70D86F005FA8D1 /* ViewController.m in Sources */,
 				96CBCB4A1D75D46900F5EAD6 /* SGGenerateQRCodeVC.m in Sources */,
+				96222AC71DAA895C002BA0E5 /* SGAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
