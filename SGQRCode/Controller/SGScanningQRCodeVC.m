@@ -42,6 +42,7 @@
 @property (nonatomic, strong) SGScanningQRCodeView *scanningView;
 
 @property (nonatomic, strong) UIButton *right_Button;
+@property (nonatomic, assign) BOOL first_push;
 
 @end
 
@@ -58,6 +59,7 @@
     self.scanningView = [[SGScanningQRCodeView alloc] initWithFrame:self.view.frame outsideViewLayer:self.view.layer];
     [self.view addSubview:self.scanningView];
     
+    self.first_push = YES;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:(UIBarButtonItemStyleDone) target:self action:@selector(rightBarButtonItenAction)];
 }
@@ -96,9 +98,13 @@
         NSString *scannedResult = feature.messageString;
         NSLog(@"result:%@",scannedResult);
         
-        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-        jumpVC.jump_URL = scannedResult;
-        [self.navigationController pushViewController:jumpVC animated:YES];
+        if (self.first_push) {
+            ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+            jumpVC.jump_URL = scannedResult;
+            [self.navigationController pushViewController:jumpVC animated:YES];
+            
+            self.first_push = NO;
+        }
     }
 }
 
