@@ -255,6 +255,8 @@ static CGFloat const timer_animation_Duration = 0.05;
 /** 移除定时器 */
 - (void)removeTimer {
     [self.timer invalidate];
+    [self.animation_line removeFromSuperview];
+    self.animation_line = nil;
 }
 
 

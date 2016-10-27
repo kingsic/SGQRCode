@@ -47,16 +47,23 @@
 
 @implementation SGScanningQRCodeVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // 创建扫描边框
+    self.scanningView = [[SGScanningQRCodeView alloc] initWithFrame:self.view.frame outsideViewLayer:self.view.layer];
+    [self.view addSubview:self.scanningView];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.barTintColor = [UIColor purpleColor];
 
     self.navigationItem.title = @"扫一扫";
-    
-    // 创建扫描边框
-    self.scanningView = [[SGScanningQRCodeView alloc] initWithFrame:self.view.frame outsideViewLayer:self.view.layer];
-    [self.view addSubview:self.scanningView];
+
+    // 二维码扫描
+    [self setupScanningQRCode];
     
     self.first_push = YES;
     
@@ -107,14 +114,6 @@
     }
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    // 二维码扫描
-    [self setupScanningQRCode];
-
-}
 
 #pragma mark - - - 二维码扫描
 - (void)setupScanningQRCode {
@@ -200,6 +199,8 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.scanningView removeTimer];
+    [self.scanningView removeFromSuperview];
+    self.scanningView = nil;
 //    NSLog(@" - - -- viewDidAppear");
 }
 
