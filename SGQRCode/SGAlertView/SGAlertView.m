@@ -5,14 +5,14 @@
 //  Created by Sorgle on 2016/9/25.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 //
-//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于kingsic@126.com邮箱联系 - - - - - //
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  - - GitHub下载地址 https://github.com/kingsic/SGPopupView.git - - - - - - - //
+//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于kingsic@126.com邮箱联系 - - - - //
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//  - - GitHub下载地址 https://github.com/kingsic/SGPopupView.git - - - - - - //
 //
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import "SGAlertView.h"
 
@@ -22,12 +22,13 @@
 #define SG_margin_X (SG_screenWidth - SG_alertView_width) * 0.5
 #define SG_lineColor [UIColor colorWithRed:200 / 255.0 green:200 / 255.0 blue:200 / 255.0 alpha:1.0]
 @interface SGAlertView ()
+
 /** 遮盖 */
 @property (nonatomic, strong) UIButton *coverView;
 /** 背景View */
 @property (nonatomic, strong) UIView *bg_view;
 
-/** 信息提示文字 */
+/** 标题提示文字 */
 @property (nonatomic, copy) NSString *messageTitle;
 /** 内容提示文字 */
 @property (nonatomic, copy) NSString *contentTitle;
@@ -36,6 +37,9 @@
 @property (nonatomic, strong) UIView *bottomViewOne;
 /** SGAlertViewBottomViewTypeTwo */
 @property (nonatomic, strong) UIView *bottomViewTwo;
+@property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) UIButton *right_button;
+@property (nonatomic, strong) UIButton *left_button;
 
 @end
 
@@ -53,6 +57,7 @@ static CGFloat const message_text_fond = 17;
 static CGFloat const content_text_fond = 14;
 
 - (instancetype)initWithTitle:(NSString *)title delegate:(id<SGAlertViewDelegate>)delegate contentTitle:(NSString *)contentTitle alertViewBottomViewType:(SGAlertViewBottomViewType)alertViewBottomViewType {
+    
     if (self = [super init]) {
         self.frame = [UIScreen mainScreen].bounds;
         self.backgroundColor = [UIColor clearColor];
@@ -67,10 +72,12 @@ static CGFloat const content_text_fond = 14;
 }
 
 + (instancetype)alertViewWithTitle:(NSString *)title delegate:(id<SGAlertViewDelegate>)delegate contentTitle:(NSString *)contentTitle alertViewBottomViewType:(SGAlertViewBottomViewType)alertViewBottomViewType{
+    
     return [[self alloc] initWithTitle:title delegate:delegate contentTitle:contentTitle alertViewBottomViewType:alertViewBottomViewType];
 }
 
 - (void)show {
+    
     if (self.superview != nil) return;
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
@@ -80,12 +87,22 @@ static CGFloat const content_text_fond = 14;
     }];
 }
 
-- (void)sureButtonClick {
+- (void)rightButtonClick {
     [UIView animateWithDuration:SG_animateWithDuration animations:^{
         [self dismiss];
     } completion:^(BOOL finished) {
-        if ([self.delegate_SG respondsToSelector:@selector(didSelectedSureButtonClick)]) {
-            [self.delegate_SG didSelectedSureButtonClick];
+        if ([self.delegate_SG respondsToSelector:@selector(didSelectedRightButtonClick)]) {
+            [self.delegate_SG didSelectedRightButtonClick];
+        }
+    }];
+}
+
+- (void)leftButtonClick {
+    [UIView animateWithDuration:SG_animateWithDuration animations:^{
+        [self dismiss];
+    } completion:^(BOOL finished) {
+        if ([self.delegate_SG respondsToSelector:@selector(didSelectedLeftButtonClick)]) {
+            [self.delegate_SG didSelectedLeftButtonClick];
         }
     }];
 }
@@ -182,18 +199,18 @@ static CGFloat const content_text_fond = 14;
         _bottomViewOne.backgroundColor = SG_lineColor;
         
         // 给 bottomViewOne 添加子视图
-        UIButton *button = [[UIButton alloc] init];
+        self.button = [[UIButton alloc] init];
         CGFloat button_X = 0;
         CGFloat button_Y = 1;
         CGFloat button_W = bottomView_W;
         CGFloat button_H = bottomView_H - button_Y;
-        button.frame = CGRectMake(button_X, button_Y, button_W, button_H);
-        button.backgroundColor = [UIColor whiteColor];
-        [button setTitle:@"确定" forState:(UIControlStateNormal)];
-        [button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        button.titleLabel.font = [UIFont systemFontOfSize:16];
-        [button addTarget:self action:@selector(dismiss) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.bottomViewOne addSubview:button];
+        _button.frame = CGRectMake(button_X, button_Y, button_W, button_H);
+        _button.backgroundColor = [UIColor whiteColor];
+        [_button setTitle:@"确定" forState:(UIControlStateNormal)];
+        [_button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        _button.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_button addTarget:self action:@selector(rightButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.bottomViewOne addSubview:_button];
 
         // 背景View
         self.bg_view = [[UIView alloc] init];
@@ -222,31 +239,31 @@ static CGFloat const content_text_fond = 14;
         _bottomViewTwo.backgroundColor = SG_lineColor;
         
         // 给 bottomViewOne 添加子视图
-        UIButton *left_button = [[UIButton alloc] init];
+        self.left_button = [[UIButton alloc] init];
         CGFloat left_button_X = 0;
         CGFloat left_button_Y = 1;
         CGFloat left_button_W = bottomView_W * 0.5;
         CGFloat left_button_H = bottomView_H - left_button_Y;
-        left_button.frame = CGRectMake(left_button_X, left_button_Y, left_button_W, left_button_H);
-        left_button.backgroundColor = [UIColor whiteColor];
-        [left_button setTitle:@"取消" forState:(UIControlStateNormal)];
-        [left_button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        left_button.titleLabel.font = [UIFont systemFontOfSize:16];
-        [left_button addTarget:self action:@selector(dismiss) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.bottomViewTwo addSubview:left_button];
+        _left_button.frame = CGRectMake(left_button_X, left_button_Y, left_button_W, left_button_H);
+        _left_button.backgroundColor = [UIColor whiteColor];
+        [_left_button setTitle:@"取消" forState:(UIControlStateNormal)];
+        [_left_button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        _left_button.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_left_button addTarget:self action:@selector(leftButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.bottomViewTwo addSubview:_left_button];
         
-        UIButton *right_button = [[UIButton alloc] init];
-        CGFloat right_button_X = CGRectGetMaxX(left_button.frame) + 1;
+        self.right_button = [[UIButton alloc] init];
+        CGFloat right_button_X = CGRectGetMaxX(_left_button.frame) + 1;
         CGFloat right_button_Y = 1;
         CGFloat right_button_W = bottomView_W - right_button_X;
         CGFloat right_button_H = bottomView_H - left_button_Y;
-        right_button.frame = CGRectMake(right_button_X, right_button_Y, right_button_W, right_button_H);
-        right_button.backgroundColor = [UIColor whiteColor];
-        [right_button setTitle:@"确定" forState:(UIControlStateNormal)];
-        [right_button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        right_button.titleLabel.font = [UIFont systemFontOfSize:16];
-        [right_button addTarget:self action:@selector(sureButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.bottomViewTwo addSubview:right_button];
+        _right_button.frame = CGRectMake(right_button_X, right_button_Y, right_button_W, right_button_H);
+        _right_button.backgroundColor = [UIColor whiteColor];
+        [_right_button setTitle:@"确定" forState:(UIControlStateNormal)];
+        [_right_button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        _right_button.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_right_button addTarget:self action:@selector(rightButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.bottomViewTwo addSubview:_right_button];
         
         // 背景View
         self.bg_view = [[UIView alloc] init];
@@ -278,6 +295,31 @@ static CGFloat const content_text_fond = 14;
     animation.values = values;
     [self.bg_view.layer addAnimation:animation forKey:nil];
 }
+
+
+- (void)setSure_btnTitle:(NSString *)sure_btnTitle {
+    _sure_btnTitle = sure_btnTitle;
+    [_button setTitle:sure_btnTitle forState:(UIControlStateNormal)];
+    [_right_button setTitle:sure_btnTitle forState:(UIControlStateNormal)];
+}
+
+- (void)setLeft_btnTitle:(NSString *)left_btnTitle {
+    _left_btnTitle = left_btnTitle;
+    [_left_button setTitle:left_btnTitle forState:(UIControlStateNormal)];
+}
+
+- (void)setSure_btnTitleColor:(UIColor *)sure_btnTitleColor {
+    _sure_btnTitleColor = sure_btnTitleColor;
+    [_button setTitleColor:sure_btnTitleColor forState:(UIControlStateNormal)];
+    [_right_button setTitleColor:sure_btnTitleColor forState:(UIControlStateNormal)];
+}
+
+- (void)setLeft_btnTitleColor:(UIColor *)left_btnTitleColor {
+    _left_btnTitleColor = left_btnTitleColor;
+    [_left_button setTitleColor:left_btnTitleColor forState:(UIControlStateNormal)];
+}
+
+
 
 @end
 

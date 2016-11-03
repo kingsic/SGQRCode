@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18BB8BE21DCAD0EA0059DCDF /* SGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BB8BE11DCAD0EA0059DCDF /* SGAlertView.m */; };
 		96214FCA1D9EC87C0093BDC2 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 96214FC91D9EC87C0093BDC2 /* sound.caf */; };
-		96222AC71DAA895C002BA0E5 /* SGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96222AC61DAA895C002BA0E5 /* SGAlertView.m */; };
 		96CBCB481D75D46900F5EAD6 /* CIImage+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB3D1D75D46900F5EAD6 /* CIImage+SGExtension.m */; };
 		96CBCB491D75D46900F5EAD6 /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB401D75D46900F5EAD6 /* ScanSuccessJumpVC.m */; };
 		96CBCB4A1D75D46900F5EAD6 /* SGGenerateQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CBCB421D75D46900F5EAD6 /* SGGenerateQRCodeVC.m */; };
@@ -42,9 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18BB8BE01DCAD0EA0059DCDF /* SGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAlertView.h; sourceTree = "<group>"; };
+		18BB8BE11DCAD0EA0059DCDF /* SGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAlertView.m; sourceTree = "<group>"; };
 		96214FC91D9EC87C0093BDC2 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
-		96222AC51DAA895C002BA0E5 /* SGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAlertView.h; sourceTree = "<group>"; };
-		96222AC61DAA895C002BA0E5 /* SGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAlertView.m; sourceTree = "<group>"; };
 		96CBCB3C1D75D46900F5EAD6 /* CIImage+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CIImage+SGExtension.h"; sourceTree = "<group>"; };
 		96CBCB3D1D75D46900F5EAD6 /* CIImage+SGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CIImage+SGExtension.m"; sourceTree = "<group>"; };
 		96CBCB3F1D75D46900F5EAD6 /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
@@ -109,8 +109,8 @@
 		96222AC41DAA895C002BA0E5 /* SGAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				96222AC51DAA895C002BA0E5 /* SGAlertView.h */,
-				96222AC61DAA895C002BA0E5 /* SGAlertView.m */,
+				18BB8BE01DCAD0EA0059DCDF /* SGAlertView.h */,
+				18BB8BE11DCAD0EA0059DCDF /* SGAlertView.m */,
 			);
 			path = SGAlertView;
 			sourceTree = "<group>";
@@ -361,7 +361,7 @@
 				96CBCB4C1D75D46900F5EAD6 /* SGScanningQRCodeView.m in Sources */,
 				DFA7298E1D70D86F005FA8D1 /* ViewController.m in Sources */,
 				96CBCB4A1D75D46900F5EAD6 /* SGGenerateQRCodeVC.m in Sources */,
-				96222AC71DAA895C002BA0E5 /* SGAlertView.m in Sources */,
+				18BB8BE21DCAD0EA0059DCDF /* SGAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,7 +509,7 @@
 				INFOPLIST_FILE = SGQRCodeExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aaa.DDQRCode;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sorgle.-SGQRCodeExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -524,7 +524,7 @@
 				INFOPLIST_FILE = SGQRCodeExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aaa.DDQRCode;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sorgle.-SGQRCodeExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
