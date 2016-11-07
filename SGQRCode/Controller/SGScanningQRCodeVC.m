@@ -179,7 +179,7 @@
         NSLog(@"metadataObjects = %@", metadataObjects);
         
         if ([obj.stringValue hasPrefix:@"http"]) {
-            // 提示：如果需要对url或者名片等信息进行扫描，可以在此进行扩展！
+
             ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
             jumpVC.jump_URL = obj.stringValue;
             NSLog(@"stringValue = = %@", obj.stringValue);
