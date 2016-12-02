@@ -2,8 +2,8 @@
 //  SGQRCodeTool.m
 //  SGQRCodeExample
 //
-//  Created by apple on 16/12/2.
-//  Copyright © 2016年 JP_lee. All rights reserved.
+//  Created by Sorgle on 16/12/2.
+//  Copyright © 2016年 Sorgle. All rights reserved.
 //
 //  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - - //
 //

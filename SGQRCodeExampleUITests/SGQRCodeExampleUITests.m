@@ -2,8 +2,8 @@
 //  SGQRCodeExampleUITests.m
 //  SGQRCodeExampleUITests
 //
-//  Created by 林大杭 on 16/8/27.
-//  Copyright © 2016年 JP_lee. All rights reserved.
+//  Created by Sorgle on 16/8/27.
+//  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
