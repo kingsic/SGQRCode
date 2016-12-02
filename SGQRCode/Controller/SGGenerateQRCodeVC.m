@@ -14,7 +14,7 @@
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import "SGGenerateQRCodeVC.h"
-#import "SGHelperTool.h"
+#import "SGQRCodeTool.h"
 
 @interface SGGenerateQRCodeVC ()
 
@@ -51,7 +51,7 @@
     [self.view addSubview:imageView];
     
     // 2、将CIImage转换成UIImage，并放大显示
-    imageView.image = [SGHelperTool SG_generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
+    imageView.image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
 }
 
 #pragma mark - - - 中间带有图标二维码生成
@@ -67,7 +67,7 @@
     [self.view addSubview:imageView];
     
     // 2、将最终合得的图片显示在UIImageView上
-    imageView.image = [SGHelperTool SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoWidth:100];
+    imageView.image = [SGQRCodeTool SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoWidth:100];
     
 }
 
@@ -84,7 +84,7 @@
     [self.view addSubview:imageView];
     
     // 2、将二维码显示在UIImageView上
-    imageView.image = [UIImage imageWithCIImage:[SGHelperTool SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]]];
+    imageView.image = [SGQRCodeTool SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
 }
 
 

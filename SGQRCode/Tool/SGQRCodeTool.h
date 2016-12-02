@@ -1,5 +1,5 @@
 //
-//  SGHelperTool.h
+//  SGQRCodeTool.h
 //  SGQRCodeExample
 //
 //  Created by apple on 16/12/2.
@@ -16,12 +16,12 @@
 #import <UIKit/UIKit.h>
 #import <CoreImage/CoreImage.h>
 
-@interface SGHelperTool : NSObject
+@interface SGQRCodeTool : NSObject
 /** 生成一张普通的二维码 */
 + (UIImage *)SG_generateWithDefaultQRCodeData:(NSString *)data imageViewWidth:(CGFloat)imageViewWidth;
 /** 生成一张带有logo的二维码 */
 + (UIImage *)SG_generateWithLogoQRCodeData:(NSString *)data logoImageName:(NSString *)logoImageName logoWidth:(CGFloat)logoWidth;
 /** 生成一张彩色的二维码 */
-+ (CIImage *)SG_generateWithColorQRCodeData:(NSString *)data backgroundColor:(CIColor *)backgroundColor mainColor:(CIColor *)mainColor;
++ (UIImage *)SG_generateWithColorQRCodeData:(NSString *)data backgroundColor:(CIColor *)backgroundColor mainColor:(CIColor *)mainColor;
 
 @end

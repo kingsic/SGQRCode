@@ -1,5 +1,5 @@
 //
-//  SGHelperTool.m
+//  SGQRCodeTool.m
 //  SGQRCodeExample
 //
 //  Created by apple on 16/12/2.
@@ -13,9 +13,9 @@
 //
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-#import "SGHelperTool.h"
+#import "SGQRCodeTool.h"
 
-@implementation SGHelperTool
+@implementation SGQRCodeTool
 
 /**
  *  生成一张普通的二维码
@@ -40,16 +40,16 @@
     
     // 3、获得滤镜输出的图像
     CIImage *outputImage = [filter outputImage];
-
     
-    return [SGHelperTool createNonInterpolatedUIImageFormCIImage:outputImage withSize:imageViewWidth];
+    
+    return [SGQRCodeTool createNonInterpolatedUIImageFormCIImage:outputImage withSize:imageViewWidth];
 }
 
 /** 根据CIImage生成指定大小的UIImage */
 + (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat)size {
     CGRect extent = CGRectIntegral(image.extent);
     CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
-
+    
     // 1.创建bitmap;
     size_t width = CGRectGetWidth(extent) * scale;
     size_t height = CGRectGetHeight(extent) * scale;
@@ -60,7 +60,7 @@
     CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
     CGContextScaleCTM(bitmapRef, scale, scale);
     CGContextDrawImage(bitmapRef, extent, bitmapImage);
-
+    
     // 2.保存bitmap到图片
     CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
     CGContextRelease(bitmapRef);
@@ -133,7 +133,7 @@
  *  @param backgroundColor    背景色
  *  @param mainColor    主颜色
  */
-+ (CIImage *)SG_generateWithColorQRCodeData:(NSString *)data backgroundColor:(CIColor *)backgroundColor mainColor:(CIColor *)mainColor {
++ (UIImage *)SG_generateWithColorQRCodeData:(NSString *)data backgroundColor:(CIColor *)backgroundColor mainColor:(CIColor *)mainColor {
     // 1、创建滤镜对象
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     
@@ -171,8 +171,11 @@
     // 7、设置输出
     CIImage *colorImage = [color_filter outputImage];
     
-    return colorImage;
+    return [UIImage imageWithCIImage:colorImage];
 }
 
 
+
 @end
+
+
