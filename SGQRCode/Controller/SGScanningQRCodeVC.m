@@ -129,10 +129,10 @@
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     
     // 设置扫描范围(每一个取值0～1，以屏幕右上角为坐标原点)
-    // 注：微信二维码的扫描范围是整个屏幕， 这里并没有做处理（可不用设置）
+    // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）
     output.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     
-    // 5、 初始化链接对象（会话对象）
+    // 5、初始化链接对象（会话对象）
     self.session = [[AVCaptureSession alloc] init];
     // 高质量采集率
     [_session setSessionPreset:AVCaptureSessionPresetHigh];
@@ -162,16 +162,16 @@
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     // 会频繁的扫描，调用代理方法
     
-    // 0. 扫描成功之后的提示音
+    // 0、扫描成功之后的提示音
     [self playSoundEffect:@"sound.caf"];
 
-    // 1. 如果扫描完成，停止会话
+    // 1、如果扫描完成，停止会话
     [self.session stopRunning];
     
-    // 2. 删除预览图层
+    // 2、删除预览图层
     [self.previewLayer removeFromSuperlayer];
     
-     // 3. 设置界面显示扫描结果
+    // 3、设置界面显示扫描结果
     if (metadataObjects.count > 0) {
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
         
@@ -222,7 +222,7 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
 - (void)playSoundEffect:(NSString *)name{
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:name ofType:nil];
     NSURL *fileUrl = [NSURL fileURLWithPath:audioFile];
-    // 1.获得系统声音ID
+    // 1、获得系统声音ID
     SystemSoundID soundID = 0;
     /**
      * inFileUrl:音频文件url
@@ -233,8 +233,8 @@ void soundCompleteCallback(SystemSoundID soundID,void * clientData){
     // 如果需要在播放完之后执行某些操作，可以调用如下方法注册一个播放完成回调函数
     AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundCompleteCallback, NULL);
     
-    // 2.播放音频
-    AudioServicesPlaySystemSound(soundID);//播放音效
+    // 2、播放音频
+    AudioServicesPlaySystemSound(soundID); // 播放音效
 }
 
 
