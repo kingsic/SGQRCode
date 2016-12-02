@@ -114,16 +114,16 @@
 
     // 会频繁的扫描，调用代理方法
     
-    // 0. 扫描成功之后的提示音
+    // 0、扫描成功之后的提示音
     [self playSoundEffect:@"sound.caf"];
 
-    // 1. 如果扫描完成，停止会话
+    // 1、如果扫描完成，停止会话
     [self.session stopRunning];
     
-    // 2. 删除预览图层
+    // 2、删除预览图层
     [self.previewLayer removeFromSuperlayer];
     
-     // 3. 设置界面显示扫描结果
+     // 3、设置界面显示扫描结果
     if (metadataObjects.count > 0) {
     
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
@@ -158,7 +158,7 @@
     
     NSURL *fileUrl = [NSURL fileURLWithPath:audioFile];
     
-    // 1.获得系统声音ID
+    // 1、获得系统声音ID
     SystemSoundID soundID = 0;
   
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)(fileUrl), &soundID);
@@ -166,21 +166,21 @@
     // 如果需要在播放完之后执行某些操作，可以调用如下方法注册一个播放完成回调函数
     AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundCompleteCallback, NULL);
     
-    // 2.播放音频
-    AudioServicesPlaySystemSound(soundID);//播放音效
+    // 2、播放音频
+    AudioServicesPlaySystemSound(soundID); // 播放音效
 }
 ```
 
 
 ## 版本介绍
 
-* 2016. 9. 30   --> 新增从相册中获取二维码功能 (注意: 从相册中读取二维码, 需要在iOS8.0以后)
+* 2016. 9. 30   --> 新增从相册中获取二维码功能 (注意: 从相册中读取二维码, 需要在 iOS8.0 以后)
 * 2016. 10. 1   --> 新增扫描成功之后提示音
-* 2016. 10. 9   --> 新增SGAlertView提升界面美观
+* 2016. 10. 9   --> 新增 SGAlertView 提升界面美观
 * 2016. 10. 12  --> 解决 iOS 10 相机访问权限崩溃的问题以及解决从相册中读取二维码重复 push 问题(一张照片中包含多个二维码，这里会选取第一个二维码进行解读)
 * 2016. 10. 22  --> 解决 XCode 8 控制台打印问题
 * 2016. 10. 27  --> 解决从相册中读取二维码，取消选择返回时，图层卡死问题（修改了创建扫描边框里的问题）
-* 2016. 12. 2   --> 新增 SGHelperTool，对生成二维码代码进行封装（只需一句代码进行调用）；删除了 CIImage 分类
+* 2016. 12. 2   --> 新增 SGQRCodeTool，对生成二维码代码进行封装（只需一句代码进行调用）；删除了 CIImage 分类
 
 
 ## 效果图
