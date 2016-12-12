@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.87 alpha:1.0];
     
     // 生成二维码(Default)
     [self setupGenerateQRCode];
@@ -52,6 +52,23 @@
     
     // 2、将CIImage转换成UIImage，并放大显示
     imageView.image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
+    
+#pragma mark - - - 模仿支付宝二维码样式（添加用户头像）
+    CGFloat scale = 0.22;
+    CGFloat borderW = 5;
+    UIView *borderView = [[UIView alloc] init];
+    CGFloat borderViewW = imageViewW * scale;
+    CGFloat borderViewH = imageViewH * scale;
+    CGFloat borderViewX = 0.5 * (imageViewW - borderViewW);
+    CGFloat borderViewY = 0.5 * (imageViewH - borderViewH);
+    borderView.frame = CGRectMake(borderViewX, borderViewY, borderViewW, borderViewH);
+    borderView.layer.borderWidth = borderW;
+    borderView.layer.borderColor = [UIColor purpleColor].CGColor;
+    borderView.layer.cornerRadius = 10;
+    borderView.layer.masksToBounds = YES;
+    borderView.layer.contents = (id)[UIImage imageNamed:@"icon_image"].CGImage;
+
+    //[imageView addSubview:borderView];
 }
 
 #pragma mark - - - 中间带有图标二维码生成
@@ -66,8 +83,10 @@
     imageView.frame =CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH);
     [self.view addSubview:imageView];
     
+    CGFloat scale = 0.2;
+    
     // 2、将最终合得的图片显示在UIImageView上
-    imageView.image = [SGQRCodeTool SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoWidth:100];
+    imageView.image = [SGQRCodeTool SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
     
 }
 
