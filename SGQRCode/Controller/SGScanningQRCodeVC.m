@@ -90,6 +90,10 @@
     }];
 }
 
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+ //   NSLog(@"info - - - %@", info);
+//}
+
 /** 从相册中识别二维码, 并进行界面跳转 */
 - (void)scanQRCodeFromPhotosInTheAlbum:(UIImage *)image {
     // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
