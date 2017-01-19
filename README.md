@@ -36,30 +36,30 @@
 ## 代码介绍(详细使用方法，请参考 Demo)
 ### 生成二维码
 
-// 普通二维码生成
+* 普通二维码生成
 ```Objective-C
 imageView.image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
 ```
 
-// logo 二维码生成
+* logo 二维码生成
 ```Objective-C
 imageView.image = [SGQRCodeTool SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
 ```
 
-// 彩色二维码生成
+* 彩色二维码生成
 ```Objective-C
 imageView.image = [SGQRCodeTool SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
 ```
 
 ### 扫描二维码
 
-// 扫描视图创建
+* 扫描视图创建
 ```Objective-C
 self.scanningView = [[SGScanningQRCodeView alloc] initWithFrame:self.view.frame outsideViewLayer:self.view.layer];
 [self.view addSubview:self.scanningView];
 ```
 
-// 扫描二维码方法
+* 扫描二维码方法
 ```Objective-C
 // 初始化链接对象（会话对象）
 self.session = [[AVCaptureSession alloc] init];
@@ -69,7 +69,7 @@ self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
 ```
 
 
-## 版本介绍
+## 更新介绍
 
 * 2016. 9. 30  --> 新增从相册中获取二维码功能 (注意: 从相册中读取二维码, 需要在 iOS8.0 以后)
 * 2016. 10. 1  --> 新增扫描成功之后提示音
