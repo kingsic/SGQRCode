@@ -15,6 +15,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreImage/CoreImage.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface SGQRCodeTool : NSObject
 /** 生成一张普通的二维码 */
@@ -23,5 +24,8 @@
 + (UIImage *)SG_generateWithLogoQRCodeData:(NSString *)data logoImageName:(NSString *)logoImageName logoScaleToSuperView:(CGFloat)logoScaleToSuperView;
 /** 生成一张彩色的二维码 */
 + (UIImage *)SG_generateWithColorQRCodeData:(NSString *)data backgroundColor:(CIColor *)backgroundColor mainColor:(CIColor *)mainColor;
+
+/** 扫描二维码 */
++ (void)SG_scanningQRCodeOutsideVC:(UIViewController *)outsideVC session:(AVCaptureSession *)session previewLayer:(AVCaptureVideoPreviewLayer *)previewLayer;
 
 @end
