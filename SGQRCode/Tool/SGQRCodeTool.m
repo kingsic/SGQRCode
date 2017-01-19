@@ -199,9 +199,9 @@
     output.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     
     // 5、初始化链接对象（会话对象）
-    
     // 高质量采集率
-    [session setSessionPreset:AVCaptureSessionPresetHigh];
+    //session.sessionPreset = AVCaptureSessionPreset1920x1080; // 如果二维码图片过小、或者模糊请使用这句代码，注释下面那句代码
+        session.sessionPreset = AVCaptureSessionPresetHigh;
     
     // 5.1 添加会话输入
     [session addInput:input];
@@ -214,7 +214,6 @@
     output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code,  AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     
     // 7、实例化预览图层, 传递_session是为了告诉图层将来显示什么内容
-    
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     previewLayer.frame = outsideVC.view.layer.bounds;
     
@@ -227,5 +226,4 @@
 
 
 @end
-
 
