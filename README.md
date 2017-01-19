@@ -35,20 +35,22 @@
 
 ## 代码介绍
 
-#### 生成二维码方法
+### 生成二维码方法
 
 // 普通二维码生成
-
+```Objective-C
 imageView.image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
+```
 
 // logo 二维码生成
-
+```Objective-C
 imageView.image = [SGQRCodeTool SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
+```
 
 // 彩色二维码生成
-
+```Objective-C
 imageView.image = [SGQRCodeTool SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
-
+```
 
 
 * 二维码扫描界面创建
