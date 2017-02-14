@@ -18,6 +18,8 @@
 #import "SGScanningQRCodeView.h"
 #import "ScanSuccessJumpVC.h"
 #import "SGQRCodeTool.h"
+#import <Photos/Photos.h>
+#import "SGAlertView.h"
 
 @interface SGScanningQRCodeVC () <AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 /** 会话对象 */
@@ -65,10 +67,50 @@
 }
 #pragma mark - - - 从相册中读取照片
 - (void)readImageFromAlbum {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init]; // 创建对象
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
-    imagePicker.delegate = self; // 指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议
-    [self presentViewController:imagePicker animated:YES completion:nil]; // 显示相册
+    // 1、 获取摄像设备
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device) {
+        // 判断授权状态
+        PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+        if (status == PHAuthorizationStatusNotDetermined) { // 用户还没有做出选择
+            // 弹框请求用户授权
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                if (status == PHAuthorizationStatusAuthorized) { // 用户点击了好
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init]; // 创建对象
+                        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
+                        imagePicker.delegate = self; // 指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议
+                        [self presentViewController:imagePicker animated:YES completion:nil]; // 显示相册
+                        NSLog(@"主线程 - - %@", [NSThread currentThread]);
+                    });
+                    NSLog(@"当前线程 - - %@", [NSThread currentThread]);
+                    
+                    // 用户第一次同意了访问相册权限
+                    NSLog(@"用户第一次同意了访问相册权限");
+                } else {
+                    // 用户第一次拒绝了访问相机权限
+                    NSLog(@"用户第一次拒绝了访问相册");
+                }
+            }];
+       
+        } else if (status == PHAuthorizationStatusAuthorized) { // 用户允许当前应用访问相册
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init]; // 创建对象
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
+            imagePicker.delegate = self; // 指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议
+            [self presentViewController:imagePicker animated:YES completion:nil]; // 显示相册
+
+        } else if (status == PHAuthorizationStatusDenied) { // 用户拒绝当前应用访问相册
+            SGAlertView *alertView = [SGAlertView alertViewWithTitle:@"⚠️ 警告" delegate:nil contentTitle:@"请去-> [设置 - 隐私 - 照片 - SGQRCodeExample] 打开访问开关" alertViewBottomViewType:(SGAlertViewBottomViewTypeOne)];
+            [alertView show];
+            
+        } else if (status == PHAuthorizationStatusRestricted) {
+            NSLog(@"因为系统原因, 无法访问相册");
+        }
+        
+    } else {
+        SGAlertView *alertView = [SGAlertView alertViewWithTitle:@"⚠️ 警告" delegate:nil contentTitle:@"未检测到您的摄像头, 请在真机上测试" alertViewBottomViewType:(SGAlertViewBottomViewTypeOne)];
+        [alertView show];
+    }
 }
 #pragma mark - - - UIImagePickerControllerDelegate
 /*

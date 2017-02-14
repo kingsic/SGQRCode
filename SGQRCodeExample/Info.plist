@@ -28,9 +28,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>cameraDesciption</string>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>photoLibraryDesciption</string>
+	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
