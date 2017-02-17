@@ -2,7 +2,7 @@
 //  SGQRCodeExampleUITests.m
 //  SGQRCodeExampleUITests
 //
-//  Created by Sorgle on 16/8/27.
+//  Created by apple on 16/8/27.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
