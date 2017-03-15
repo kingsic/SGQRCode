@@ -65,6 +65,13 @@ self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
 ```
 
 
+## 效果图
+
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle.png)  ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle2.png) 
+
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle3.png)  ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle4.png)
+
+
 ## 更新介绍
 
 * 2016. 9. 30  --> 新增从相册中获取二维码功能 (注意: 从相册中读取二维码, 需要在 iOS8.0 以后)
@@ -74,16 +81,6 @@ self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
 * 2017. 1. 29  --> 对扫描二维码部分代码的封装，从相册中读取二维码采用新方法；扫描视图布局采用CALayer
 * 2017. 2. 14  --> 相机访问权限崩溃问题处理
 
-
-## 效果图
-
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle.png) 
-
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle2.png) 
-
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle3.png) 
-
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle4.png)
 
 
 ## Concluding remarks
