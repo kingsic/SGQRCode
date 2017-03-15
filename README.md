@@ -30,7 +30,7 @@
 
 
 ## 代码介绍(详细使用方法，请参考 Demo)
-### 生成二维码
+#### 生成二维码
 
 * 普通二维码生成
 ```Objective-C
@@ -47,7 +47,7 @@ imageView.image = [SGQRCodeTool SG_generateWithLogoQRCodeData:@"https://github.c
 imageView.image = [SGQRCodeTool SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
 ```
 
-### 扫描二维码
+#### 扫描二维码
 
 * 扫描视图创建
 ```Objective-C
@@ -74,12 +74,12 @@ self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
 
 ## 更新介绍
 
-* 2016. 9. 30  --> 新增从相册中获取二维码功能 (注意: 从相册中读取二维码, 需要在 iOS8.0 以后)
-* 2016. 10. 12  --> 解决从相册中读取二维码重复 push 问题(一张照片中包含多个二维码，这里会选取第一个二维码进行解读)
-* 2016. 10. 27  --> 解决从相册中读取二维码，取消选择返回时，图层卡死问题（修改了创建扫描边框里的问题）
-* 2016. 12. 2  --> 新增 SGQRCodeTool，对生成二维码代码进行封装（只需一句代码进行调用）；删除了 CIImage 分类
-* 2017. 1. 29  --> 对扫描二维码部分代码的封装，从相册中读取二维码采用新方法；扫描视图布局采用CALayer
-* 2017. 2. 14  --> 相机访问权限崩溃问题处理
+* 2016-9-30  --> 新增从相册中获取二维码功能 (注意: 从相册中读取二维码, 需要在 iOS8.0 以后)
+* 2016-10=12  --> 解决从相册中读取二维码重复 push 问题(一张照片中包含多个二维码，这里会选取第一个二维码进行解读)
+* 2016-10-27  --> 解决从相册中读取二维码，取消选择返回时，图层卡死问题（修改了创建扫描边框里的问题）
+* 2016-12-2  --> 新增 SGQRCodeTool，对生成二维码代码进行封装（只需一句代码进行调用）；删除了 CIImage 分类
+* 2017-1-29  --> 对扫描二维码部分代码的封装，从相册中读取二维码采用新方法；扫描视图布局采用CALayer
+* 2017-2-14  --> 相机访问权限崩溃问题处理
 
 
 ## Concluding remarks
