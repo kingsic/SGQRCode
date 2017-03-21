@@ -2,8 +2,8 @@
 //  SGQRCodeExampleUITests.m
 //  SGQRCodeExampleUITests
 //
-//  Created by apple on 16/8/27.
-//  Copyright © 2016年 Sorgle. All rights reserved.
+//  Created by apple on 17/3/21.
+//  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

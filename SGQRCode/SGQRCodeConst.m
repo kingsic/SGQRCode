@@ -1,9 +1,9 @@
 //
-//  SGScanningQRCodeView.h
+//  SGQRCodeConst.m
 //  SGQRCodeExample
 //
-//  Created by Sorgle on 16/8/27.
-//  Copyright © 2016年 Sorgle. All rights reserved.
+//  Created by apple on 17/3/21.
+//  Copyright © 2017年 Sorgle. All rights reserved.
 //
 //  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - - //
 //
@@ -15,13 +15,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SGScanningQRCodeView : UIView
+/** 二维码冲击波动画时间 */
+CGFloat const SGQRCodeScanningLineAnimation = 0.05;
 
-- (instancetype)initWithFrame:(CGRect)frame outsideViewLayer:(CALayer *)outsideViewLayer;
+/** 从相册里得到的二维码信息 */
+NSString *const SGQRCodeInformationFromeAibum = @"SGQRCodeInformationFromeAibum";
 
-+ (instancetype)scanningQRCodeViewWithFrame:(CGRect )frame outsideViewLayer:(CALayer *)outsideViewLayer;
+/** 扫描得到的二维码信息 */
+NSString *const SGQRCodeInformationFromeScanning = @"SGQRCodeInformationFromeScanning";
 
-/** 移除定时器(切记：一定要在Controller视图消失的时候，停止定时器) */
-- (void)removeTimer;
-
-@end

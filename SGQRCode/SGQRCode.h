@@ -1,9 +1,9 @@
 //
-//  SGScanningQRCodeVC.h
+//  SGQRCode.h
 //  SGQRCodeExample
 //
-//  Created by Sorgle on 16/8/25.
-//  Copyright © 2016年 Sorgle. All rights reserved.
+//  Created by apple on 17/3/21.
+//  Copyright © 2017年 Sorgle. All rights reserved.
 //
 //  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - - //
 //
@@ -14,7 +14,7 @@
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import <UIKit/UIKit.h>
+#import "SGQRCodeTool.h"
+#import "SGQRCodeConst.h"
+#import "SGQRCodeScanningVC.h"
 
-@interface SGScanningQRCodeVC : UIViewController
-
-@end

@@ -1,9 +1,9 @@
 //
-//  ScanSuccessJumpVC.h
+//  SGQRCodeConst.h
 //  SGQRCodeExample
 //
-//  Created by Sorgle on 16/8/29.
-//  Copyright © 2016年 Sorgle. All rights reserved.
+//  Created by apple on 17/3/21.
+//  Copyright © 2017年 Sorgle. All rights reserved.
 //
 //  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - - //
 //
@@ -15,11 +15,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScanSuccessJumpVC : UIViewController
+#define SGQRCodeNotificationCenter [NSNotificationCenter defaultCenter]
 
-/** 接收扫描的二维码信息 */
-@property (nonatomic, copy) NSString *jump_URL;
-/** 接收扫描的条形码信息 */
-@property (nonatomic, copy) NSString *jump_bar_code;
+/** 二维码冲击波动画时间 */
+UIKIT_EXTERN CGFloat const SGQRCodeScanningLineAnimation;
 
-@end
+/** 扫描得到的二维码信息 */
+UIKIT_EXTERN NSString *const SGQRCodeInformationFromeScanning;
+
+/** 从相册里得到的二维码信息 */
+UIKIT_EXTERN NSString *const SGQRCodeInformationFromeAibum;
+

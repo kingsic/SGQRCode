@@ -1,60 +1,58 @@
 //
-//  SGScanningQRCodeView.m
+//  SGQRCodeScanningView.m
 //  SGQRCodeExample
 //
-//  Created by Sorgle on 16/8/27.
-//  Copyright © 2016年 Sorgle. All rights reserved.
+//  Created by apple on 17/3/20.
+//  Copyright © 2017年 Sorgle. All rights reserved.
 //
-//  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - - //
-//
-//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于 kingsic@126.com 邮箱联系 - - - - //
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  - - GitHub下载地址 https://github.com/kingsic/SGQRCode.git - - - - - - - - - //
-//
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-#import "SGScanningQRCodeView.h"
+#import "SGQRCodeScanningView.h"
 #import <AVFoundation/AVFoundation.h>
+#import "SGQRCodeConst.h"
 
 /** 扫描内容的Y值 */
 #define scanContent_Y self.frame.size.height * 0.24
 /** 扫描内容的Y值 */
 #define scanContent_X self.frame.size.width * 0.15
 
-@interface SGScanningQRCodeView ()
-@property (nonatomic, strong) CALayer *basedLayer;
+@interface SGQRCodeScanningView ()
 @property (nonatomic, strong) AVCaptureDevice *device;
-/** 扫描动画线(冲击波) */
-@property (nonatomic, strong) UIImageView *animation_line;
+@property (nonatomic, strong) CALayer *tempLayer;
+@property (nonatomic, strong) UIImageView *scanningline;
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
 
-@implementation SGScanningQRCodeView
+@implementation SGQRCodeScanningView
 
 /** 扫描动画线(冲击波) 的高度 */
-static CGFloat const animation_line_H = 12;
+static CGFloat const scanninglineHeight = 12;
 /** 扫描内容外部View的alpha值 */
 static CGFloat const scanBorderOutsideViewAlpha = 0.4;
-/** 定时器和动画的时间 */
-static CGFloat const timer_animation_Duration = 0.05;
 
-- (instancetype)initWithFrame:(CGRect)frame outsideViewLayer:(CALayer *)outsideViewLayer {
+- (CALayer *)tempLayer {
+    if (!_tempLayer) {
+        _tempLayer = [[CALayer alloc] init];
+    }
+    return _tempLayer;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame layer:(CALayer *)layer {
     if (self = [super initWithFrame:frame]) {
-        _basedLayer = outsideViewLayer;
-         // 创建扫描边框
-         [self setupScanningQRCodeEdging];
+        self.tempLayer = layer;
+        
+        // 布局扫描界面
+        [self setupSubviews];
+
     }
     return self;
 }
 
-+ (instancetype)scanningQRCodeViewWithFrame:(CGRect)frame outsideViewLayer:(CALayer *)outsideViewLayer {
-    return [[self alloc] initWithFrame:frame outsideViewLayer:outsideViewLayer];
++ (instancetype)scanningViewWithFrame:(CGRect )frame layer:(CALayer *)layer {
+    return [[self alloc] initWithFrame:frame layer:layer];
 }
 
-
-// 创建扫描边框
-- (void)setupScanningQRCodeEdging {
+- (void)setupSubviews {
     // 扫描内容的创建
     CALayer *scanContent_layer = [[CALayer alloc] init];
     CGFloat scanContent_layerX = scanContent_X;
@@ -65,16 +63,16 @@ static CGFloat const timer_animation_Duration = 0.05;
     scanContent_layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6].CGColor;
     scanContent_layer.borderWidth = 0.7;
     scanContent_layer.backgroundColor = [UIColor clearColor].CGColor;
-    [self.basedLayer addSublayer:scanContent_layer];
+    [self.tempLayer addSublayer:scanContent_layer];
     
     // 扫描动画添加
-    self.animation_line = [[UIImageView alloc] init];
-    _animation_line.image = [UIImage imageNamed:@"QRCodeLine"];
-    _animation_line.frame = CGRectMake(scanContent_X * 0.5, scanContent_layerY, self.frame.size.width - scanContent_X , animation_line_H);
-    [self.basedLayer addSublayer:_animation_line.layer];
+    self.scanningline = [[UIImageView alloc] init];
+    _scanningline.image = [UIImage imageNamed:@"SGQRCode.bundle/QRCodeScanningLine"];
+    _scanningline.frame = CGRectMake(scanContent_X * 0.5, scanContent_layerY, self.frame.size.width - scanContent_X , scanninglineHeight);
+    [self.tempLayer addSublayer:_scanningline.layer];
     
     // 添加定时器
-    self.timer =[NSTimer scheduledTimerWithTimeInterval:timer_animation_Duration target:self selector:@selector(animation_line_action) userInfo:nil repeats:YES];
+    [self addTimer];
     
 #pragma mark - - - 扫描外部View的创建
     // 顶部layer的创建
@@ -86,7 +84,7 @@ static CGFloat const timer_animation_Duration = 0.05;
     top_layer.frame = CGRectMake(top_layerX, top_layerY, top_layerW, top_layerH);
     top_layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:scanBorderOutsideViewAlpha].CGColor;
     [self.layer addSublayer:top_layer];
-
+    
     // 左侧layer的创建
     CALayer *left_layer = [[CALayer alloc] init];
     CGFloat left_layerX = 0;
@@ -106,7 +104,7 @@ static CGFloat const timer_animation_Duration = 0.05;
     right_layer.frame = CGRectMake(right_layerX, right_layerY, right_layerW, right_layerH);
     right_layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:scanBorderOutsideViewAlpha].CGColor;
     [self.layer addSublayer:right_layer];
-
+    
     // 下面layer的创建
     CALayer *bottom_layer = [[CALayer alloc] init];
     CGFloat bottom_layerX = 0;
@@ -116,7 +114,7 @@ static CGFloat const timer_animation_Duration = 0.05;
     bottom_layer.frame = CGRectMake(bottom_layerX, bottom_layerY, bottom_layerW, bottom_layerH);
     bottom_layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:scanBorderOutsideViewAlpha].CGColor;
     [self.layer addSublayer:bottom_layer];
-
+    
     // 提示Label
     UILabel *promptLabel = [[UILabel alloc] init];
     promptLabel.backgroundColor = [UIColor clearColor];
@@ -145,12 +143,12 @@ static CGFloat const timer_animation_Duration = 0.05;
     
     [light_button addTarget:self action:@selector(light_buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:light_button];
-
+    
 #pragma mark - - - 扫描边角imageView的创建
     // 左上侧的image
     CGFloat margin = 7;
     
-    UIImage *left_image = [UIImage imageNamed:@"QRCodeTopLeft"];
+    UIImage *left_image = [UIImage imageNamed:@"SGQRCode.bundle/QRCodeLeftTop"];
     UIImageView *left_imageView = [[UIImageView alloc] init];
     CGFloat left_imageViewX = CGRectGetMinX(scanContent_layer.frame) - left_image.size.width * 0.5 + margin;
     CGFloat left_imageViewY = CGRectGetMinY(scanContent_layer.frame) - left_image.size.width * 0.5 + margin;
@@ -158,10 +156,10 @@ static CGFloat const timer_animation_Duration = 0.05;
     CGFloat left_imageViewH = left_image.size.height;
     left_imageView.frame = CGRectMake(left_imageViewX, left_imageViewY, left_imageViewW, left_imageViewH);
     left_imageView.image = left_image;
-    [self.basedLayer addSublayer:left_imageView.layer];
+    [self.tempLayer addSublayer:left_imageView.layer];
     
     // 右上侧的image
-    UIImage *right_image = [UIImage imageNamed:@"QRCodeTopRight"];
+    UIImage *right_image = [UIImage imageNamed:@"SGQRCode.bundle/QRCodeRightTop"];
     UIImageView *right_imageView = [[UIImageView alloc] init];
     CGFloat right_imageViewX = CGRectGetMaxX(scanContent_layer.frame) - right_image.size.width * 0.5 - margin;
     CGFloat right_imageViewY = left_imageView.frame.origin.y;
@@ -169,10 +167,10 @@ static CGFloat const timer_animation_Duration = 0.05;
     CGFloat right_imageViewH = left_image.size.height;
     right_imageView.frame = CGRectMake(right_imageViewX, right_imageViewY, right_imageViewW, right_imageViewH);
     right_imageView.image = right_image;
-    [self.basedLayer addSublayer:right_imageView.layer];
+    [self.tempLayer addSublayer:right_imageView.layer];
     
     // 左下侧的image
-    UIImage *left_image_down = [UIImage imageNamed:@"QRCodebottomLeft"];
+    UIImage *left_image_down = [UIImage imageNamed:@"SGQRCode.bundle/QRCodeLeftBottom"];
     UIImageView *left_imageView_down = [[UIImageView alloc] init];
     CGFloat left_imageView_downX = left_imageView.frame.origin.x;
     CGFloat left_imageView_downY = CGRectGetMaxY(scanContent_layer.frame) - left_image_down.size.width * 0.5 - margin;
@@ -180,10 +178,10 @@ static CGFloat const timer_animation_Duration = 0.05;
     CGFloat left_imageView_downH = left_image.size.height;
     left_imageView_down.frame = CGRectMake(left_imageView_downX, left_imageView_downY, left_imageView_downW, left_imageView_downH);
     left_imageView_down.image = left_image_down;
-    [self.basedLayer addSublayer:left_imageView_down.layer];
+    [self.tempLayer addSublayer:left_imageView_down.layer];
     
     // 右下侧的image
-    UIImage *right_image_down = [UIImage imageNamed:@"QRCodebottomRight"];
+    UIImage *right_image_down = [UIImage imageNamed:@"SGQRCode.bundle/QRCodeRightBottom"];
     UIImageView *right_imageView_down = [[UIImageView alloc] init];
     CGFloat right_imageView_downX = right_imageView.frame.origin.x;
     CGFloat right_imageView_downY = left_imageView_down.frame.origin.y;
@@ -191,8 +189,7 @@ static CGFloat const timer_animation_Duration = 0.05;
     CGFloat right_imageView_downH = left_image.size.height;
     right_imageView_down.frame = CGRectMake(right_imageView_downX, right_imageView_downY, right_imageView_downW, right_imageView_downH);
     right_imageView_down.image = right_image_down;
-    [self.basedLayer addSublayer:right_imageView_down.layer];
-
+    [self.tempLayer addSublayer:right_imageView_down.layer];
 }
 
 #pragma mark - - - 照明灯的点击事件
@@ -205,7 +202,6 @@ static CGFloat const timer_animation_Duration = 0.05;
         button.selected = NO;
     }
 }
-
 - (void)turnOnLight:(BOOL)on {
     self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if ([_device hasTorch]) {
@@ -219,30 +215,42 @@ static CGFloat const timer_animation_Duration = 0.05;
     }
 }
 
+#pragma mark - - - 添加定时器
+- (void)addTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:SGQRCodeScanningLineAnimation target:self selector:@selector(timeAction) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+}
+#pragma mark - - - 移除定时器
+- (void)removeTimer {
+    [self.timer invalidate];
+    [self.scanningline removeFromSuperview];
+    self.scanningline = nil;
+}
+
 #pragma mark - - - 执行定时器方法
-- (void)animation_line_action {
-    __block CGRect frame = _animation_line.frame;
+- (void)timeAction {
+    __block CGRect frame = _scanningline.frame;
     
     static BOOL flag = YES;
     
     if (flag) {
         frame.origin.y = scanContent_Y;
         flag = NO;
-        [UIView animateWithDuration:timer_animation_Duration animations:^{
+        [UIView animateWithDuration:SGQRCodeScanningLineAnimation animations:^{
             frame.origin.y += 5;
-            _animation_line.frame = frame;
+            _scanningline.frame = frame;
         } completion:nil];
     } else {
-        if (_animation_line.frame.origin.y >= scanContent_Y) {
+        if (_scanningline.frame.origin.y >= scanContent_Y) {
             CGFloat scanContent_MaxY = scanContent_Y + self.frame.size.width - 2 * scanContent_X;
-            if (_animation_line.frame.origin.y >= scanContent_MaxY - 5) {
+            if (_scanningline.frame.origin.y >= scanContent_MaxY - 10) {
                 frame.origin.y = scanContent_Y;
-                _animation_line.frame = frame;
+                _scanningline.frame = frame;
                 flag = YES;
             } else {
-                [UIView animateWithDuration:timer_animation_Duration animations:^{
+                [UIView animateWithDuration:SGQRCodeScanningLineAnimation animations:^{
                     frame.origin.y += 5;
-                    _animation_line.frame = frame;
+                    _scanningline.frame = frame;
                 } completion:nil];
             }
         } else {
@@ -250,14 +258,6 @@ static CGFloat const timer_animation_Duration = 0.05;
         }
     }
 }
-
-#pragma mark - - - 移除定时器
-- (void)removeTimer {
-    [self.timer invalidate];
-    [self.animation_line removeFromSuperview];
-    self.animation_line = nil;
-}
-
 
 
 @end

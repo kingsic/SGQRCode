@@ -5,13 +5,6 @@
 //  Created by Sorgle on 16/8/29.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
-//  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - - //
-//
-//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于 kingsic@126.com 邮箱联系 - - - - //
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  - - GitHub下载地址 https://github.com/kingsic/SGQRCode.git - - - - - - - - - //
-//
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import "ScanSuccessJumpVC.h"
 
@@ -35,10 +28,10 @@
     }
 }
 
-
 - (void)setupNavigationItem {
     UIButton *left_Button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
     [left_Button setTitle:@"返回" forState:UIControlStateNormal];
+    [left_Button setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
     [left_Button addTarget:self action:@selector(left_BarButtonItemAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left_BarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:left_Button];
     self.navigationItem.leftBarButtonItem = left_BarButtonItem;
