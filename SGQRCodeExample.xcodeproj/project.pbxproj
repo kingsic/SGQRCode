@@ -573,6 +573,7 @@
 				18479EF91E80F92500F7F225 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18479EFA1E80F92500F7F225 /* Build configuration list for PBXNativeTarget "SGQRCodeExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -581,6 +582,7 @@
 				18479EFC1E80F92500F7F225 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18479EFD1E80F92500F7F225 /* Build configuration list for PBXNativeTarget "SGQRCodeExampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -589,6 +591,7 @@
 				18479EFF1E80F92500F7F225 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
