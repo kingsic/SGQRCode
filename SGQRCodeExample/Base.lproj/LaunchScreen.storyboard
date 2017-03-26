@@ -22,18 +22,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎使用 SGQRCode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r26-Ta-fry">
-                                <rect key="frame" x="0.0" y="220" width="375" height="26.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <rect key="frame" x="38" y="314.5" width="299.5" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="r26-Ta-fry" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5kL-Xh-1pD"/>
-                            <constraint firstItem="r26-Ta-fry" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="200" id="dSJ-Tp-sYh"/>
-                            <constraint firstAttribute="trailing" secondItem="r26-Ta-fry" secondAttribute="trailing" id="e6X-iq-vhd"/>
-                            <constraint firstItem="r26-Ta-fry" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="scW-xg-Dr4"/>
+                            <constraint firstItem="r26-Ta-fry" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="R9h-qv-9f1"/>
+                            <constraint firstItem="r26-Ta-fry" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="fvh-8M-zXE"/>
                         </constraints>
                     </view>
                 </viewController>

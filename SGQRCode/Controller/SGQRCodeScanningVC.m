@@ -22,6 +22,16 @@
 
 @implementation SGQRCodeScanningVC
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.scanningView addTimer];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.scanningView removeTimer];
+}
+
 - (void)dealloc {
     [self removeScanningView];
 }
@@ -29,13 +39,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     self.view.backgroundColor = [UIColor clearColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupNavigationBar];
     [self.view addSubview:self.scanningView];
     [self setupSGQRCodeScanning];
-    
-
 }
 
 - (void)setupNavigationBar {

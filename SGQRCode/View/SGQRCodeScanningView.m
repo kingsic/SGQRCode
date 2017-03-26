@@ -65,15 +65,6 @@ static CGFloat const scanBorderOutsideViewAlpha = 0.4;
     scanContent_layer.backgroundColor = [UIColor clearColor].CGColor;
     [self.tempLayer addSublayer:scanContent_layer];
     
-    // 扫描动画添加
-    self.scanningline = [[UIImageView alloc] init];
-    _scanningline.image = [UIImage imageNamed:@"SGQRCode.bundle/QRCodeScanningLine"];
-    _scanningline.frame = CGRectMake(scanContent_X * 0.5, scanContent_layerY, self.frame.size.width - scanContent_X , scanninglineHeight);
-    [self.tempLayer addSublayer:_scanningline.layer];
-    
-    // 添加定时器
-    [self addTimer];
-    
 #pragma mark - - - 扫描外部View的创建
     // 顶部layer的创建
     CALayer *top_layer = [[CALayer alloc] init];
@@ -215,14 +206,31 @@ static CGFloat const scanBorderOutsideViewAlpha = 0.4;
     }
 }
 
+- (UIImageView *)scanningline {
+    if (!_scanningline) {
+        _scanningline = [[UIImageView alloc] init];
+        _scanningline.image = [UIImage imageNamed:@"SGQRCode.bundle/QRCodeScanningLine"];
+        _scanningline.frame = CGRectMake(scanContent_X * 0.5, scanContent_Y, self.frame.size.width - scanContent_X , scanninglineHeight);
+    }
+    return _scanningline;
+}
+
+- (void)addScanningline {
+    // 扫描动画添加
+    [self.tempLayer addSublayer:self.scanningline.layer];
+}
+
 #pragma mark - - - 添加定时器
 - (void)addTimer {
+    [self addScanningline];
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:SGQRCodeScanningLineAnimation target:self selector:@selector(timeAction) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 #pragma mark - - - 移除定时器
 - (void)removeTimer {
     [self.timer invalidate];
+    self.timer = nil;
     [self.scanningline removeFromSuperview];
     self.scanningline = nil;
 }

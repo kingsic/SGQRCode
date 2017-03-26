@@ -175,13 +175,13 @@
 			isa = PBXGroup;
 			children = (
 				18479F0D1E80F98F00F7F225 /* Controller */,
+				18479F161E80F98F00F7F225 /* View */,
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
 				18479F111E80F98F00F7F225 /* SGQRCode.h */,
 				18479F121E80F98F00F7F225 /* SGQRCodeConst.h */,
 				18479F131E80F98F00F7F225 /* SGQRCodeConst.m */,
 				18479F141E80F98F00F7F225 /* SGQRCodeTool.h */,
 				18479F151E80F98F00F7F225 /* SGQRCodeTool.m */,
-				18479F161E80F98F00F7F225 /* View */,
 			);
 			path = SGQRCode;
 			sourceTree = "<group>";

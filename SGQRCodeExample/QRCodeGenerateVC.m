@@ -59,7 +59,7 @@
     borderView.layer.borderColor = [UIColor purpleColor].CGColor;
     borderView.layer.cornerRadius = 10;
     borderView.layer.masksToBounds = YES;
-    borderView.layer.contents = (id)[UIImage imageNamed:@"icon_image"].CGImage;
+    borderView.layer.contents = (id)[UIImage imageNamed:@"logo"].CGImage;
 
     //[imageView addSubview:borderView];
 }
@@ -79,7 +79,7 @@
     CGFloat scale = 0.2;
     
     // 2、将最终合得的图片显示在UIImageView上
-    imageView.image = [SGQRCodeTool SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
+    imageView.image = [SGQRCodeTool SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"logo" logoScaleToSuperView:scale];
     
 }
 
