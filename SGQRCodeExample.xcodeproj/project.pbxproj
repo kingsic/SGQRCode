@@ -23,6 +23,7 @@
 		18479F1C1E80F98F00F7F225 /* SGQRCodeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479F151E80F98F00F7F225 /* SGQRCodeTool.m */; };
 		18479F1D1E80F98F00F7F225 /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479F181E80F98F00F7F225 /* SGQRCodeScanningView.m */; };
 		18479F1F1E80F9CA00F7F225 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18479F1E1E80F9CA00F7F225 /* Main.storyboard */; };
+		18DF174A1E88D8DD006938B6 /* SGWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF17491E88D8DD006938B6 /* SGWebView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		18479F171E80F98F00F7F225 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		18479F181E80F98F00F7F225 /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
 		18479F1E1E80F9CA00F7F225 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		18DF17481E88D8DD006938B6 /* SGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebView.h; sourceTree = "<group>"; };
+		18DF17491E88D8DD006938B6 /* SGWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,8 +203,18 @@
 			children = (
 				18479F171E80F98F00F7F225 /* SGQRCodeScanningView.h */,
 				18479F181E80F98F00F7F225 /* SGQRCodeScanningView.m */,
+				18DF17471E88D8DD006938B6 /* SGWebView */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		18DF17471E88D8DD006938B6 /* SGWebView */ = {
+			isa = PBXGroup;
+			children = (
+				18DF17481E88D8DD006938B6 /* SGWebView.h */,
+				18DF17491E88D8DD006938B6 /* SGWebView.m */,
+			);
+			path = SGWebView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18DF174A1E88D8DD006938B6 /* SGWebView.m in Sources */,
 				18479F1C1E80F98F00F7F225 /* SGQRCodeTool.m in Sources */,
 				18479F0B1E80F97700F7F225 /* ViewController.m in Sources */,
 				18479F1B1E80F98F00F7F225 /* SGQRCodeConst.m in Sources */,

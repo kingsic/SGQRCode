@@ -7,9 +7,10 @@
 //
 
 #import "ScanSuccessJumpVC.h"
+#import "SGWebView.h"
 
-@interface ScanSuccessJumpVC ()
-
+@interface ScanSuccessJumpVC () <SGWebViewDelegate>
+@property (nonatomic , strong) SGWebView *webView;
 @end
 
 @implementation ScanSuccessJumpVC
@@ -29,15 +30,21 @@
 }
 
 - (void)setupNavigationItem {
-    UIButton *left_Button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    [left_Button setTitle:@"返回" forState:UIControlStateNormal];
-    [left_Button setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
+    UIButton *left_Button = [[UIButton alloc] init];
+    [left_Button setTitle:@"back" forState:UIControlStateNormal];
+    [left_Button setTitleColor:[UIColor colorWithRed: 21/ 255.0f green: 126/ 255.0f blue: 251/ 255.0f alpha:1.0] forState:(UIControlStateNormal)];
+    [left_Button sizeToFit];
     [left_Button addTarget:self action:@selector(left_BarButtonItemAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left_BarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:left_Button];
     self.navigationItem.leftBarButtonItem = left_BarButtonItem;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemRefresh) target:self action:@selector(right_BarButtonItemAction)];
 }
 - (void)left_BarButtonItemAction {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+- (void)right_BarButtonItemAction {
+    [self.webView reloadData];
 }
 
 // 添加Label，加载扫描过来的内容
@@ -61,24 +68,17 @@
 
 // 添加webView，加载扫描过来的内容
 - (void)setupWebView {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    
-    webView.frame = self.view.bounds;
-    
-    // 1. URL 定位资源,需要资源的地址
-    NSString *urlStr = self.jump_URL;
-    
-    NSURL *url = [NSURL URLWithString:urlStr];
-    
-    // 2. 把URL告诉给服务器,请求,从m.baidu.com请求数据
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    // 3. 发送请求给服务器
-    [webView loadRequest:request];
-    
-    [self.view addSubview:webView];
+    self.webView = [[SGWebView alloc] initWithFrame:self.view.bounds];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.jump_URL]]];
+    _webView.progressViewColor = [UIColor redColor];
+    _webView.SGDelegate = self;
+    [self.view addSubview:_webView];
 }
 
+- (void)webView:(SGWebView *)webView didFinishLoadWithURL:(NSURL *)url {
+    NSLog(@"didFinishLoad");
+    self.title = webView.navigationItemTitle;
+}
 
 @end
 

@@ -146,7 +146,7 @@
     for (int index = 0; index < [features count]; index ++) {
         CIQRCodeFeature *feature = [features objectAtIndex:index];
         NSString *scannedResult = feature.messageString;
-        NSLog(@"scannedResult - - %@", scannedResult);
+        //NSLog(@"scannedResult - - %@", scannedResult);
         // 在此发通知，告诉子类二维码数据
         [SGQRCodeNotificationCenter postNotificationName:SGQRCodeInformationFromeAibum object:scannedResult];
     }
