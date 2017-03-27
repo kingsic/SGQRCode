@@ -108,7 +108,11 @@ imageView.image = [SGQRCodeTool SG_generateWithColorQRCodeData:@"https://github.
 
 * 2017-3-21 ：版本升级处理 (2.0 采用继承)
 
+* 2017-3-27 ：从相册中读取二维码照片的优化处理
+
 
 ## Concluding remarks
 
 * 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGQRCode/issues) 或 kingsic@126.com 邮箱联系我
+
+* 感谢邮箱号为：notifications@github.com 的这位朋友提供的从相册中读取二维码照片的优化方案
