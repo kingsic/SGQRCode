@@ -42,14 +42,14 @@
                         [self.navigationController pushViewController:vc animated:YES];
                     });
 
-                    NSLog(@"当前线程 - - %@", [NSThread currentThread]);
+                    SGQRCodeLog(@"当前线程 - - %@", [NSThread currentThread]);
                     // 用户第一次同意了访问相机权限
-                    NSLog(@"用户第一次同意了访问相机权限");
+                    SGQRCodeLog(@"用户第一次同意了访问相机权限");
                     
                 } else {
                     
                     // 用户第一次拒绝了访问相机权限
-                    NSLog(@"用户第一次拒绝了访问相机权限");
+                    SGQRCodeLog(@"用户第一次拒绝了访问相机权限");
                 }
             }];
         } else if (status == AVAuthorizationStatusAuthorized) { // 用户允许当前应用访问相机

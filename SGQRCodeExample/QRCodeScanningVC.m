@@ -33,7 +33,7 @@
 }
 
 - (void)SGQRCodeInformationFromeScanning:(NSNotification *)noti {
-    NSLog(@"noti - - %@", noti);
+    SGQRCodeLog(@"noti - - %@", noti);
     NSString *string = noti.object;
     
     if ([string hasPrefix:@"http"]) {
@@ -50,7 +50,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"dealloc");
+    SGQRCodeLog(@"dealloc");
     
     [SGQRCodeNotificationCenter removeObserver:self];
 }

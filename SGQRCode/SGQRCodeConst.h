@@ -15,7 +15,15 @@
 
 #import <UIKit/UIKit.h>
 
+#ifdef DEBUG
+#define SGQRCodeLog(...) NSLog(__VA_ARGS__)
+#else
+#define SGQRCodeLog(...)
+#endif
+
 #define SGQRCodeNotificationCenter [NSNotificationCenter defaultCenter]
+#define SGQRCodeScreenWidth [UIScreen mainScreen].bounds.size.width
+#define SGQRCodeScreenHeight [UIScreen mainScreen].bounds.size.height
 
 /** 二维码冲击波动画时间 */
 UIKIT_EXTERN CGFloat const SGQRCodeScanningLineAnimation;

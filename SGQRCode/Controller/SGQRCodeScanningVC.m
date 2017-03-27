@@ -11,6 +11,7 @@
 #import <Photos/Photos.h>
 #import "SGQRCodeScanningView.h"
 #import "SGQRCodeConst.h"
+#import "UIImage+SGHelper.h"
 
 @interface SGQRCodeScanningVC () <AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 /// 会话对象
@@ -137,6 +138,9 @@
 
 #pragma mark - - - 从相册中识别二维码, 并进行界面跳转
 - (void)scanQRCodeFromPhotosInTheAlbum:(UIImage *)image {
+    // 对选取照片的处理，如果选取的图片尺寸过大，则压缩选取图片，否则不作处理
+    image = [UIImage imageSizeWithScreenImage:image];
+
     // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
     // 声明一个CIDetector，并设定识别类型 CIDetectorTypeQRCode
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
@@ -146,7 +150,7 @@
     for (int index = 0; index < [features count]; index ++) {
         CIQRCodeFeature *feature = [features objectAtIndex:index];
         NSString *scannedResult = feature.messageString;
-        //NSLog(@"scannedResult - - %@", scannedResult);
+        //SGQRCodeLog(@"scannedResult - - %@", scannedResult);
         // 在此发通知，告诉子类二维码数据
         [SGQRCodeNotificationCenter postNotificationName:SGQRCodeInformationFromeAibum object:scannedResult];
     }
@@ -233,7 +237,7 @@
 }
 /** 播放完成回调函数 */
 void soundCompleteCallback(SystemSoundID soundID, void *clientData){
-    //NSLog(@"播放完成...");
+    //SGQRCodeLog(@"播放完成...");
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "ScanSuccessJumpVC.h"
 #import "SGWebView.h"
+#import "SGQRCodeConst.h"
 
 @interface ScanSuccessJumpVC () <SGWebViewDelegate>
 @property (nonatomic , strong) SGWebView *webView;
@@ -76,7 +77,7 @@
 }
 
 - (void)webView:(SGWebView *)webView didFinishLoadWithURL:(NSURL *)url {
-    NSLog(@"didFinishLoad");
+    SGQRCodeLog(@"didFinishLoad");
     self.title = webView.navigationItemTitle;
 }
 

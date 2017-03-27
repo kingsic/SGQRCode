@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183A1A351E893B3800186578 /* UIImage+SGHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A1A341E893B3800186578 /* UIImage+SGHelper.m */; };
 		18479ECF1E80F92500F7F225 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479ECE1E80F92500F7F225 /* main.m */; };
 		18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479ED11E80F92500F7F225 /* AppDelegate.m */; };
 		18479EDA1E80F92500F7F225 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18479ED91E80F92500F7F225 /* Assets.xcassets */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		183A1A331E893B3800186578 /* UIImage+SGHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SGHelper.h"; sourceTree = "<group>"; };
+		183A1A341E893B3800186578 /* UIImage+SGHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SGHelper.m"; sourceTree = "<group>"; };
 		18479ECA1E80F92500F7F225 /* SGQRCodeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGQRCodeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18479ECE1E80F92500F7F225 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18479ED01E80F92500F7F225 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -105,6 +108,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		183A1A321E893B0600186578 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				183A1A331E893B3800186578 /* UIImage+SGHelper.h */,
+				183A1A341E893B3800186578 /* UIImage+SGHelper.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		18479EC11E80F92500F7F225 = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +189,7 @@
 		18479F0C1E80F98F00F7F225 /* SGQRCode */ = {
 			isa = PBXGroup;
 			children = (
+				183A1A321E893B0600186578 /* Category */,
 				18479F0D1E80F98F00F7F225 /* Controller */,
 				18479F161E80F98F00F7F225 /* View */,
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
@@ -362,6 +375,7 @@
 				18479ECF1E80F92500F7F225 /* main.m in Sources */,
 				18479F081E80F97700F7F225 /* QRCodeGenerateVC.m in Sources */,
 				18479F191E80F98F00F7F225 /* SGQRCodeScanningVC.m in Sources */,
+				183A1A351E893B3800186578 /* UIImage+SGHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
