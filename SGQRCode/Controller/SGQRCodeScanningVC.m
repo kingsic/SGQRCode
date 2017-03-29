@@ -49,8 +49,8 @@
 }
 
 - (void)setupNavigationBar {
-    self.navigationItem.title = @"扫一扫";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:(UIBarButtonItemStyleDone) target:self action:@selector(rightBarButtonItenAction)];
+    self.navigationItem.title = @"scan it";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Album" style:(UIBarButtonItemStyleDone) target:self action:@selector(rightBarButtonItenAction)];
 }
 
 - (SGQRCodeScanningView *)scanningView {
@@ -68,53 +68,55 @@
 
 - (void)rightBarButtonItenAction {
     [self readImageFromAlbum];
-
+    
     dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
-    // 栅栏函数
+    // Fence function
     dispatch_barrier_async(queue, ^{
         [self removeScanningView];
     });
 }
 
 - (void)readImageFromAlbum {
-
-    // 1、 获取摄像设备
+    
+    // 1、 Get the camera device
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if (device) {
-        // 判断授权状态
+        // Determine the authorization status
         PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-        if (status == PHAuthorizationStatusNotDetermined) { // 用户还没有做出选择
-            // 弹框请求用户授权
+        if (status == PHAuthorizationStatusNotDetermined) { // The user has not made a choice
+            // Pixel request user authorization
             [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-                if (status == PHAuthorizationStatusAuthorized) { // 用户第一次同意了访问相册权限
+                if (status == PHAuthorizationStatusAuthorized) {
+                    // The user first agreed to access the album permissions
                     dispatch_async(dispatch_get_main_queue(), ^{
                         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-                        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
+                        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                        //(Selection type) indicates that only photos are selected from the album
                         imagePicker.delegate = self;
                         [self presentViewController:imagePicker animated:YES completion:nil];
                     });
-                } else { // 用户第一次拒绝了访问相机权限
+                } else { // The user first denied access to the camera
                     
                 }
             }];
             
-        } else if (status == PHAuthorizationStatusAuthorized) { // 用户允许当前应用访问相册
+        } else if (status == PHAuthorizationStatusAuthorized) { // The user allows the current application to access the album
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //(Selection type) indicates that only photos are selected from the album
             imagePicker.delegate = self;
             [self presentViewController:imagePicker animated:YES completion:nil];
-
-        } else if (status == PHAuthorizationStatusDenied) { // 用户拒绝当前应用访问相册
-            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"⚠️ 警告" message:@"请去-> [设置 - 隐私 - 照片 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        } else if (status == PHAuthorizationStatusDenied) { // The user rejects the current application to access the album
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"⚠️ Info" message:@"Go to -> [Settings - Privacy - Photo - Open Access Switch" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"OK" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                 
             }];
             
             [alertC addAction:alertA];
             [self presentViewController:alertC animated:YES completion:nil];
         } else if (status == PHAuthorizationStatusRestricted) {
-            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"由于系统原因, 无法访问相册" preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"Tips" message:@"The album can not be accessed due to system reasons" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"OK" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                 
             }];
             
@@ -136,110 +138,108 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - - - 从相册中识别二维码, 并进行界面跳转
+#pragma mark - - - Identify two-dimensional code from the album and interface jump
 - (void)scanQRCodeFromPhotosInTheAlbum:(UIImage *)image {
-    // 对选取照片的处理，如果选取的图片尺寸过大，则压缩选取图片，否则不作处理
+    // The selection of the photo processing, if the selected picture size is too large, then select the picture compression, or not for processing
     image = [UIImage imageSizeWithScreenImage:image];
-
-    // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
-    // 声明一个CIDetector，并设定识别类型 CIDetectorTypeQRCode
+    
+    //CIDetector (CIDetector can be used for face recognition) for image analysis, so that we can easily get from the album to the two-dimensional code
+    // Declare a CIDetector and set the recognition type CIDetectorTypeQRCode
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
     
-    // 取得识别结果
+    // Get the recognition result
     NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
     for (int index = 0; index < [features count]; index ++) {
         CIQRCodeFeature *feature = [features objectAtIndex:index];
         NSString *scannedResult = feature.messageString;
-        //SGQRCodeLog(@"scannedResult - - %@", scannedResult);
-        // 在此发通知，告诉子类二维码数据
-        [SGQRCodeNotificationCenter postNotificationName:SGQRCodeInformationFromeAibum object:scannedResult];
+        // Scanned result
     }
 }
 
 - (void)setupSGQRCodeScanning {
-    // 1、获取摄像设备
+    // 1、Get the camera device
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
-    // 2、创建输入流
+    // 2、Create input stream
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
     
-    // 3、创建输出流
+    // 3、Create an output stream
     AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc] init];
     
-    // 4、设置代理 在主线程里刷新
+    // 4、Set the agent to refresh in the main thread
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     
-    // 设置扫描范围(每一个取值0～1，以屏幕右上角为坐标原点)
-    // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）
+    // Set the scan range (each value of 0 to 1, the upper right corner of the screen for the coordinates of the origin)
+    // Note: WeChat two-dimensional code scanning range is the entire screen, there is no processing (not set)
     output.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     
-    // 5、初始化链接对象（会话对象）
+    // 5、Initialize the link object (session object)
     self.session = [[AVCaptureSession alloc] init];
-    // 高质量采集率
+    // High quality collection rate
     [_session setSessionPreset:AVCaptureSessionPresetHigh];
     
-    // 5.1 添加会话输入
+    // 5.1 Add session input
     [_session addInput:input];
     
-    // 5.2 添加会话输出
+    // 5.2 Add session output
     [_session addOutput:output];
     
-    // 6、设置输出数据类型，需要将元数据输出添加到会话后，才能指定元数据类型，否则会报错
-    // 设置扫码支持的编码格式(如下设置条形码和二维码兼容)
+    // 6、After setting the output data type, you need to add meta data to the session, in order to specify the type of metadata, otherwise it will error
+    // Set the encoding format supported by the sweep code (set bar code and two-dimensional code as follows)
     output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code,  AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     
-    // 7、实例化预览图层, 传递_session是为了告诉图层将来显示什么内容
+    // 7、Instantiate the preview layer and pass _session to tell the layer what to display in the future
     self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
     _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     _previewLayer.frame = self.view.layer.bounds;
     
-    // 8、将图层插入当前视图
+    // 8、Insert the layer into the current view
     [self.view.layer insertSublayer:_previewLayer atIndex:0];
     
-    // 9、启动会话
+    // 9、Start the session
     [_session startRunning];
 }
 #pragma mark - - - AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    // 0、扫描成功之后的提示音
+    // 0、A successful tone after scanning
     [self SG_playSoundEffect:@"SGQRCode.bundle/sound.caf"];
     
-    // 1、如果扫描完成，停止会话
+    // 1、If the scan is complete, stop the session
     [self.session stopRunning];
     
-    // 2、删除预览图层
+    // 2、Delete the preview layer
     [self.previewLayer removeFromSuperlayer];
     
-    // 3、设置界面显示扫描结果
+    // 3、Set the interface to display the scan results
     if (metadataObjects.count > 0) {
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
         
-        // 在此发通知，告诉子类二维码数据
-        [SGQRCodeNotificationCenter postNotificationName:SGQRCodeInformationFromeScanning object:obj.stringValue];
+        
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
-/** 播放音效文件 */
+/** Play the sound file */
 - (void)SG_playSoundEffect:(NSString *)name {
-    // 获取音效
+    // Get sound effects
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:name ofType:nil];
     NSURL *fileUrl = [NSURL fileURLWithPath:audioFile];
     
-    // 1、获得系统声音ID
+    // 1、Get the system sound ID
     SystemSoundID soundID = 0;
     
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)(fileUrl), &soundID);
     
     AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundCompleteCallback, NULL);
     
-    // 2、播放音频
-    AudioServicesPlaySystemSound(soundID); // 播放音效
+    // 2、Play audio
+    AudioServicesPlaySystemSound(soundID); // Play sound effects
 }
-/** 播放完成回调函数 */
+/** Playback completes the callback function*/
 void soundCompleteCallback(SystemSoundID soundID, void *clientData){
-    //SGQRCodeLog(@"播放完成...");
+    //SGQRCodeLog(@"Play done...");
 }
-
 
 @end
 
