@@ -69,10 +69,14 @@
 
 // 添加webView，加载扫描过来的内容
 - (void)setupWebView {
-    self.webView = [[SGWebView alloc] initWithFrame:self.view.bounds];
+    CGFloat webViewX = 0;
+    CGFloat webViewY = 0;
+    CGFloat webViewW = SGQRCodeScreenWidth;
+    CGFloat webViewH = SGQRCodeScreenHeight;
+    self.webView = [SGWebView webViewWithFrame:CGRectMake(webViewX, webViewY, webViewW, webViewH)];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.jump_URL]]];
     _webView.progressViewColor = [UIColor redColor];
-    _webView.SGDelegate = self;
+    _webView.SGQRCodeDelegate = self;
     [self.view addSubview:_webView];
 }
 
