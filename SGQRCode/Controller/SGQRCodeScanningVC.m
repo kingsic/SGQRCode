@@ -34,6 +34,7 @@
 }
 
 - (void)dealloc {
+    SGQRCodeLog(@"SGQRCodeScanningVC - dealloc");
     [self removeScanningView];
 }
 

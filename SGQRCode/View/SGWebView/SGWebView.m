@@ -8,15 +8,19 @@
 
 #import "SGWebView.h"
 #import <WebKit/WebKit.h>
+#import "SGQRCodeConst.h"
 
 @interface SGWebView () <WKNavigationDelegate, WKUIDelegate>
-/// wkWebView
+/// WKWebView
 @property (nonatomic, strong) WKWebView *wkWebView;
 /// 进度条
 @property (nonatomic, strong) UIProgressView *progressView;
 @end
 
 @implementation SGWebView
+
+static CGFloat const navigationBarHeight = 64;
+static CGFloat const progressViewHeight = 2;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -46,9 +50,9 @@
         _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
         _progressView.trackTintColor = [UIColor clearColor];
         // 高度默认有导航栏且有穿透效果
-        _progressView.frame = CGRectMake(0, 64, self.frame.size.width, 2);
+        _progressView.frame = CGRectMake(0, navigationBarHeight, self.frame.size.width, progressViewHeight);
         // 设置进度条颜色
-        self.tintColor = [UIColor blueColor];
+        _progressView.tintColor = [UIColor greenColor];
     }
     return _progressView;
 }
@@ -57,7 +61,7 @@
     _progressViewColor = progressViewColor;
     
     if (progressViewColor) {
-        self.tintColor = progressViewColor;
+        _progressView.tintColor = progressViewColor;
     }
 }
 
@@ -65,9 +69,9 @@
     _isNavigationBarOrTranslucent = isNavigationBarOrTranslucent;
     
     if (isNavigationBarOrTranslucent == YES) { // 导航栏存在且有穿透效果
-        _progressView.frame = CGRectMake(0, 64, self.frame.size.width, 2);
+        _progressView.frame = CGRectMake(0, navigationBarHeight, self.frame.size.width, progressViewHeight);
     } else { // 导航栏不存在或者没有有穿透效果
-        _progressView.frame = CGRectMake(0, 0, self.frame.size.width, 2);
+        _progressView.frame = CGRectMake(0, 0, self.frame.size.width, progressViewHeight);
     }
 }
 
@@ -77,7 +81,6 @@
         self.progressView.alpha = 1.0;
         BOOL animated = self.wkWebView.estimatedProgress > self.progressView.progress;
         [self.progressView setProgress:self.wkWebView.estimatedProgress animated:animated];
-        NSLog(@"progress - - %.2f", self.progressView.progress);
         if(self.wkWebView.estimatedProgress >= 0.97) {
             [UIView animateWithDuration:0.1 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.progressView.alpha = 0.0;
@@ -138,6 +141,8 @@
 
 /// dealloc
 - (void)dealloc {
+    SGQRCodeLog(@"SGWebView - dealloc");
+    
     [self.wkWebView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
 }
 

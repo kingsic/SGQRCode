@@ -17,10 +17,10 @@
 - (void)webViewDidStartLoad:(SGWebView *)webView;
 /** 内容开始返回时调用 */
 - (void)webView:(SGWebView *)webView didCommitWithURL:(NSURL *)url;
-/** 页面加载完成之后调用 */
-- (void)webView:(SGWebView *)webView didFailLoadWithError:(NSError *)error;
 /** 页面加载失败时调用 */
 - (void)webView:(SGWebView *)webView didFinishLoadWithURL:(NSURL *)url;
+/** 页面加载完成之后调用 */
+- (void)webView:(SGWebView *)webView didFailLoadWithError:(NSError *)error;
 @end
 
 @interface SGWebView : UIView
@@ -42,4 +42,6 @@
 /** 刷新数据 */
 - (void)reloadData;
 
+
 @end
+

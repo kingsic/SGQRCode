@@ -50,8 +50,7 @@
 }
 
 - (void)dealloc {
-    SGQRCodeLog(@"dealloc");
-    
+    SGQRCodeLog(@"QRCodeScanningVC - dealloc");
     [SGQRCodeNotificationCenter removeObserver:self];
 }
 
