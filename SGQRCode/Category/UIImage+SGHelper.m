@@ -22,13 +22,19 @@
         return image;
     }
     
-    //SGQRCodeLog(@"压缩前图片尺寸 － width：%.2f, height: %.2f", imageWidth, imageHeight);
-    CGFloat max = MAX(imageWidth, imageHeight);
-    // 如果是6plus等设备，比例应该是 3.0
-    CGFloat scale = max / (screenHeight * 2.0f);
-    //SGQRCodeLog(@"压缩后图片尺寸 － width：%.2f, height: %.2f", imageWidth / scale, imageHeight / scale);
+    CGFloat scaleW = screenWidth/imageWidth;
+    CGFloat scaleH = screenHeight/imageHeight;
+    // 取比例较小的
+    CGFloat minScale = fminf(scaleW, scaleH);
+    // 缩放比向下取 -- 保留四位小数
+    minScale = floor(minScale * 10000) / 10000;
+    CGFloat scaleWidth = imageWidth * minScale;
+    CGFloat scaleHeigth = imageHeight * minScale;
+    // 因minScale是向下取 不会出现因小数点进位导致的大于设备尺寸，可四舍五入
+    scaleWidth = roundf(scaleWidth);
+    scaleHeigth = roundf(scaleHeigth);
     
-    return [UIImage imageWithImage:image scaledToSize:CGSizeMake(imageWidth / scale, imageHeight / scale)];
+    return [UIImage imageWithImage:image scaledToSize:CGSizeMake(scaleWidth, scaleHeigth)];
 }
 /// 返回一张处理后的图片
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)size {
