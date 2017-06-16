@@ -5,7 +5,7 @@
 
 * 这是对iOS原生二维码生成与扫描的总结 (之所以在此做总结：是为了方便更多的人去很好的使用iOS原生二维码生成与扫描的这块知识点)
 
-* v2.0 采用的是继承，只需接收通知（拿到数据做处理）即可，喜欢使用即成的可在 releases 中下载 v2.0 版本；最新的版本采用封装思想（由于 v2.0 采用的继承，代码耦合性比较高且设备输入流、数据输出流、会话对象、预览图层及代理方法全部写在控制器中，造成了代码的可读性较差）
+* v2.0 采用的是继承，只需接收通知（拿到数据做处理）即可，如果你想使用继承，那么可在 releases 中下载 v2.0 版本；最新的版本采用封装思想（由于 v2.0 采用的继承，代码耦合性比较高且设备输入流、数据输出流、会话对象、预览图层及代理方法全部写在控制器中，造成了代码的可读性较差）
 
 
 ## 主要内容的介绍
@@ -67,7 +67,7 @@ imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://gith
     /// 扫描二维码创建
     SGQRCodeManager *manager = [SGQRCodeManager sharedQRCodeManager];
     manager.currentVC = self;
-    NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code,  AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
+    NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     [manager SG_setupSessionPreset:AVCaptureSessionPresetHigh metadataObjectTypes:arr];
     manager.delegate = self;
     
