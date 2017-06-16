@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 @class SGQRCodeManager;
 
@@ -42,11 +41,13 @@
 @end
 
 @interface SGQRCodeManager : NSObject
-
+/// 快速创建单利方法
 + (instancetype)sharedQRCodeManager;
 
-/// 当前 SGQRCodeManager 所在的控制器；必须设置切在 SG_setupeSsionPreset:metadataObjectTypes 方法前设置
+/// 当前 SGQRCodeManager 所在的控制器；必须设置且在 SG_setupeSsionPreset:metadataObjectTypes 方法前设置
 @property (nonatomic, strong) UIViewController *currentVC;
+/// 相册访问权限是否打开
+@property (nonatomic, assign) BOOL isPHAuthorization;
 @property (nonatomic, weak) id<SGQRCodeManagerDelegate> delegate;
 /**
  *  设置会话采集数据类型以及扫码支持的编码格式

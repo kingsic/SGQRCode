@@ -96,6 +96,7 @@ static SGQRCodeManager *_instance;
 
 - (void)SG_stopRunning {
     [_session stopRunning];
+    _session = nil;
 }
 
 - (void)SG_videoPreviewLayerRemoveFromSuperlayer {
@@ -125,6 +126,7 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
             // 弹框请求用户授权
             [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
                 if (status == PHAuthorizationStatusAuthorized) { // 用户第一次同意了访问相册权限
+                    self.isPHAuthorization = YES;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
@@ -137,12 +139,13 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
             }];
             
         } else if (status == PHAuthorizationStatusAuthorized) { // 用户允许当前应用访问相册
+            self.isPHAuthorization = YES;
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
             imagePicker.delegate = self;
             [self.currentVC presentViewController:imagePicker animated:YES completion:nil];
         } else if (status == PHAuthorizationStatusDenied) { // 用户拒绝当前应用访问相册
-            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"⚠️ 警告" message:@"请去-> [设置 - 隐私 - 照片 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 照片 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                 
             }];

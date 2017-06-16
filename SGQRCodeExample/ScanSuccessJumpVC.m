@@ -7,7 +7,7 @@
 //
 
 #import "ScanSuccessJumpVC.h"
-#import "SGWebView.h"
+#import "SGQRCode.h"
 
 @interface ScanSuccessJumpVC () <SGWebViewDelegate>
 @property (nonatomic , strong) SGWebView *webView;
@@ -40,9 +40,11 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemRefresh) target:self action:@selector(right_BarButtonItemAction)];
 }
+
 - (void)left_BarButtonItemAction {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 - (void)right_BarButtonItemAction {
     [self.webView reloadData];
 }

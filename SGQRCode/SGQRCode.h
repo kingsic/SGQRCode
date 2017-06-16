@@ -15,4 +15,6 @@
 
 #import <UIKit/UIKit.h>
 #import "SGQRCodeManager.h"
-
+#import "UIImage+SGHelper.h"
+#import "SGQRCodeScanningView.h"
+#import "SGWebView.h"
