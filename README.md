@@ -68,7 +68,8 @@ imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://gith
     SGQRCodeManager *manager = [SGQRCodeManager sharedQRCodeManager];
     manager.currentVC = self;
     NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
-    [manager SG_setupSessionPreset:AVCaptureSessionPresetHigh metadataObjectTypes:arr];
+    // AVCaptureSessionPreset1920x1080 推荐使用，对于较小的二维码识别率较高
+    [manager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr];
     manager.delegate = self;
     
     /// 从相册中读取二维码方法
