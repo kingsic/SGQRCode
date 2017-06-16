@@ -8,7 +8,6 @@
 
 #import "SGWebView.h"
 #import <WebKit/WebKit.h>
-#import "SGQRCodeConst.h"
 
 @interface SGWebView () <WKNavigationDelegate, WKUIDelegate>
 /// WKWebView
@@ -140,9 +139,7 @@ static CGFloat const progressViewHeight = 2;
 }
 
 /// dealloc
-- (void)dealloc {
-    SGQRCodeLog(@"SGWebView - dealloc");
-    
+- (void)dealloc {    
     [self.wkWebView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
 }
 

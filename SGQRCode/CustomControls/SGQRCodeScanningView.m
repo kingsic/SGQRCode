@@ -8,7 +8,6 @@
 
 #import "SGQRCodeScanningView.h"
 #import <AVFoundation/AVFoundation.h>
-#import "SGQRCodeConst.h"
 
 /** 扫描内容的Y值 */
 #define scanContent_Y self.frame.size.height * 0.24
@@ -24,6 +23,8 @@
 @end
 
 @implementation SGQRCodeScanningView
+/** 二维码冲击波动画时间 */
+static CGFloat const SGQRCodeScanningLineAnimation = 0.05;
 
 /** 扫描动画线(冲击波) 的高度 */
 static CGFloat const scanninglineHeight = 12;

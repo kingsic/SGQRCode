@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "QRCodeGenerateVC.h"
-#import "QRCodeScanningVC.h"
+#import "SGQRCodeScanningVC.h"
 
 @interface ViewController ()
 
@@ -38,22 +38,22 @@
             [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
                 if (granted) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        QRCodeScanningVC *vc = [[QRCodeScanningVC alloc] init];
+                        SGQRCodeScanningVC *vc = [[SGQRCodeScanningVC alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     });
 
-                    SGQRCodeLog(@"当前线程 - - %@", [NSThread currentThread]);
+                    NSLog(@"当前线程 - - %@", [NSThread currentThread]);
                     // 用户第一次同意了访问相机权限
-                    SGQRCodeLog(@"用户第一次同意了访问相机权限");
+                    NSLog(@"用户第一次同意了访问相机权限");
                     
                 } else {
                     
                     // 用户第一次拒绝了访问相机权限
-                    SGQRCodeLog(@"用户第一次拒绝了访问相机权限");
+                    NSLog(@"用户第一次拒绝了访问相机权限");
                 }
             }];
         } else if (status == AVAuthorizationStatusAuthorized) { // 用户允许当前应用访问相机
-            QRCodeScanningVC *vc = [[QRCodeScanningVC alloc] init];
+            SGQRCodeScanningVC *vc = [[SGQRCodeScanningVC alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         } else if (status == AVAuthorizationStatusDenied) { // 用户拒绝当前应用访问相机
             UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"⚠️ 警告" message:@"请去-> [设置 - 隐私 - 相机 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];

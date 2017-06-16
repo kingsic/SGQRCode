@@ -7,7 +7,9 @@
 //
 
 #import "UIImage+SGHelper.h"
-#import "SGQRCodeConst.h"
+
+#define SGQRCodeScreenWidth [UIScreen mainScreen].bounds.size.width
+#define SGQRCodeScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @implementation UIImage (SGHelper)
 /// 返回一张不超过屏幕尺寸的 image
@@ -22,20 +24,18 @@
         return image;
     }
     
-    //SGQRCodeLog(@"压缩前图片尺寸 － width：%.2f, height: %.2f", imageWidth, imageHeight);
+//    NSLog(@"压缩前图片尺寸 － width：%.2f, height: %.2f", imageWidth, imageHeight);
     CGFloat max = MAX(imageWidth, imageHeight);
     // 如果是6plus等设备，比例应该是 3.0
-    CGFloat scale = max / (screenHeight * 2.0f);
-    //SGQRCodeLog(@"压缩后图片尺寸 － width：%.2f, height: %.2f", imageWidth / scale, imageHeight / scale);
+    CGFloat scale = max / (screenHeight * 2.0);
     
-    return [UIImage imageWithImage:image scaledToSize:CGSizeMake(imageWidth / scale, imageHeight / scale)];
-}
-/// 返回一张处理后的图片
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)size {
+    //NSLog(@"压缩后图片尺寸 － width：%.2f, height: %.2f", imageWidth / scale, imageHeight / scale);
+    CGSize size = CGSizeMake(imageWidth / scale, imageHeight / scale);
     UIGraphicsBeginImageContext(size);
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     return newImage;
 }
 

@@ -14,7 +14,5 @@
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import <UIKit/UIKit.h>
-#import "SGQRCodeTool.h"
-#import "SGQRCodeConst.h"
-#import "SGQRCodeScanningVC.h"
+#import "SGQRCodeManager.h"
 
