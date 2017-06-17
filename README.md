@@ -101,7 +101,7 @@ imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://gith
 
 ## 更新介绍
 
-* 2016-9-30 ：新增从相册中获取二维码功能 (注意: 从相册中读取二维码, 需要在 iOS8.0 以后)
+* 2016-9-30 ：新增从相册中读取二维码功能
 
 * 2016-10-27：解决从相册中读取二维码，取消选择返回时，图层卡死问题（修改了创建扫描边框里的问题）
 
