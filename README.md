@@ -37,9 +37,11 @@
 
 * `NSPhotoLibraryUsageDescription (相册权限访问)`<br>
 
-#### 2、导入 SGQRCode 文件夹
+#### 2、SGQRCode 集成
 
-* 导入 “SGQRCode.h”
+* 1、CocoaPods 导入 pod 'SGQRCode'”
+
+* 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 
 #### 3、二维码生成
 
@@ -79,16 +81,16 @@ imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://gith
 
 * * 扫面二维码的代理方法
 ```Objective-C
-- (void)manager:(SGQRCodeManager *)manager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection；
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection；
 ```
 
 * * 从相册中读取二维码的代理方法
 ```Objective-C
 /// 取消选择照片的代理方法
-- (void)manager:(SGQRCodeManager *)manager imagePickerControllerDidCancel:(UIImagePickerController *)picker；
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerControllerDidCancel:(UIImagePickerController *)picker；
 
 /// 选择照片完成的代理方法
-- (void)manager:(SGQRCodeManager *)manager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info；
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info；
 ```
 
 
@@ -114,6 +116,8 @@ imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://gith
 * 2017-3-27 ：从相册中读取二维码照片的优化处理
 
 * 2017-5-16 ：v2.0.5 采用封装的思想进行二维码扫描管理
+
+* 2017-6-26 ：v2.1.0 加入 CocoaPods 管理
 
 
 ## Concluding remarks
