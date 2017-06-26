@@ -24,12 +24,10 @@
         return image;
     }
     
-//    NSLog(@"压缩前图片尺寸 － width：%.2f, height: %.2f", imageWidth, imageHeight);
     CGFloat max = MAX(imageWidth, imageHeight);
     // 如果是6plus等设备，比例应该是 3.0
     CGFloat scale = max / (screenHeight * 2.0);
     
-    //NSLog(@"压缩后图片尺寸 － width：%.2f, height: %.2f", imageWidth / scale, imageHeight / scale);
     CGSize size = CGSizeMake(imageWidth / scale, imageHeight / scale);
     UIGraphicsBeginImageContext(size);
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];

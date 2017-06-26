@@ -14,29 +14,29 @@
 /**
  *  delegate(扫描二维码获取数据的方法)
  *
- *  @param manager    SGQRCodeManager
+ *  @param QRCodeManager    SGQRCodeManager
  *  @param captureOutput    AVCaptureMetadataOutput（不知道什么用，暂时提供出去）
  *  @param metadataObjects    数据信息
  *  @param connection    AVCaptureConnection（不知道什么用，暂时提供出去）
  */
-- (void)manager:(SGQRCodeManager *)manager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection;
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection;
 
 /**
  *  delegate(didFinishPickingMediaWithInfo)
  *
- *  @param manager    SGQRCodeManager
+ *  @param QRCodeManager    SGQRCodeManager
  *  @param picker    UIImagePickerController
  *  @param info    获取图片信息
  */
-- (void)manager:(SGQRCodeManager *)manager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info;
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info;
 
 /**
  *  delegate(imagePickerControllerDidCancel)
  *
- *  @param manager    SGQRCodeManager
+ *  @param QRCodeManager    SGQRCodeManager
  *  @param picker    UIImagePickerController
  */
-- (void)manager:(SGQRCodeManager *)manager imagePickerControllerDidCancel:(UIImagePickerController *)picker;
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 
 @end
 
@@ -46,8 +46,10 @@
 
 /// 当前 SGQRCodeManager 所在的控制器；必须设置且在 SG_setupeSsionPreset:metadataObjectTypes 方法前设置
 @property (nonatomic, strong) UIViewController *currentVC;
-/// 相册访问权限是否打开
+/// 判断相册访问权限是否授权
 @property (nonatomic, assign) BOOL isPHAuthorization;
+/// 是否开启 log 打印，默认为 YES
+@property (nonatomic, assign) BOOL isOpenLog;
 @property (nonatomic, weak) id<SGQRCodeManagerDelegate> delegate;
 /**
  *  设置会话采集数据类型以及扫码支持的编码格式
@@ -66,6 +68,12 @@
 - (void)SG_videoPreviewLayerRemoveFromSuperlayer;
 /// 播放音效文件
 - (void)SG_palySoundName:(NSString *)name;
+/**
+ *  返回从相册中读取二维码数据结果
+ *
+ *  @param image    要读取的二维码照片
+ */
+- (NSString *)SG_readQRCodeFromPhotosInTheAlbum:(UIImage *)image;
 
 /// 生成一张普通的二维码
 + (UIImage *)SG_generateWithDefaultQRCodeData:(NSString *)data imageViewWidth:(CGFloat)imageViewWidth;

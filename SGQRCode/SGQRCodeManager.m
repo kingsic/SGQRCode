@@ -8,10 +8,18 @@
 
 #import "SGQRCodeManager.h"
 #import <Photos/Photos.h>
+#import "UIImage+SGHelper.h"
+
+#ifdef DEBUG
+#define SGQRCodeLog(...) NSLog(__VA_ARGS__)
+#else
+#define SGQRCodeLog(...)
+#endif
 
 @interface SGQRCodeManager () <AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
+@property (nonatomic, strong) NSString *detectorString;
 @end
 
 @implementation SGQRCodeManager
@@ -26,8 +34,8 @@ static SGQRCodeManager *_instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [super allocWithZone:zone];
+        _instance.isOpenLog = YES;
     });
-    
     return _instance;
 }
 
@@ -85,8 +93,8 @@ static SGQRCodeManager *_instance;
 
 #pragma mark - - - AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(manager:captureOutput:didOutputMetadataObjects:fromConnection:)]) {
-        [self.delegate manager:self captureOutput:captureOutput didOutputMetadataObjects:metadataObjects fromConnection:connection];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManager:captureOutput:didOutputMetadataObjects:fromConnection:)]) {
+        [self.delegate QRCodeManager:self captureOutput:captureOutput didOutputMetadataObjects:metadataObjects fromConnection:connection];
     }
 }
 
@@ -167,14 +175,42 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
 #pragma mark - - - UIImagePickerControllerDelegate
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self.currentVC dismissViewControllerAnimated:YES completion:nil];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(manager:imagePickerControllerDidCancel:)]) {
-        [self.delegate manager:self imagePickerControllerDidCancel:picker];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManager:imagePickerControllerDidCancel:)]) {
+        [self.delegate QRCodeManager:self imagePickerControllerDidCancel:picker];
     }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(manager:imagePickerController:didFinishPickingMediaWithInfo:)]) {
-        [self.delegate manager:self imagePickerController:picker didFinishPickingMediaWithInfo:info];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManager:imagePickerController:didFinishPickingMediaWithInfo:)]) {
+        [self.delegate QRCodeManager:self imagePickerController:picker didFinishPickingMediaWithInfo:info];
+    }
+}
+
+- (NSString *)SG_readQRCodeFromPhotosInTheAlbum:(UIImage *)image {
+    // 对选取照片的处理，如果选取的图片尺寸过大，则压缩选取图片，否则不作处理
+    image = [UIImage imageSizeWithScreenImage:image];
+    
+    // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
+    // 声明一个 CIDetector，并设定识别类型 CIDetectorTypeQRCode
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
+    
+    // 取得识别结果
+    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+    if (features.count == 0) {
+        if (self.isOpenLog == YES) {
+            SGQRCodeLog(@"暂未识别出扫描的二维码");
+        }
+        return nil;
+    } else {
+        for (int index = 0; index < [features count]; index ++) {
+            CIQRCodeFeature *feature = [features objectAtIndex:index];
+            NSString *resultStr = feature.messageString;
+            if (self.isOpenLog == YES) {
+                SGQRCodeLog(@"相册中读取二维码数据信息 - - %@", resultStr);
+            } 
+            self.detectorString = resultStr;
+        }
+        return self.detectorString;
     }
 }
 
@@ -333,6 +369,12 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
     CIImage *colorImage = [color_filter outputImage];
     
     return [UIImage imageWithCIImage:colorImage];
+}
+
+
+#pragma mark - - - set
+- (void)setIsOpenLog:(BOOL)isOpenLog {
+    _isOpenLog = isOpenLog;
 }
 
 

@@ -74,47 +74,24 @@
     });
 }
 
-- (void)manager:(SGQRCodeManager *)manager imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self.view addSubview:self.scanningView];
 }
 
-- (void)manager:(SGQRCodeManager *)manager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     [self.view addSubview:self.scanningView];
     [self dismissViewControllerAnimated:YES completion:^{
-        [self scanQRCodeFromPhotosInTheAlbum:info[UIImagePickerControllerOriginalImage]];
-    }];
-}
-
-#pragma mark - - - 从相册中识别二维码, 并进行界面跳转
-- (void)scanQRCodeFromPhotosInTheAlbum:(UIImage *)image {
-    // 对选取照片的处理，如果选取的图片尺寸过大，则压缩选取图片，否则不作处理
-    image = [UIImage imageSizeWithScreenImage:image];
-
-    // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
-    // 声明一个 CIDetector，并设定识别类型 CIDetectorTypeQRCode
-    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
-    
-    // 取得识别结果
-    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
-    if (features.count == 0) {
-        NSLog(@"暂未识别出扫描的二维码");
-        return;
-    }
-    for (int index = 0; index < [features count]; index ++) {
-        CIQRCodeFeature *feature = [features objectAtIndex:index];
-        NSString *resultStr = feature.messageString;
-        NSLog(@"scannedResult - - %@", resultStr);
-        if ([resultStr hasPrefix:@"http"]) {
+        NSString *result = [QRCodeManager SG_readQRCodeFromPhotosInTheAlbum:info[UIImagePickerControllerOriginalImage]];
+        if ([result hasPrefix:@"http"]) {
             ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-            jumpVC.jump_URL = resultStr;
+            jumpVC.jump_URL = result;
             [self.navigationController pushViewController:jumpVC animated:YES];
         } else {
             ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-            jumpVC.jump_bar_code = resultStr;
+            jumpVC.jump_bar_code = result;
             [self.navigationController pushViewController:jumpVC animated:YES];
         }
-
-    }
+    }];
 }
 
 - (void)setupQRCodeScanning {
@@ -124,14 +101,15 @@
     // AVCaptureSessionPreset1920x1080 推荐使用，对于小型的二维码读取率较高
     [manager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr];
     manager.delegate = self;
+//    manager.isOpenLog = NO;
 }
 
-- (void)manager:(SGQRCodeManager *)manager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     NSLog(@"metadataObjects - - %@", metadataObjects);
     if (metadataObjects != nil && metadataObjects.count > 0) {
-        [manager SG_palySoundName:@"SGQRCode.bundle/sound.caf"];
-        [manager SG_stopRunning];
-        [manager SG_videoPreviewLayerRemoveFromSuperlayer];
+        [QRCodeManager SG_palySoundName:@"SGQRCode.bundle/sound.caf"];
+        [QRCodeManager SG_stopRunning];
+        [QRCodeManager SG_videoPreviewLayerRemoveFromSuperlayer];
         
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
         ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
