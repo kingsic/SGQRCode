@@ -81,16 +81,17 @@ imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://gith
 
 * * 扫面二维码的代理方法
 ```Objective-C
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection；
+/// 二维码扫描获取数据的回调方法
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager didOutputMetadataObjects:(NSArray *)metadataObjects；
 ```
 
 * * 从相册中读取二维码的代理方法
 ```Objective-C
-/// 取消选择照片的代理方法
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerControllerDidCancel:(UIImagePickerController *)picker；
+/// 图片选择控制器取消按钮的点击回调方法
+- (void)QRCodeManagerDidCancelWithImagePickerController:(SGQRCodeManager *)QRCodeManager；
 
-/// 选择照片完成的代理方法
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info；
+/// 图片选择控制器选取图片完成之后的回调方法
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager didFinishPickingMediaWithResult:(NSString *)result；
 ```
 
 
@@ -112,8 +113,6 @@ imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://gith
 * 2017-2-14 ：相机访问权限崩溃问题处理
 
 * 2017-3-21 ：版本升级处理 (v2.0 采用继承)
-
-* 2017-3-27 ：从相册中读取二维码照片的优化处理
 
 * 2017-5-16 ：v2.0.5 采用封装的思想进行二维码扫描管理
 
