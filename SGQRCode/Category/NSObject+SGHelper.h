@@ -4,17 +4,18 @@
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic
 //
-//  UIImage+SGHelper.h
-//  SGQRCodeExample
+//  NSObject+SGHelper.h
+//  NSObject+SGHelper
 //
-//  Created by apple on 17/3/27.
+//  Created by apple on 2017/6/27.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface UIImage (SGHelper)
-/// 返回一张不超过屏幕尺寸的 image
-+ (UIImage *)imageSizeWithScreenImage:(UIImage *)image;
+@interface NSObject (SGHelper)
+/// 获取当前控制器
+- (UIViewController *)SG_getCurrentViewController;
 
 @end
