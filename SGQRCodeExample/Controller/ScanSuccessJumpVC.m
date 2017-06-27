@@ -7,7 +7,7 @@
 //
 
 #import "ScanSuccessJumpVC.h"
-#import "SGQRCode.h"
+#import "SGWebView.h"
 
 @interface ScanSuccessJumpVC () <SGWebViewDelegate>
 @property (nonatomic , strong) SGWebView *webView;

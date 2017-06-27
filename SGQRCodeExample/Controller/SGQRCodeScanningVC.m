@@ -48,7 +48,6 @@
     }
     return _scanningView;
 }
-
 - (void)removeScanningView {
     [self.scanningView removeTimer];
     [self.scanningView removeFromSuperview];
@@ -62,36 +61,17 @@
 
 - (void)rightBarButtonItenAction {
     /// 从相册中读取二维码
-    [[SGQRCodeManager sharedQRCodeManager] SG_readQRCodeFromAlbum];
+    SGQRCodeManager *manager = [SGQRCodeManager sharedQRCodeManager];
+    [manager SG_readQRCodeFromAlbum];
     
     dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
     // 栅栏函数
     dispatch_barrier_async(queue, ^{
-        BOOL isPHAuthorization = [SGQRCodeManager sharedQRCodeManager].isPHAuthorization;
+        BOOL isPHAuthorization = manager.isPHAuthorization;
         if (isPHAuthorization == YES) {
             [self removeScanningView];
         }
     });
-}
-
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self.view addSubview:self.scanningView];
-}
-
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    [self.view addSubview:self.scanningView];
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSString *result = [QRCodeManager SG_readQRCodeFromPhotosInTheAlbum:info[UIImagePickerControllerOriginalImage]];
-        if ([result hasPrefix:@"http"]) {
-            ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-            jumpVC.jump_URL = result;
-            [self.navigationController pushViewController:jumpVC animated:YES];
-        } else {
-            ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-            jumpVC.jump_bar_code = result;
-            [self.navigationController pushViewController:jumpVC animated:YES];
-        }
-    }];
 }
 
 - (void)setupQRCodeScanning {
@@ -101,10 +81,28 @@
     // AVCaptureSessionPreset1920x1080 推荐使用，对于小型的二维码读取率较高
     [manager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr];
     manager.delegate = self;
-//    manager.isOpenLog = NO;
+    //    manager.isOpenLog = NO;
 }
 
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+#pragma mark - - - SGQRCodeManagerDelegate
+- (void)QRCodeManagerDidCancelWithImagePickerController:(SGQRCodeManager *)QRCodeManager {
+    [self.view addSubview:self.scanningView];
+}
+
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager didFinishPickingMediaWithResult:(NSString *)result {
+    if ([result hasPrefix:@"http"]) {
+        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+        jumpVC.jump_URL = result;
+        [self.navigationController pushViewController:jumpVC animated:YES];
+        
+    } else {
+        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+        jumpVC.jump_bar_code = result;
+        [self.navigationController pushViewController:jumpVC animated:YES];
+    }
+}
+
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager didOutputMetadataObjects:(NSArray *)metadataObjects {
     NSLog(@"metadataObjects - - %@", metadataObjects);
     if (metadataObjects != nil && metadataObjects.count > 0) {
         [QRCodeManager SG_palySoundName:@"SGQRCode.bundle/sound.caf"];

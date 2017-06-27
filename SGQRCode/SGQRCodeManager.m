@@ -98,8 +98,8 @@ static SGQRCodeManager *_instance;
 
 #pragma mark - - - AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManager:captureOutput:didOutputMetadataObjects:fromConnection:)]) {
-        [self.delegate QRCodeManager:self captureOutput:captureOutput didOutputMetadataObjects:metadataObjects fromConnection:connection];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManager:didOutputMetadataObjects:)]) {
+        [self.delegate QRCodeManager:self didOutputMetadataObjects:metadataObjects];
     }
 }
 
@@ -141,18 +141,29 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
                 if (status == PHAuthorizationStatusAuthorized) { // 用户第一次同意了访问相册权限
                     self.isPHAuthorization = YES;
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        if (self.isOpenLog) {
+                            SGQRCodeLog(@"第一次同意了访问相机权限 - - %@", [NSThread currentThread]);
+                        }
                         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
                         imagePicker.delegate = self;
                         [self.currentVC presentViewController:imagePicker animated:YES completion:nil];
                     });
+                    if (self.isOpenLog) {
+                        SGQRCodeLog(@"用户第一次同意了访问相册权限 - - %@", [NSThread currentThread]);
+                    }
                 } else { // 用户第一次拒绝了访问相机权限
-                    
+                    if (self.isOpenLog) {
+                        SGQRCodeLog(@"用户第一次拒绝了访问相机权限 - - %@", [NSThread currentThread]);
+                    }
                 }
             }];
             
         } else if (status == PHAuthorizationStatusAuthorized) { // 用户允许当前应用访问相册
             self.isPHAuthorization = YES;
+            if (self.isOpenLog) {
+                SGQRCodeLog(@"访问相机权限 - - %@", [NSThread currentThread]);
+            }
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
             imagePicker.delegate = self;
@@ -180,42 +191,42 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
 #pragma mark - - - UIImagePickerControllerDelegate
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self.currentVC dismissViewControllerAnimated:YES completion:nil];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManager:imagePickerControllerDidCancel:)]) {
-        [self.delegate QRCodeManager:self imagePickerControllerDidCancel:picker];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManagerDidCancelWithImagePickerController:)]) {
+        [self.delegate QRCodeManagerDidCancelWithImagePickerController:self];
     }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManager:imagePickerController:didFinishPickingMediaWithInfo:)]) {
-        [self.delegate QRCodeManager:self imagePickerController:picker didFinishPickingMediaWithInfo:info];
-    }
-}
-
-- (NSString *)SG_readQRCodeFromPhotosInTheAlbum:(UIImage *)image {
     // 对选取照片的处理，如果选取的图片尺寸过大，则压缩选取图片，否则不作处理
-    image = [UIImage imageSizeWithScreenImage:image];
-    
+    UIImage *image = [UIImage imageSizeWithScreenImage:info[UIImagePickerControllerOriginalImage]];
     // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
     // 声明一个 CIDetector，并设定识别类型 CIDetectorTypeQRCode
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
     
     // 取得识别结果
     NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+
     if (features.count == 0) {
-        if (self.isOpenLog == YES) {
-            SGQRCodeLog(@"暂未识别出扫描的二维码");
+        if (self.isOpenLog) {
+            SGQRCodeLog(@"暂未识别出扫描的二维码 - - %@", features);
         }
-        return nil;
+        [self.currentVC dismissViewControllerAnimated:YES completion:nil];
+        return;
+        
     } else {
         for (int index = 0; index < [features count]; index ++) {
             CIQRCodeFeature *feature = [features objectAtIndex:index];
             NSString *resultStr = feature.messageString;
-            if (self.isOpenLog == YES) {
+            if (self.isOpenLog) {
                 SGQRCodeLog(@"相册中读取二维码数据信息 - - %@", resultStr);
-            } 
+            }
             self.detectorString = resultStr;
         }
-        return self.detectorString;
+        [self.currentVC dismissViewControllerAnimated:YES completion:^{
+            if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeManager:didFinishPickingMediaWithResult:)]) {
+                [self.delegate QRCodeManager:self didFinishPickingMediaWithResult:self.detectorString];
+            }
+        }];
     }
 }
 
@@ -301,7 +312,6 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
     // 4、将CIImage类型转成UIImage类型
     UIImage *start_image = [UIImage imageWithCIImage:outputImage];
     
-    
     // - - - - - - - - - - - - - - - - 添加中间小图标 - - - - - - - - - - - - - - - -
     // 5、开启绘图, 获取图形上下文 (上下文的大小, 就是二维码的大小)
     UIGraphicsBeginImageContext(start_image.size);
@@ -355,7 +365,6 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
     
     // 图片小于(27,27),我们需要放大
     outputImage = [outputImage imageByApplyingTransform:CGAffineTransformMakeScale(9, 9)];
-    
     
     // 4、创建彩色过滤器(彩色的用的不多)
     CIFilter * color_filter = [CIFilter filterWithName:@"CIFalseColor"];

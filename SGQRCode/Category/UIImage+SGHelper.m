@@ -1,4 +1,9 @@
 //
+//  如遇到问题或有更好方案，请通过以下方式进行联系
+//      QQ：1357127436
+//      邮箱：kingsic@126.com
+//  GitHub：(https://github.com/kingsic/SGQRCode.git）
+//
 //  UIImage+SGHelper.m
 //  SGQRCodeExample
 //
@@ -12,6 +17,7 @@
 #define SGQRCodeScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @implementation UIImage (SGHelper)
+
 /// 返回一张不超过屏幕尺寸的 image
 + (UIImage *)imageSizeWithScreenImage:(UIImage *)image {
     CGFloat imageWidth = image.size.width;
@@ -19,13 +25,11 @@
     CGFloat screenWidth = SGQRCodeScreenWidth;
     CGFloat screenHeight = SGQRCodeScreenHeight;
     
-    // 如果读取的二维码照片宽和高小于屏幕尺寸，直接返回原图片
     if (imageWidth <= screenWidth && imageHeight <= screenHeight) {
         return image;
     }
     
     CGFloat max = MAX(imageWidth, imageHeight);
-    // 如果是6plus等设备，比例应该是 3.0
     CGFloat scale = max / (screenHeight * 2.0);
     
     CGSize size = CGSizeMake(imageWidth / scale, imageHeight / scale);

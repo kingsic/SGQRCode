@@ -17,31 +17,25 @@
 
 @protocol SGQRCodeManagerDelegate <NSObject>
 /**
- *  delegate(扫描二维码获取数据的方法)
+ *  二维码扫描获取数据回调方法
  *
  *  @param QRCodeManager    SGQRCodeManager
- *  @param captureOutput    AVCaptureMetadataOutput（不知道什么用，暂时提供出去）
- *  @param metadataObjects    数据信息
- *  @param connection    AVCaptureConnection（不知道什么用，暂时提供出去）
+ *  @param metadataObjects    扫描二维码数据信息
  */
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection;
-
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager didOutputMetadataObjects:(NSArray *)metadataObjects;
 /**
- *  delegate(didFinishPickingMediaWithInfo)
+ *  图片选择控制器取消按钮的点击回调方法
  *
  *  @param QRCodeManager    SGQRCodeManager
- *  @param picker    UIImagePickerController
- *  @param info    获取图片信息
  */
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info;
-
+- (void)QRCodeManagerDidCancelWithImagePickerController:(SGQRCodeManager *)QRCodeManager;
 /**
- *  delegate(imagePickerControllerDidCancel)
+ *  图片选择控制器选取图片完成之后的回调方法
  *
  *  @param QRCodeManager    SGQRCodeManager
- *  @param picker    UIImagePickerController
+ *  @param result    获取的二维码数据
  */
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager imagePickerControllerDidCancel:(UIImagePickerController *)picker;
+- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager didFinishPickingMediaWithResult:(NSString *)result;
 
 @end
 
@@ -55,15 +49,16 @@
 @property (nonatomic, assign) BOOL isPHAuthorization;
 /// 是否开启 log 打印，默认为 YES
 @property (nonatomic, assign) BOOL isOpenLog;
+/// SGQRCodeManagerDelegate
 @property (nonatomic, weak) id<SGQRCodeManagerDelegate> delegate;
 /**
- *  设置会话采集数据类型以及扫码支持的编码格式
+ *  创建扫描二维码会话对象以及会话采集数据类型和扫码支持的编码格式的设置
  *
  *  @param sessionPreset    会话采集数据类型
  *  @param metadataObjectTypes    扫码支持的编码格式
  */
 - (void)SG_setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes;
-/// 从相册中读取二维码
+/// 从相册中读取二维码方法
 - (void)SG_readQRCodeFromAlbum;
 /// 开启会话对象扫描
 - (void)SG_startRunning;
@@ -73,12 +68,6 @@
 - (void)SG_videoPreviewLayerRemoveFromSuperlayer;
 /// 播放音效文件
 - (void)SG_palySoundName:(NSString *)name;
-/**
- *  返回从相册中读取二维码数据结果
- *
- *  @param image    要读取的二维码照片
- */
-- (NSString *)SG_readQRCodeFromPhotosInTheAlbum:(UIImage *)image;
 
 /// 生成一张普通的二维码
 + (UIImage *)SG_generateWithDefaultQRCodeData:(NSString *)data imageViewWidth:(CGFloat)imageViewWidth;
