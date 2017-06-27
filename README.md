@@ -47,17 +47,17 @@
 
 * 普通二维码生成
 ```Objective-C
-imageView.image = [SGQRCodeManager SG_generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
+imageView.image = [SGQRCodeGenerateManager SG_generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
 ```
 
 * logo 二维码生成
 ```Objective-C
-imageView.image = [SGQRCodeManager SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
+imageView.image = [SGQRCodeGenerateManager SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
 ```
 
 * 彩色二维码生成
 ```Objective-C
-imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
+imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
 ```
 
 #### 4、二维码扫描
@@ -67,31 +67,33 @@ imageView.image = [SGQRCodeManager SG_generateWithColorQRCodeData:@"https://gith
     [super viewDidLoad];
     
     /// 扫描二维码创建
-    SGQRCodeManager *manager = [SGQRCodeManager sharedQRCodeManager];
-    manager.currentVC = self;
+    SGQRCodeScanManager *scanManager = [SGQRCodeScanManager sharedManager];
     NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
-    // AVCaptureSessionPreset1920x1080 推荐使用，对于较小的二维码识别率较高
-    [manager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr];
-    manager.delegate = self;
+    // AVCaptureSessionPreset1920x1080 推荐使用，对于小型的二维码读取率较高
+    [scanManager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr];
+    scanManager.delegate = self;
+    
     
     /// 从相册中读取二维码方法
-    [[SGQRCodeManager sharedQRCodeManager] SG_readQRCodeFromAlbum];
+    SGQRCodeAlbumManager *albumManager = [SGQRCodeAlbumManager sharedManager];
+    [albumManager SG_readQRCodeFromAlbum];
+    albumManager.delegate = self;
 }
 ```
 
 * * 扫面二维码的代理方法
 ```Objective-C
 /// 二维码扫描获取数据的回调方法
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager didOutputMetadataObjects:(NSArray *)metadataObjects；
+- (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects；
 ```
 
 * * 从相册中读取二维码的代理方法
 ```Objective-C
 /// 图片选择控制器取消按钮的点击回调方法
-- (void)QRCodeManagerDidCancelWithImagePickerController:(SGQRCodeManager *)QRCodeManager；
+- (void)QRCodeAlbumManagerDidCancelWithImagePickerController:(SGQRCodeAlbumManager *)albumManager；
 
 /// 图片选择控制器选取图片完成之后的回调方法
-- (void)QRCodeManager:(SGQRCodeManager *)QRCodeManager didFinishPickingMediaWithResult:(NSString *)result；
+- (void)QRCodeAlbumManager:(SGQRCodeAlbumManager *)albumManager didFinishPickingMediaWithResult:(NSString *)result；
 ```
 
 
