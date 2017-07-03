@@ -15,7 +15,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
 #import "UIImage+SGHelper.h"
-#import "NSObject+SGHelper.h"
 
 #ifdef DEBUG
 #define SGQRCodeLog(...) NSLog(__VA_ARGS__)
@@ -41,11 +40,11 @@
 
 - (void)initialization {
     _isOpenLog = YES;
-    self.currentVC = self.SG_getCurrentViewController;
 }
 
-- (void)SG_readQRCodeFromAlbum {
+- (void)SG_readQRCodeFromAlbumWithCurrentController:(UIViewController *)currentController {
     [self initialization];
+    self.currentVC = currentController;
     
     // 1、 获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];

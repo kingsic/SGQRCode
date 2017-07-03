@@ -11,7 +11,8 @@
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 @class SGQRCodeAlbumManager;
 
 @protocol SGQRCodeAlbumManagerDelegate <NSObject>
@@ -34,6 +35,6 @@
 /// 是否开启 log 打印，默认为 YES
 @property (nonatomic, assign) BOOL isOpenLog;
 /// 从相册中读取二维码方法
-- (void)SG_readQRCodeFromAlbum;
+- (void)SG_readQRCodeFromAlbumWithCurrentController:(UIViewController *)currentController;
 
 @end

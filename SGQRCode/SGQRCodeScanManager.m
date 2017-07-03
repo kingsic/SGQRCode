@@ -12,12 +12,10 @@
 //
 
 #import "SGQRCodeScanManager.h"
-#import "NSObject+SGHelper.h"
 
 @interface SGQRCodeScanManager () <AVCaptureMetadataOutputObjectsDelegate>
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
-@property (nonatomic, strong) UIViewController *currentVC;
 @end
 
 @implementation SGQRCodeScanManager
@@ -44,13 +42,8 @@ static SGQRCodeScanManager *_instance;
     return _instance;
 }
 
-- (void)initialization {
-    self.currentVC = self.SG_getCurrentViewController;
-}
-
-- (void)SG_setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes {
-    [self initialization];
-
+- (void)SG_setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes currentController:(UIViewController *)currentController {
+    
     // 1、获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
@@ -87,8 +80,8 @@ static SGQRCodeScanManager *_instance;
     _videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
     // 保持纵横比；填充层边界
     _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    _videoPreviewLayer.frame = self.currentVC.view.layer.bounds;
-    [self.currentVC.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
+    _videoPreviewLayer.frame = currentController.view.layer.bounds;
+    [currentController.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
     
     // 10、启动会话
     [_session startRunning];

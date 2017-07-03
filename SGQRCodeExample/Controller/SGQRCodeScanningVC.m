@@ -61,7 +61,7 @@
 
 - (void)rightBarButtonItenAction {
     SGQRCodeAlbumManager *manager = [SGQRCodeAlbumManager sharedManager];
-    [manager SG_readQRCodeFromAlbum];
+    [manager SG_readQRCodeFromAlbumWithCurrentController:self];
     manager.delegate = self;
     dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
     // 栅栏函数
@@ -77,7 +77,7 @@
     SGQRCodeScanManager *manager = [SGQRCodeScanManager sharedManager];
     NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     // AVCaptureSessionPreset1920x1080 推荐使用，对于小型的二维码读取率较高
-    [manager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr];
+    [manager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr currentController:self];
     manager.delegate = self;
 }
 

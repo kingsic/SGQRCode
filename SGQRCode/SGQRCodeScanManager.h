@@ -34,8 +34,9 @@
  *
  *  @param sessionPreset    会话采集数据类型
  *  @param metadataObjectTypes    扫码支持的编码格式
+ *  @param currentController      SGQRCodeScanManager 所在控制器
  */
-- (void)SG_setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes;
+- (void)SG_setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes currentController:(UIViewController *)currentController;
 /// 开启会话对象扫描
 - (void)SG_startRunning;
 /// 停止会话对象扫描
