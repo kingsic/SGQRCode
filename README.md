@@ -29,21 +29,22 @@
 * `扫描二维码界面采取了微信二维码界面的布局`<br>
 
 
-## 代码介绍 (详细使用方法，请参考 Demo)
+## SGQRCode 集成
 
-#### 1、在 info.plist 中需添加的字段
+* 1、CocoaPods 导入 pod 'SGQRCode'
+
+* 2、下载、拖拽 “SGQRCode” 文件夹到工程中
+
+
+## 代码介绍 (详细使用，请参考 Demo)
+
+#### 1、在 info.plist 中添加以下字段
 
 * `NSCameraUsageDescription (相机权限访问)`<br>
 
 * `NSPhotoLibraryUsageDescription (相册权限访问)`<br>
 
-#### 2、SGQRCode 集成
-
-* 1、CocoaPods 导入 pod 'SGQRCode'”
-
-* 2、下载、拖拽 “SGQRCode” 文件夹到工程中
-
-#### 3、二维码生成
+#### 2、二维码生成
 
 * 普通二维码生成
 ```Objective-C
@@ -60,7 +61,7 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithLogoQRCodeData:@"https
 imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
 ```
 
-#### 4、二维码扫描
+#### 3、二维码扫描
 
 ```Objective-C
 - (void)viewDidLoad {
@@ -70,13 +71,13 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
     SGQRCodeScanManager *scanManager = [SGQRCodeScanManager sharedManager];
     NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     // AVCaptureSessionPreset1920x1080 推荐使用，对于小型的二维码读取率较高
-    [scanManager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr];
+    [scanManager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr currentController:self];
     scanManager.delegate = self;
     
     
     /// 从相册中读取二维码方法
     SGQRCodeAlbumManager *albumManager = [SGQRCodeAlbumManager sharedManager];
-    [albumManager SG_readQRCodeFromAlbum];
+    [albumManager SG_readQRCodeFromAlbumWithCurrentController:self];
     albumManager.delegate = self;
 }
 ```
