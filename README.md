@@ -105,13 +105,18 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle3.png)       ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle4.png)
 
 
+## 问题及解决方案
+
+* 若在使用 CocoaPods 安装第三方时，出现 [!] Unable to find a specification for 提示语句时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (有可能等很长的)
+
+
 ## 更新介绍
 
 * 2016-9-30 ：新增从相册中读取二维码功能
 
-* 2016-10-27：解决从相册中读取二维码，取消选择返回时，图层卡死问题（修改了创建扫描边框里的问题）
+* 2016-10-27：解决从相册中读取二维码，取消选择返回时，图层卡死问题（修改了创建扫描边框问题）
 
-* 2017-1-29 ：对扫描二维码部分代码的封装，从相册中读取二维码采用新方法；扫描视图布局采用 CALayer
+* 2017-1-29 ：对扫描二维码部分代码的封装；扫描视图布局采用 CALayer
 
 * 2017-2-14 ：相机访问权限崩溃问题处理
 
