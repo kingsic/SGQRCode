@@ -107,7 +107,7 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 
 ## 问题及解决方案
 
-* 若在使用 CocoaPods 安装第三方时，出现 [!] Unable to find a specification for 提示语句时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (有可能等很长的)
+* 若在使用 CocoaPods 安装第三方时，出现 [!] Unable to find a specification for (第三方仓库名) 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
 
 
 ## 更新介绍
