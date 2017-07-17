@@ -510,7 +510,7 @@
 				INFOPLIST_FILE = SGQRCodeExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGQRCodeExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SGQRCodeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -523,7 +523,7 @@
 				INFOPLIST_FILE = SGQRCodeExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGQRCodeExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SGQRCodeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

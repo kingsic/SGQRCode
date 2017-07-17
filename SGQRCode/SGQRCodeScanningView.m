@@ -2,13 +2,13 @@
 //  如遇到问题或有更好方案，请通过以下方式进行联系
 //      QQ：1357127436
 //      Email：kingsic@126.com
-//      GitHub：https://github.com/kingsic
+//      GitHub：https://github.com/kingsic/SGQRCode.git
 //
 //  SGQRCodeScanningView.m
 //  SGQRCodeExample
 //
-//  Created by apple on 17/3/20.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Created by kingsic on 17/3/20.
+//  Copyright © 2017年 kingsic. All rights reserved.
 //
 
 #import "SGQRCodeScanningView.h"

@@ -2,8 +2,8 @@
 //  ScanSuccessJumpVC.m
 //  SGQRCodeExample
 //
-//  Created by Sorgle on 16/8/29.
-//  Copyright © 2016年 Sorgle. All rights reserved.
+//  Created by kingsic on 16/8/29.
+//  Copyright © 2016年 kingsic. All rights reserved.
 //
 
 #import "ScanSuccessJumpVC.h"
