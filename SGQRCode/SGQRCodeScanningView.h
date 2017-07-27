@@ -14,7 +14,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SGQRCodeScanningView : UIView
-
 /**
  *  对象方法创建SGQRCodeScanningView
  *
