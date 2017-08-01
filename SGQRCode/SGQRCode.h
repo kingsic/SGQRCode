@@ -5,7 +5,7 @@
 //      GitHub：https://github.com/kingsic
 //
 //  SGQRCode.h
-//  Version 2.1.3
+//  Version 2.1.4
 //
 //  Created by kingsic on 2016/8/16.
 //  Copyright © 2016年 kingsic. All rights reserved.
