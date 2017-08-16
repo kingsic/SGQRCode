@@ -15,7 +15,7 @@
 
 * `带有小图标二维码生成`<br>
 
-* `是否开启闪光灯`<br>
+* `根据光线强弱开启手电筒`<br>
 
 * `从相册中读取二维码`<br>
 
@@ -122,6 +122,8 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 * 2017-5-16 ：v2.0.5 使用封装的思想进行二维码扫描管理
 
 * 2017-6-26 ：v2.1.0 加入 CocoaPods 管理
+
+* 2017-8-17 ：v2.1.5 新增根据光线强弱判断是否打开手电筒
 
 
 ## Concluding remarks
