@@ -25,6 +25,7 @@
 		18CD01B81F02557100320B3D /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B31F02557100320B3D /* SGQRCodeAlbumManager.m */; };
 		18CD01B91F02557100320B3D /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */; };
 		18CD01BA1F02557100320B3D /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B71F02557100320B3D /* SGQRCodeScanManager.m */; };
+		8D96500B1F44BAE2004E8B2C /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeGenerateManager.m; sourceTree = "<group>"; };
 		18CD01B61F02557100320B3D /* SGQRCodeScanManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanManager.h; sourceTree = "<group>"; };
 		18CD01B71F02557100320B3D /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
+		8D9650091F44BAE2004E8B2C /* SGQRCodeHelperTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeHelperTool.h; sourceTree = "<group>"; };
+		8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeHelperTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +219,8 @@
 				18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */,
 				180E36011F01F32300A53E7A /* SGQRCodeScanningView.h */,
 				180E36021F01F32300A53E7A /* SGQRCodeScanningView.m */,
+				8D9650091F44BAE2004E8B2C /* SGQRCodeHelperTool.h */,
+				8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */,
 				183A1A321E893B0600186578 /* Category */,
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
 			);
@@ -368,6 +373,7 @@
 				180E36031F01F32300A53E7A /* SGQRCodeScanningView.m in Sources */,
 				18479ECF1E80F92500F7F225 /* main.m in Sources */,
 				183A1A351E893B3800186578 /* UIImage+SGHelper.m in Sources */,
+				8D96500B1F44BAE2004E8B2C /* SGQRCodeHelperTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

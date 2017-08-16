@@ -5,7 +5,7 @@
 //      GitHub：https://github.com/kingsic
 //
 //  SGQRCode.h
-//  Version 2.1.4
+//  Version 2.1.5
 //
 //  Created by kingsic on 2016/8/16.
 //  Copyright © 2016年 kingsic. All rights reserved.
@@ -16,3 +16,4 @@
 #import "SGQRCodeScanManager.h"
 #import "SGQRCodeAlbumManager.h"
 #import "SGQRCodeScanningView.h"
+#import "SGQRCodeHelperTool.h"

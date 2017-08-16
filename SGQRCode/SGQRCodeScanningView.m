@@ -126,20 +126,20 @@ static CGFloat const scanBorderOutsideViewAlpha = 0.4;
     promptLabel.text = @"将二维码/条码放入框内, 即可自动扫描";
     [self addSubview:promptLabel];
     
-    // 添加闪光灯按钮
-    UIButton *light_button = [[UIButton alloc] init];
-    CGFloat light_buttonX = 0;
-    CGFloat light_buttonY = CGRectGetMaxY(promptLabel.frame) + scanContent_X * 0.5;
-    CGFloat light_buttonW = self.frame.size.width;
-    CGFloat light_buttonH = 25;
-    light_button.frame = CGRectMake(light_buttonX, light_buttonY, light_buttonW, light_buttonH);
-    [light_button setTitle:@"打开照明灯" forState:UIControlStateNormal];
-    [light_button setTitle:@"关闭照明灯" forState:UIControlStateSelected];
-    [light_button setTitleColor:promptLabel.textColor forState:(UIControlStateNormal)];
-    light_button.titleLabel.font = [UIFont systemFontOfSize:17];
-    
-    [light_button addTarget:self action:@selector(light_buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:light_button];
+//    // 添加闪光灯按钮
+//    UIButton *light_button = [[UIButton alloc] init];
+//    CGFloat light_buttonX = 0;
+//    CGFloat light_buttonY = CGRectGetMaxY(promptLabel.frame) + scanContent_X * 0.5;
+//    CGFloat light_buttonW = self.frame.size.width;
+//    CGFloat light_buttonH = 25;
+//    light_button.frame = CGRectMake(light_buttonX, light_buttonY, light_buttonW, light_buttonH);
+//    [light_button setTitle:@"打开照明灯" forState:UIControlStateNormal];
+//    [light_button setTitle:@"关闭照明灯" forState:UIControlStateSelected];
+//    [light_button setTitleColor:promptLabel.textColor forState:(UIControlStateNormal)];
+//    light_button.titleLabel.font = [UIFont systemFontOfSize:17];
+//    
+//    [light_button addTarget:self action:@selector(light_buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:light_button];
     
 #pragma mark - - - 扫描边角imageView的创建
     // 左上侧的image
@@ -187,29 +187,6 @@ static CGFloat const scanBorderOutsideViewAlpha = 0.4;
     right_imageView_down.frame = CGRectMake(right_imageView_downX, right_imageView_downY, right_imageView_downW, right_imageView_downH);
     right_imageView_down.image = right_image_down;
     [self.tempLayer addSublayer:right_imageView_down.layer];
-}
-
-#pragma mark - - - 照明灯的点击事件
-- (void)light_buttonAction:(UIButton *)button {
-    if (button.selected == NO) { // 点击打开照明灯
-        [self turnOnLight:YES];
-        button.selected = YES;
-    } else { // 点击关闭照明灯
-        [self turnOnLight:NO];
-        button.selected = NO;
-    }
-}
-- (void)turnOnLight:(BOOL)on {
-    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if ([_device hasTorch]) {
-        [_device lockForConfiguration:nil];
-        if (on) {
-            [_device setTorchMode:AVCaptureTorchModeOn];
-        } else {
-            [_device setTorchMode: AVCaptureTorchModeOff];
-        }
-        [_device unlockForConfiguration];
-    }
 }
 
 - (UIImageView *)scanningline {

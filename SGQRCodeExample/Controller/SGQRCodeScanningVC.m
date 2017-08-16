@@ -12,6 +12,8 @@
 
 @interface SGQRCodeScanningVC () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>
 @property (nonatomic, strong) SGQRCodeScanningView *scanningView;
+@property (nonatomic, strong) UIButton *flashlightBtn;
+@property (nonatomic, assign) BOOL isSelectedFlashlightBtn;
 @end
 
 @implementation SGQRCodeScanningVC
@@ -24,6 +26,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.scanningView removeTimer];
+    [self removeFlashlightBtn];
 }
 
 - (void)dealloc {
@@ -113,6 +116,51 @@
     } else {
         NSLog(@"暂未识别出扫描的二维码");
     }
+}
+
+- (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager brightnessValue:(CGFloat)brightnessValue {
+    if (brightnessValue < - 1) {
+        [self.view addSubview:self.flashlightBtn];
+    } else {
+        if (self.isSelectedFlashlightBtn == NO) {
+            [self removeFlashlightBtn];
+        }
+    }
+}
+
+- (UIButton *)flashlightBtn {
+    if (!_flashlightBtn) {
+        // 添加闪光灯按钮
+        _flashlightBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        CGFloat flashlightBtnW = 30;
+        CGFloat flashlightBtnH = 30;
+        CGFloat flashlightBtnX = 0.5 * (self.view.frame.size.width - flashlightBtnW);
+        CGFloat flashlightBtnY = 0.55 * self.view.frame.size.height;
+        _flashlightBtn.frame = CGRectMake(flashlightBtnX, flashlightBtnY, flashlightBtnW, flashlightBtnH);
+        [_flashlightBtn setBackgroundImage:[UIImage imageNamed:@"SGQRCodeFlashlightOpenImage"] forState:(UIControlStateNormal)];
+        [_flashlightBtn setBackgroundImage:[UIImage imageNamed:@"SGQRCodeFlashlightCloseImage"] forState:(UIControlStateSelected)];
+        [_flashlightBtn addTarget:self action:@selector(flashlightBtn_action:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _flashlightBtn;
+}
+
+- (void)flashlightBtn_action:(UIButton *)button {
+    if (button.selected == NO) {
+        [SGQRCodeHelperTool SG_openFlashlight];
+        self.isSelectedFlashlightBtn = YES;
+        button.selected = YES;
+    } else {
+        [self removeFlashlightBtn];
+    }
+}
+
+- (void)removeFlashlightBtn {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SGQRCodeHelperTool SG_CloseFlashlight];
+        self.isSelectedFlashlightBtn = NO;
+        self.flashlightBtn.selected = NO;
+        [self.flashlightBtn removeFromSuperview];
+    });
 }
 
 

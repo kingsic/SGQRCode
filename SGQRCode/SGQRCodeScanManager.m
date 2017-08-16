@@ -12,8 +12,9 @@
 //
 
 #import "SGQRCodeScanManager.h"
+#import <ImageIO/ImageIO.h>
 
-@interface SGQRCodeScanManager () <AVCaptureMetadataOutputObjectsDelegate>
+@interface SGQRCodeScanManager () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @end
@@ -52,6 +53,9 @@ static SGQRCodeScanManager *_instance;
     
     // 3、创建数据输出流
     AVCaptureMetadataOutput *metadataOutput = [[AVCaptureMetadataOutput alloc] init];
+    // 3(1)创建设备输出流
+    AVCaptureVideoDataOutput *VideoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
+    [VideoDataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
     
     // 4、设置代理：在主线程里刷新
     [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
@@ -68,9 +72,11 @@ static SGQRCodeScanManager *_instance;
     // 6、添加设备输入流到会话对象
     [_session addInput:deviceInput];
     
-    // 7、添加设备输入流到会话对象
+    // 7、添加设备输出流到会话对象
     [_session addOutput:metadataOutput];
-    
+    // 7(1)添加设备输出流到会话对象；与 3(1) 构成识别光线强弱
+    [_session addOutput:VideoDataOutput];
+
     // 8、设置数据输出类型，需要将数据输出添加到会话后，才能指定元数据类型，否则会报错
     // 设置扫码支持的编码格式(如下设置条形码和二维码兼容)
     // @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code,  AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code]
@@ -91,6 +97,22 @@ static SGQRCodeScanManager *_instance;
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeScanManager:didOutputMetadataObjects:)]) {
         [self.delegate QRCodeScanManager:self didOutputMetadataObjects:metadataObjects];
+    }
+}
+
+#pragma mark - - - AVCaptureVideoDataOutputSampleBufferDelegate的方法
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    // 这个方法会时时调用，但内存很稳定
+    CFDictionaryRef metadataDict = CMCopyDictionaryOfAttachments(NULL,sampleBuffer, kCMAttachmentMode_ShouldPropagate);
+    NSDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:(__bridge NSDictionary*)metadataDict];
+    CFRelease(metadataDict);
+    NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];
+    float brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];
+    
+    NSLog(@"%f",brightnessValue);
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeScanManager:brightnessValue:)]) {
+        [self.delegate QRCodeScanManager:self brightnessValue:brightnessValue];
     }
 }
 

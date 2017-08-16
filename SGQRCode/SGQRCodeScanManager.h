@@ -20,7 +20,9 @@
 @required
 /** 二维码扫描获取数据的回调方法 (metadataObjects: 扫描二维码数据信息) */
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects;
-
+@optional
+/** 根据光线强弱值判断是否打开手电筒 */
+- (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager brightnessValue:(CGFloat)brightnessValue;
 @end
 
 @interface SGQRCodeScanManager : NSObject
