@@ -25,6 +25,8 @@
 
 * `扫描界面仿微信（请根据项目需求，自行布局或调整）`<br>
 
+* `扫描界面可自定义（扫描线条以及网格样式）`<br>
+
 
 ## SGQRCode 集成
 
@@ -101,6 +103,8 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 
 ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle3.png)       ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle4.png)
 
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle5.png)       ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle6.png)
+
 
 ## 问题及解决方案
 
@@ -124,6 +128,8 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 * 2017-6-26 ：v2.1.0 加入 CocoaPods 管理
 
 * 2017-8-17 ：v2.1.5 新增根据光线强弱判断是否打开手电筒
+
+* 2017-8-23 ：v2.1.6 扫描界面使用 UIBezierPath 布局且可根据不同需求实现自定义（扫描线条以及网格样式）
 
 
 ## Concluding remarks
