@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		180E36031F01F32300A53E7A /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E36021F01F32300A53E7A /* SGQRCodeScanningView.m */; };
 		180E360E1F01F33E00A53E7A /* QRCodeGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E36061F01F33E00A53E7A /* QRCodeGenerateVC.m */; };
 		180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E36081F01F33E00A53E7A /* ScanSuccessJumpVC.m */; };
 		180E36101F01F33E00A53E7A /* SGQRCodeScanningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E360A1F01F33E00A53E7A /* SGQRCodeScanningVC.m */; };
@@ -25,6 +24,7 @@
 		18CD01B81F02557100320B3D /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B31F02557100320B3D /* SGQRCodeAlbumManager.m */; };
 		18CD01B91F02557100320B3D /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */; };
 		18CD01BA1F02557100320B3D /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B71F02557100320B3D /* SGQRCodeScanManager.m */; };
+		8D8999271F4DB6EA00E9E09D /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8999261F4DB6EA00E9E09D /* SGQRCodeScanningView.m */; };
 		8D96500B1F44BAE2004E8B2C /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		180E36011F01F32300A53E7A /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
-		180E36021F01F32300A53E7A /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
 		180E36051F01F33E00A53E7A /* QRCodeGenerateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerateVC.h; sourceTree = "<group>"; };
 		180E36061F01F33E00A53E7A /* QRCodeGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerateVC.m; sourceTree = "<group>"; };
 		180E36071F01F33E00A53E7A /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
@@ -82,6 +80,8 @@
 		18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeGenerateManager.m; sourceTree = "<group>"; };
 		18CD01B61F02557100320B3D /* SGQRCodeScanManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanManager.h; sourceTree = "<group>"; };
 		18CD01B71F02557100320B3D /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
+		8D8999251F4DB6EA00E9E09D /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
+		8D8999261F4DB6EA00E9E09D /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
 		8D9650091F44BAE2004E8B2C /* SGQRCodeHelperTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeHelperTool.h; sourceTree = "<group>"; };
 		8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeHelperTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -217,8 +217,8 @@
 				18CD01B31F02557100320B3D /* SGQRCodeAlbumManager.m */,
 				18CD01B41F02557100320B3D /* SGQRCodeGenerateManager.h */,
 				18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */,
-				180E36011F01F32300A53E7A /* SGQRCodeScanningView.h */,
-				180E36021F01F32300A53E7A /* SGQRCodeScanningView.m */,
+				8D8999251F4DB6EA00E9E09D /* SGQRCodeScanningView.h */,
+				8D8999261F4DB6EA00E9E09D /* SGQRCodeScanningView.m */,
 				8D9650091F44BAE2004E8B2C /* SGQRCodeHelperTool.h */,
 				8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */,
 				183A1A321E893B0600186578 /* Category */,
@@ -365,12 +365,12 @@
 				180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */,
 				180E36101F01F33E00A53E7A /* SGQRCodeScanningVC.m in Sources */,
 				18CD01B81F02557100320B3D /* SGQRCodeAlbumManager.m in Sources */,
+				8D8999271F4DB6EA00E9E09D /* SGQRCodeScanningView.m in Sources */,
 				18CD01BA1F02557100320B3D /* SGQRCodeScanManager.m in Sources */,
 				18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */,
 				180E360E1F01F33E00A53E7A /* QRCodeGenerateVC.m in Sources */,
 				180E36111F01F33E00A53E7A /* SGWebView.m in Sources */,
 				18CD01B91F02557100320B3D /* SGQRCodeGenerateManager.m in Sources */,
-				180E36031F01F32300A53E7A /* SGQRCodeScanningView.m in Sources */,
 				18479ECF1E80F92500F7F225 /* main.m in Sources */,
 				183A1A351E893B3800186578 /* UIImage+SGHelper.m in Sources */,
 				8D96500B1F44BAE2004E8B2C /* SGQRCodeHelperTool.m in Sources */,
