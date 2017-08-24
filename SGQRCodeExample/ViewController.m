@@ -37,19 +37,16 @@
         if (status == AVAuthorizationStatusNotDetermined) {
             [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
                 if (granted) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         SGQRCodeScanningVC *vc = [[SGQRCodeScanningVC alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     });
-
-                    NSLog(@"当前线程 - - %@", [NSThread currentThread]);
                     // 用户第一次同意了访问相机权限
-                    NSLog(@"用户第一次同意了访问相机权限");
+                    NSLog(@"用户第一次同意了访问相机权限 - - %@", [NSThread currentThread]);
                     
                 } else {
-                    
                     // 用户第一次拒绝了访问相机权限
-                    NSLog(@"用户第一次拒绝了访问相机权限");
+                    NSLog(@"用户第一次拒绝了访问相机权限 - - %@", [NSThread currentThread]);
                 }
             }];
         } else if (status == AVAuthorizationStatusAuthorized) { // 用户允许当前应用访问相机

@@ -62,7 +62,7 @@ static SGQRCodeScanManager *_instance;
     
     // 设置扫描范围（每一个取值0～1，以屏幕右上角为坐标原点）
     // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）
-    metadataOutput.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
+//    metadataOutput.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     
     // 5、创建会话对象
     _session = [[AVCaptureSession alloc] init];
@@ -109,7 +109,7 @@ static SGQRCodeScanManager *_instance;
     NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];
     float brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];
     
-    NSLog(@"%f",brightnessValue);
+//    NSLog(@"%f",brightnessValue);
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeScanManager:brightnessValue:)]) {
         [self.delegate QRCodeScanManager:self brightnessValue:brightnessValue];

@@ -56,14 +56,8 @@
             [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
                 if (status == PHAuthorizationStatusAuthorized) { // 用户第一次同意了访问相册权限
                     self.isPHAuthorization = YES;
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (self.isOpenLog) {
-                            SGQRCodeLog(@"第一次同意了访问相机权限 - - %@", [NSThread currentThread]);
-                        }
-                        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-                        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
-                        imagePicker.delegate = self;
-                        [self.currentVC presentViewController:imagePicker animated:YES completion:nil];
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [self enterImagePickerController];
                     });
                     if (self.isOpenLog) {
                         SGQRCodeLog(@"用户第一次同意了访问相册权限 - - %@", [NSThread currentThread]);
@@ -80,24 +74,9 @@
             if (self.isOpenLog) {
                 SGQRCodeLog(@"访问相机权限 - - %@", [NSThread currentThread]);
             }
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
-            imagePicker.delegate = self;
-            [self.currentVC presentViewController:imagePicker animated:YES completion:nil];
+            [self enterImagePickerController];
         } else if (status == PHAuthorizationStatusDenied) { // 用户拒绝当前应用访问相册
-            NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-            NSString *appName = [infoDict objectForKey:@"CFBundleName"];
-            if (self.isOpenLog) {
-                SGQRCodeLog(@"appName - - %@", appName);
-            }
-            NSString *message = [NSString stringWithFormat:@"请前往 -> [设置 - 隐私 - 照片 - %@ 打开访问开关", appName];
-            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            
-            [alertC addAction:alertA];
-            [self.currentVC presentViewController:alertC animated:YES completion:nil];
+            [self enterImagePickerController];
         } else if (status == PHAuthorizationStatusRestricted) {
             UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"由于系统原因, 无法访问相册" preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -108,6 +87,14 @@
             [self.currentVC presentViewController:alertC animated:YES completion:nil];
         }
     }
+}
+
+// 进入 UIImagePickerController
+- (void)enterImagePickerController {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+    [self.currentVC presentViewController:imagePicker animated:YES completion:nil];
 }
 
 #pragma mark - - - UIImagePickerControllerDelegate

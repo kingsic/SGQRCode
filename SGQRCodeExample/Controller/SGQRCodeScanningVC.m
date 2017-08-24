@@ -46,7 +46,7 @@
     [self setupNavigationBar];
     [self setupQRCodeScanning];
     [self.view addSubview:self.promptLabel];
-    /// 为了效果图，没什么用
+    /// 为了 UI 效果
     [self.view addSubview:self.bottomView];
 }
 
@@ -55,7 +55,7 @@
         _promptLabel = [[UILabel alloc] init];
         _promptLabel.backgroundColor = [UIColor clearColor];
         CGFloat promptLabelX = 0;
-        CGFloat promptLabelY = 0.75 * self.view.frame.size.height;
+        CGFloat promptLabelY = 0.73 * self.view.frame.size.height;
         CGFloat promptLabelW = self.view.frame.size.width;
         CGFloat promptLabelH = 25;
         _promptLabel.frame = CGRectMake(promptLabelX, promptLabelY, promptLabelW, promptLabelH);
@@ -63,7 +63,6 @@
         _promptLabel.font = [UIFont boldSystemFontOfSize:13.0];
         _promptLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
         _promptLabel.text = @"将二维码/条码放入框内, 即可自动扫描";
-
     }
     return _promptLabel;
 }
@@ -100,14 +99,10 @@
     SGQRCodeAlbumManager *manager = [SGQRCodeAlbumManager sharedManager];
     [manager SG_readQRCodeFromAlbumWithCurrentController:self];
     manager.delegate = self;
-    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
-    // 栅栏函数
-    dispatch_barrier_async(queue, ^{
-        BOOL isPHAuthorization = manager.isPHAuthorization;
-        if (isPHAuthorization == YES) {
-            [self removeScanningView];
-        }
-    });
+
+    if (manager.isPHAuthorization == YES) {
+        [self.scanningView removeTimer];
+    }
 }
 
 - (void)setupQRCodeScanning {
@@ -162,6 +157,7 @@
     }
 }
 
+#pragma mark - - - 闪光灯按钮
 - (UIButton *)flashlightBtn {
     if (!_flashlightBtn) {
         // 添加闪光灯按钮
