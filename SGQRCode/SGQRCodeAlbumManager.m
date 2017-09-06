@@ -42,9 +42,14 @@
     _isOpenLog = YES;
 }
 
-- (void)SG_readQRCodeFromAlbumWithCurrentController:(UIViewController *)currentController {
+- (void)readQRCodeFromAlbumWithCurrentController:(UIViewController *)currentController {
     [self initialization];
     self.currentVC = currentController;
+    
+    if (currentController == nil) {
+        NSException *excp = [NSException exceptionWithName:@"SGQRCode" reason:@"readQRCodeFromAlbumWithCurrentController: 方法中的 currentController 参数不能为空" userInfo:nil];
+        [excp raise];
+    }
     
     // 1、 获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];

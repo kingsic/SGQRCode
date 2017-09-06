@@ -16,6 +16,7 @@
 
 @interface SGQRCodeScanManager () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 @property (nonatomic, strong) AVCaptureSession *session;
+@property (nonatomic, strong) AVCaptureVideoDataOutput *videoDataOutput;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @end
 
@@ -43,8 +44,23 @@ static SGQRCodeScanManager *_instance;
     return _instance;
 }
 
-- (void)SG_setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes currentController:(UIViewController *)currentController {
+- (void)setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes currentController:(UIViewController *)currentController {
     
+    if (sessionPreset == nil) {
+        NSException *excp = [NSException exceptionWithName:@"SGQRCode" reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 sessionPreset 参数不能为空" userInfo:nil];
+        [excp raise];
+    }
+    
+    if (metadataObjectTypes == nil) {
+        NSException *excp = [NSException exceptionWithName:@"SGQRCode" reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 metadataObjectTypes 参数不能为空" userInfo:nil];
+        [excp raise];
+    }
+    
+    if (currentController == nil) {
+        NSException *excp = [NSException exceptionWithName:@"SGQRCode" reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 currentController 参数不能为空" userInfo:nil];
+        [excp raise];
+    }
+
     // 1、获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
@@ -53,43 +69,46 @@ static SGQRCodeScanManager *_instance;
     
     // 3、创建数据输出流
     AVCaptureMetadataOutput *metadataOutput = [[AVCaptureMetadataOutput alloc] init];
-    // 3(1)创建设备输出流
-    AVCaptureVideoDataOutput *VideoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
-    [VideoDataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
-    
-    // 4、设置代理：在主线程里刷新
     [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     
+    // 3(1)、创建设备输出流
+    self.videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
+    [_videoDataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
+    
     // 设置扫描范围（每一个取值0～1，以屏幕右上角为坐标原点）
-    // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）
+    // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）; 如需限制扫描范围，打开下一句注释代码并进行相应调试
 //    metadataOutput.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     
-    // 5、创建会话对象
+    // 4、创建会话对象
     _session = [[AVCaptureSession alloc] init];
     // 会话采集率: AVCaptureSessionPresetHigh
     _session.sessionPreset = sessionPreset;
     
+    // 5、添加设备输出流到会话对象
+    [_session addOutput:metadataOutput];
+    // 5(1)添加设备输出流到会话对象；与 3(1) 构成识别光线强弱
+    [_session addOutput:_videoDataOutput];
+
     // 6、添加设备输入流到会话对象
     [_session addInput:deviceInput];
-    
-    // 7、添加设备输出流到会话对象
-    [_session addOutput:metadataOutput];
-    // 7(1)添加设备输出流到会话对象；与 3(1) 构成识别光线强弱
-    [_session addOutput:VideoDataOutput];
 
-    // 8、设置数据输出类型，需要将数据输出添加到会话后，才能指定元数据类型，否则会报错
+    // 7、设置数据输出类型，需要将数据输出添加到会话后，才能指定元数据类型，否则会报错
     // 设置扫码支持的编码格式(如下设置条形码和二维码兼容)
     // @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code,  AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code]
     metadataOutput.metadataObjectTypes = metadataObjectTypes;
     
-    // 9、实例化预览图层, 传递_session是为了告诉图层将来显示什么内容
+    // 8、实例化预览图层, 传递_session是为了告诉图层将来显示什么内容
     _videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
     // 保持纵横比；填充层边界
     _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    _videoPreviewLayer.frame = currentController.view.layer.bounds;
+    CGFloat x = 0;
+    CGFloat y = 0;
+    CGFloat w = [UIScreen mainScreen].bounds.size.width;
+    CGFloat h = [UIScreen mainScreen].bounds.size.height;
+    _videoPreviewLayer.frame = CGRectMake(x, y, w, h);
     [currentController.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
     
-    // 10、启动会话
+    // 9、启动会话
     [_session startRunning];
 }
 
@@ -109,27 +128,35 @@ static SGQRCodeScanManager *_instance;
     NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];
     float brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];
     
-//    NSLog(@"%f",brightnessValue);
+    NSLog(@"%f",brightnessValue);
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeScanManager:brightnessValue:)]) {
         [self.delegate QRCodeScanManager:self brightnessValue:brightnessValue];
     }
 }
 
-- (void)SG_startRunning {
+- (void)startRunning {
     [_session startRunning];
 }
 
-- (void)SG_stopRunning {
+- (void)stopRunning {
     [_session stopRunning];
-    _session = nil;
+//    _session = nil;
 }
 
-- (void)SG_videoPreviewLayerRemoveFromSuperlayer {
+- (void)videoPreviewLayerRemoveFromSuperlayer {
     [_videoPreviewLayer removeFromSuperlayer];
 }
 
-- (void)SG_palySoundName:(NSString *)name {
+- (void)resetSampleBufferDelegate {
+    [_videoDataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
+}
+
+- (void)cancelSampleBufferDelegate {
+    [_videoDataOutput setSampleBufferDelegate:nil queue:dispatch_get_main_queue()];
+}
+
+- (void)palySoundName:(NSString *)name {
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:name ofType:nil];
     NSURL *fileUrl = [NSURL fileURLWithPath:audioFile];
     
@@ -140,6 +167,10 @@ static SGQRCodeScanManager *_instance;
 }
 void soundCompleteCallback(SystemSoundID soundID, void *clientData){
 
+}
+
+- (void)dealloc {
+    NSLog(@"SGQRCodeScanManager - - dealloc");
 }
 
 
