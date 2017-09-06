@@ -51,17 +51,17 @@
 
 * 普通二维码生成
 ```Objective-C
-imageView.image = [SGQRCodeGenerateManager SG_generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
+imageView.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
 ```
 
 * logo 二维码生成
 ```Objective-C
-imageView.image = [SGQRCodeGenerateManager SG_generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
+imageView.image = [SGQRCodeGenerateManager generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
 ```
 
 * 彩色二维码生成
 ```Objective-C
-imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
+imageView.image = [SGQRCodeGenerateManager generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
 ```
 
 #### 3、二维码扫描
@@ -74,13 +74,13 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
     SGQRCodeScanManager *scanManager = [SGQRCodeScanManager sharedManager];
     NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     // AVCaptureSessionPreset1920x1080 推荐使用，对于小型的二维码读取率较高
-    [scanManager SG_setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr currentController:self];
+    [scanManager setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr currentController:self];
     scanManager.delegate = self;
     
     
     /// 从相册中读取二维码方法
     SGQRCodeAlbumManager *albumManager = [SGQRCodeAlbumManager sharedManager];
-    [albumManager SG_readQRCodeFromAlbumWithCurrentController:self];
+    [albumManager readQRCodeFromAlbumWithCurrentController:self];
     albumManager.delegate = self;
 }
 ```
@@ -89,6 +89,9 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 ```Objective-C
 /// 二维码扫描获取数据的回调方法
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects；
+
+/// 根据光线强弱值打开手电筒的回调方法
+- (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager brightnessValue:(CGFloat)brightnessValue;
 ```
 
 * * 从相册中读取二维码的代理方法
@@ -135,7 +138,7 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 
 * 2017-8-23 ：v2.1.6 扫描界面使用 UIBezierPath 布局且可根据不同需求实现自定义（扫描线条以及网格样式）
 
-* 2017-9-6  ：v2.1.7 根据光线强弱值代理方法性能优化以及解决与第三方[MMDrawerController](https://github.com/mutualmobile/MMDrawerController)产生的图层问题
+* 2017-9-6  ：v2.1.7 根据光线强弱值代理方法性能优化以及解决与第三方[MMDrawerController](https://github.com/mutualmobile/MMDrawerController)产生的图层尺寸问题
 
 
 ## Concluding remarks
