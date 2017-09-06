@@ -47,7 +47,7 @@
 - (void)videoPreviewLayerRemoveFromSuperlayer;
 /** 播放音效文件 */
 - (void)palySoundName:(NSString *)name;
-/** 设置根据光线强弱值打开手电筒的 delegate 方法 */
+/** 重置根据光线强弱值打开手电筒的 delegate 方法 */
 - (void)resetSampleBufferDelegate;
 /** 取消根据光线强弱值打开手电筒的 delegate 方法 */
 - (void)cancelSampleBufferDelegate;
