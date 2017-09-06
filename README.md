@@ -4,6 +4,10 @@
 
 ## 前沿
 
+* 项目中的二维码扫描逻辑仿微信二维码逻辑；具体扫描业务逻辑设置请参考 SGQRCodeScanManager.h 方法中 api 进行相应处理
+
+* 关于根据光线强弱值打开手电筒的 delegate 方法，是时刻调用的，且不对内存产生影响（可自行调试看看昂），尽请放心使用，如若不需要根据光线强弱值打开手电筒，调用 cancelSampleBufferDelegate 方法即可
+
 * v2.0.0 使用继承的思想进行二维码扫描管理（只需接收通知获取到数据即可；如果你想使用继承，那么可在 releases 中下载 v2.0.0 版本）；之后使用封装的思想进行二维码扫描管理（由于使用继承，设备输入流、数据输出流、会话对象、预览图层及代理方法的代码全部书写在控制器中，导致了代码的可读性较差以及耦合性较高）
 
 
@@ -108,7 +112,7 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 
 ## 问题及解决方案
 
-* 若在使用 CocoaPods 安装第三方时，出现 [!] Unable to find a specification for (第三方仓库名) 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
+* 若在使用 CocoaPods 安装第三方时，出现 [!] Unable to find a specification for SGQRCode 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
 
 
 ## 更新介绍
@@ -130,6 +134,8 @@ imageView.image = [SGQRCodeGenerateManager SG_generateWithColorQRCodeData:@"http
 * 2017-8-17 ：v2.1.5 新增根据光线强弱判断是否打开手电筒
 
 * 2017-8-23 ：v2.1.6 扫描界面使用 UIBezierPath 布局且可根据不同需求实现自定义（扫描线条以及网格样式）
+
+* 2017-9-6  ：v2.1.7 根据光线强弱值代理方法性能优化以及解决与第三方[MMDrawerController](https://github.com/mutualmobile/MMDrawerController)产生的图层问题
 
 
 ## Concluding remarks
