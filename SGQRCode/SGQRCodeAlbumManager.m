@@ -14,7 +14,7 @@
 #import "SGQRCodeAlbumManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
-#import "UIImage+SGHelper.h"
+#import "UIImage+ImageSize.h"
 
 #ifdef DEBUG
 #define SGQRCodeLog(...) NSLog(__VA_ARGS__)

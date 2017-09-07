@@ -53,29 +53,9 @@
     [self.view addSubview:self.bottomView];
 }
 
-- (UILabel *)promptLabel {
-    if (!_promptLabel) {
-        _promptLabel = [[UILabel alloc] init];
-        _promptLabel.backgroundColor = [UIColor clearColor];
-        CGFloat promptLabelX = 0;
-        CGFloat promptLabelY = 0.73 * self.view.frame.size.height;
-        CGFloat promptLabelW = self.view.frame.size.width;
-        CGFloat promptLabelH = 25;
-        _promptLabel.frame = CGRectMake(promptLabelX, promptLabelY, promptLabelW, promptLabelH);
-        _promptLabel.textAlignment = NSTextAlignmentCenter;
-        _promptLabel.font = [UIFont boldSystemFontOfSize:13.0];
-        _promptLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
-        _promptLabel.text = @"将二维码/条码放入框内, 即可自动扫描";
-    }
-    return _promptLabel;
-}
-
-- (UIView *)bottomView {
-    if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.scanningView.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.scanningView.frame))];
-        _bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-    }
-    return _bottomView;
+- (void)setupNavigationBar {
+    self.navigationItem.title = @"扫一扫";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:(UIBarButtonItemStyleDone) target:self action:@selector(rightBarButtonItenAction)];
 }
 
 - (SGQRCodeScanningView *)scanningView {
@@ -93,13 +73,7 @@
     self.scanningView = nil;
 }
 
-- (void)setupNavigationBar {
-    self.navigationItem.title = @"扫一扫";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:(UIBarButtonItemStyleDone) target:self action:@selector(rightBarButtonItenAction)];
-}
-
 - (void)rightBarButtonItenAction {
-    
     SGQRCodeAlbumManager *manager = [SGQRCodeAlbumManager sharedManager];
     [manager readQRCodeFromAlbumWithCurrentController:self];
     manager.delegate = self;
@@ -151,7 +125,6 @@
         NSLog(@"暂未识别出扫描的二维码");
     }
 }
-
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager brightnessValue:(CGFloat)brightnessValue {
     if (brightnessValue < - 1) {
         [self.view addSubview:self.flashlightBtn];
@@ -160,6 +133,31 @@
             [self removeFlashlightBtn];
         }
     }
+}
+
+- (UILabel *)promptLabel {
+    if (!_promptLabel) {
+        _promptLabel = [[UILabel alloc] init];
+        _promptLabel.backgroundColor = [UIColor clearColor];
+        CGFloat promptLabelX = 0;
+        CGFloat promptLabelY = 0.73 * self.view.frame.size.height;
+        CGFloat promptLabelW = self.view.frame.size.width;
+        CGFloat promptLabelH = 25;
+        _promptLabel.frame = CGRectMake(promptLabelX, promptLabelY, promptLabelW, promptLabelH);
+        _promptLabel.textAlignment = NSTextAlignmentCenter;
+        _promptLabel.font = [UIFont boldSystemFontOfSize:13.0];
+        _promptLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+        _promptLabel.text = @"将二维码/条码放入框内, 即可自动扫描";
+    }
+    return _promptLabel;
+}
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.scanningView.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.scanningView.frame))];
+        _bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    }
+    return _bottomView;
 }
 
 #pragma mark - - - 闪光灯按钮

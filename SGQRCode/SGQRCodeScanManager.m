@@ -169,10 +169,6 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
 
 }
 
-- (void)dealloc {
-    NSLog(@"SGQRCodeScanManager - - dealloc");
-}
-
 
 @end
 

@@ -11,12 +11,12 @@
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "UIImage+SGHelper.h"
+#import "UIImage+ImageSize.h"
 
 #define SGQRCodeScreenWidth [UIScreen mainScreen].bounds.size.width
 #define SGQRCodeScreenHeight [UIScreen mainScreen].bounds.size.height
 
-@implementation UIImage (SGHelper)
+@implementation UIImage (ImageSize)
 
 /// 返回一张不超过屏幕尺寸的 image
 + (UIImage *)imageSizeWithScreenImage:(UIImage *)image {
