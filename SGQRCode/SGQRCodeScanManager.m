@@ -64,6 +64,17 @@ static SGQRCodeScanManager *_instance;
     // 1、获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
+    // 1(1)、设置自动对焦
+    if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+        NSError *error = nil;
+        [device lockForConfiguration:&error];
+        if (!error) {
+            [device setFocusPointOfInterest:CGPointMake(0.5f,0.5f)];
+            [device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+            [device unlockForConfiguration];
+        }
+    }
+    
     // 2、创建设备输入流
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
     
@@ -101,11 +112,7 @@ static SGQRCodeScanManager *_instance;
     _videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
     // 保持纵横比；填充层边界
     _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    CGFloat x = 0;
-    CGFloat y = 0;
-    CGFloat w = [UIScreen mainScreen].bounds.size.width;
-    CGFloat h = [UIScreen mainScreen].bounds.size.height;
-    _videoPreviewLayer.frame = CGRectMake(x, y, w, h);
+    _videoPreviewLayer.frame = currentController.view.bounds;
     [currentController.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
     
     // 9、启动会话
