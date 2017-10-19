@@ -64,6 +64,17 @@ static SGQRCodeScanManager *_instance;
     // 1、获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
+    // 1(1)、设置自动对焦
+    if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+        NSError *error = nil;
+        [device lockForConfiguration:&error];
+        if (!error) {
+            [device setFocusPointOfInterest:CGPointMake(0.5f,0.5f)];
+            [device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+            [device unlockForConfiguration];
+        }
+    }
+    
     // 2、创建设备输入流
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
     
