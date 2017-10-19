@@ -112,11 +112,7 @@ static SGQRCodeScanManager *_instance;
     _videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
     // 保持纵横比；填充层边界
     _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    CGFloat x = 0;
-    CGFloat y = 0;
-    CGFloat w = [UIScreen mainScreen].bounds.size.width;
-    CGFloat h = [UIScreen mainScreen].bounds.size.height;
-    _videoPreviewLayer.frame = CGRectMake(x, y, w, h);
+    _videoPreviewLayer.frame = currentController.view.bounds;
     [currentController.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
     
     // 9、启动会话
