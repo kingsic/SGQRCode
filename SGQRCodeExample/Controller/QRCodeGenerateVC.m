@@ -15,6 +15,10 @@
 
 @implementation QRCodeGenerateVC
 
+- (void)dealloc {
+    NSLog(@"QRCodeGenerateVC - dealloc");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
