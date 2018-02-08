@@ -2,7 +2,7 @@
 //  如遇到问题或有更好方案，请通过以下方式进行联系
 //      QQ群：429899752
 //      Email：kingsic@126.com
-//      GitHub：https://github.com/kingsic/SGQRCode.git
+//      GitHub：https://github.com/kingsic/SGQRCode
 //
 //  SGQRCodeAlbumManager.m
 //  SGQRCodeExample
@@ -14,7 +14,7 @@
 #import "SGQRCodeAlbumManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
-#import "UIImage+ImageSize.h"
+#import "UIImage+SGImageSize.h"
 
 #ifdef DEBUG
 #define SGQRCodeLog(...) NSLog(__VA_ARGS__)

@@ -1,22 +1,22 @@
 //
 //  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ：1357127436
+//      QQ群：429899752
 //      Email：kingsic@126.com
-//      GitHub：https://github.com/kingsic/SGQRCode.git
+//      GitHub：https://github.com/kingsic/SGQRCode
 //
-//  UIImage+SGHelper.m
+//  UIImage+SGImageSize.m
 //  SGQRCodeExample
 //
-//  Created by apple on 17/3/27.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Created by kingsic on 17/3/27.
+//  Copyright © 2017年 kingsic. All rights reserved.
 //
 
-#import "UIImage+ImageSize.h"
+#import "UIImage+SGImageSize.h"
 
 #define SGQRCodeScreenWidth [UIScreen mainScreen].bounds.size.width
 #define SGQRCodeScreenHeight [UIScreen mainScreen].bounds.size.height
 
-@implementation UIImage (ImageSize)
+@implementation UIImage (SGImageSize)
 
 /// 返回一张不超过屏幕尺寸的 image
 + (UIImage *)imageSizeWithScreenImage:(UIImage *)image {
