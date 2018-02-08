@@ -13,7 +13,6 @@
 @interface WBQRCodeScanningVC () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>
 @property (nonatomic, strong) SGQRCodeScanManager *manager;
 @property (nonatomic, strong) SGQRCodeScanningView *scanningView;
-@property (nonatomic, strong) UIButton *flashlightBtn;
 @property (nonatomic, strong) UILabel *promptLabel;
 @end
 

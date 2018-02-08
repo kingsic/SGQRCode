@@ -26,7 +26,7 @@
 }
 
 - (void)configuration {
-    _dataList = @[@"生成二维码", @"微博扫描二维码", @"微信扫描二维码"];
+    _dataList = @[@"生成二维码", @"WBQRCode (popVC 逻辑处理）", @"WCQRCode (popToRootVC 逻辑处理)"];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
