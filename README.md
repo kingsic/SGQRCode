@@ -34,7 +34,7 @@
 
 ## SGQRCode 集成
 
-* 1、CocoaPods 导入 pod 'SGQRCode'
+* 1、CocoaPods 导入 pod 'SGQRCode', '~> 2.2.0'
 
 * 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 
