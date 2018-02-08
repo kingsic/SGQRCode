@@ -143,7 +143,7 @@ imageView.image = [SGQRCodeGenerateManager generateWithColorQRCodeData:@"https:/
 
 * 2017-09-06  ：v2.1.7 根据光线强弱值代理方法性能优化以及解决与第三方[MMDrawerController](https://github.com/mutualmobile/MMDrawerController)产生的图层尺寸问题
 
-* 2018-02-08  ：v2.1.9 新增从相册中读取二维码失败回调函数以及新增新浪微博示例
+* 2018-02-08  ：v2.2.0 新增新浪微博示例、新增从相册中读取二维码失败回调函数以及分类名称的更换
 
 
 ## Concluding remarks
