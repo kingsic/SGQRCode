@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r0T-6M-Xj5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r0T-6M-Xj5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,42 +24,31 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_image" translatesAutoresizingMaskIntoConstraints="NO" id="BJn-xf-1bT">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pf-aj-vwR">
-                                <rect key="frame" x="137.5" y="164" width="100" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.80584417500000005" blue="0.37902437550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="r30-qM-Vde"/>
-                                </constraints>
-                                <state key="normal" title="生成二维码"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ncT-IN-0s1">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="generateQRCode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7b2-zo-u5C"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="me3-US-tz8"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="lV0-t3-c9Z"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3e-DC-AUh">
-                                <rect key="frame" x="137.5" y="244" width="100" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.80584417500000005" blue="0.37902437550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="IYk-qH-qRv"/>
-                                </constraints>
-                                <state key="normal" title="扫描二维码"/>
-                                <connections>
-                                    <action selector="scanningQRCode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PBr-tm-0Ma"/>
-                                </connections>
-                            </button>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="h3e-DC-AUh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="07O-5D-H8o"/>
+                            <constraint firstItem="ncT-IN-0s1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="0QW-yp-pmC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ncT-IN-0s1" secondAttribute="bottom" id="3Gu-0V-Yqa"/>
                             <constraint firstAttribute="trailing" secondItem="BJn-xf-1bT" secondAttribute="trailing" id="8IM-XN-Eia"/>
+                            <constraint firstItem="ncT-IN-0s1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FHc-bM-obZ"/>
                             <constraint firstItem="BJn-xf-1bT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="K9f-d4-qMH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BJn-xf-1bT" secondAttribute="bottom" id="McC-sz-ecf"/>
-                            <constraint firstItem="6pf-aj-vwR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="SUO-sT-pqU"/>
-                            <constraint firstItem="6pf-aj-vwR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UHy-Hy-eOL"/>
+                            <constraint firstAttribute="trailing" secondItem="ncT-IN-0s1" secondAttribute="trailing" id="WKn-nP-1Bg"/>
                             <constraint firstItem="BJn-xf-1bT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="knE-39-yxH"/>
-                            <constraint firstItem="h3e-DC-AUh" firstAttribute="top" secondItem="6pf-aj-vwR" secondAttribute="bottom" constant="50" id="yd2-Y0-QVX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SGQRCode" id="IgM-iT-AVL"/>
+                    <connections>
+                        <outlet property="tableView" destination="ncT-IN-0s1" id="nbL-6y-ch7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -71,7 +60,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r0T-6M-Xj5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gEE-2Q-jU6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

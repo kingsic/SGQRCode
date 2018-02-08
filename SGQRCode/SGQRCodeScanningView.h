@@ -1,6 +1,6 @@
 //
 //  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ：1357127436
+//      QQ群：429899752
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGQRCode.git
 //
@@ -19,14 +19,14 @@ typedef enum : NSUInteger {
     /// 在边框线内部
     CornerLoactionInside,
     /// 在边框线外部
-    CornerLoactionOutside,
+    CornerLoactionOutside
 } CornerLoaction;
 
 typedef enum : NSUInteger {
     /// 单线扫描样式
     ScanningAnimationStyleDefault,
     /// 网格扫描样式
-    ScanningAnimationStyleGrid,
+    ScanningAnimationStyleGrid
 } ScanningAnimationStyle;
 
 @interface SGQRCodeScanningView : UIView

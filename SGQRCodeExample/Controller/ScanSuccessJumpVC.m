@@ -42,7 +42,13 @@
 }
 
 - (void)left_BarButtonItemAction {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (self.comeFromVC == ScanSuccessJumpComeFromWB) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    if (self.comeFromVC == ScanSuccessJumpComeFromWC) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void)right_BarButtonItemAction {
@@ -75,8 +81,10 @@
     CGFloat webViewW = [UIScreen mainScreen].bounds.size.width;
     CGFloat webViewH = [UIScreen mainScreen].bounds.size.height;
     self.webView = [SGWebView webViewWithFrame:CGRectMake(webViewX, webViewY, webViewW, webViewH)];
+    if (self.comeFromVC == ScanSuccessJumpComeFromWB) {
+        _webView.progressViewColor = [UIColor orangeColor];
+    };
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.jump_URL]]];
-    _webView.progressViewColor = [UIColor redColor];
     _webView.SGQRCodeDelegate = self;
     [self.view addSubview:_webView];
 }
@@ -86,6 +94,6 @@
     self.title = webView.navigationItemTitle;
 }
 
-@end
 
+@end
 

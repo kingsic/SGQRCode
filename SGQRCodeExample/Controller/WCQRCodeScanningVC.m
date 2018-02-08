@@ -1,16 +1,16 @@
 //
-//  SGQRCodeScanningVC.m
+//  WCQRCodeScanningVC.m
 //  SGQRCodeExample
 //
 //  Created by kingsic on 17/3/20.
 //  Copyright © 2017年 kingsic. All rights reserved.
 //
 
-#import "SGQRCodeScanningVC.h"
+#import "WCQRCodeScanningVC.h"
 #import "SGQRCode.h"
 #import "ScanSuccessJumpVC.h"
 
-@interface SGQRCodeScanningVC () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>
+@interface WCQRCodeScanningVC () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>
 @property (nonatomic, strong) SGQRCodeScanManager *manager;
 @property (nonatomic, strong) SGQRCodeScanningView *scanningView;
 @property (nonatomic, strong) UIButton *flashlightBtn;
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UIView *bottomView;
 @end
 
-@implementation SGQRCodeScanningVC
+@implementation WCQRCodeScanningVC
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -35,7 +35,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"SGQRCodeScanningVC - dealloc");
+    NSLog(@"WCQRCodeScanningVC - dealloc");
     [self removeScanningView];
 }
 
@@ -61,9 +61,6 @@
 - (SGQRCodeScanningView *)scanningView {
     if (!_scanningView) {
         _scanningView = [[SGQRCodeScanningView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.9 * self.view.frame.size.height)];
-//        _scanningView.scanningImageName = @"SGQRCode.bundle/QRCodeScanningLineGrid";
-//        _scanningView.scanningAnimationStyle = ScanningAnimationStyleGrid;
-//        _scanningView.cornerColor = [UIColor orangeColor];
     }
     return _scanningView;
 }
@@ -88,7 +85,6 @@
     NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     // AVCaptureSessionPreset1920x1080 推荐使用，对于小型的二维码读取率较高
     [_manager setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr currentController:self];
-//    [manager cancelSampleBufferDelegate];
     _manager.delegate = self;
 }
 
@@ -99,26 +95,32 @@
 - (void)QRCodeAlbumManager:(SGQRCodeAlbumManager *)albumManager didFinishPickingMediaWithResult:(NSString *)result {
     if ([result hasPrefix:@"http"]) {
         ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+        jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
         jumpVC.jump_URL = result;
         [self.navigationController pushViewController:jumpVC animated:YES];
         
     } else {
         ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+        jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
         jumpVC.jump_bar_code = result;
         [self.navigationController pushViewController:jumpVC animated:YES];
     }
+}
+- (void)QRCodeAlbumManagerDidReadQRCodeFailure:(SGQRCodeAlbumManager *)albumManager {
+    NSLog(@"暂未识别出二维码");
 }
 
 #pragma mark - - - SGQRCodeScanManagerDelegate
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects {
     NSLog(@"metadataObjects - - %@", metadataObjects);
     if (metadataObjects != nil && metadataObjects.count > 0) {
-        [scanManager palySoundName:@"SGQRCode.bundle/sound.caf"];
+        [scanManager playSoundName:@"SGQRCode.bundle/sound.caf"];
         [scanManager stopRunning];
         [scanManager videoPreviewLayerRemoveFromSuperlayer];
         
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
         ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+        jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
         jumpVC.jump_URL = [obj stringValue];
         [self.navigationController pushViewController:jumpVC animated:YES];
     } else {
@@ -195,6 +197,7 @@
         [self.flashlightBtn removeFromSuperview];
     });
 }
+
 
 
 @end

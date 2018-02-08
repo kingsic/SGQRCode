@@ -1,6 +1,6 @@
 //
 //  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ：1357127436
+//      QQ群：429899752
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGQRCode.git
 //
@@ -46,7 +46,7 @@
 /** 移除 videoPreviewLayer 对象 */
 - (void)videoPreviewLayerRemoveFromSuperlayer;
 /** 播放音效文件 */
-- (void)palySoundName:(NSString *)name;
+- (void)playSoundName:(NSString *)name;
 /** 重置根据光线强弱值打开手电筒的 delegate 方法 */
 - (void)resetSampleBufferDelegate;
 /** 取消根据光线强弱值打开手电筒的 delegate 方法 */

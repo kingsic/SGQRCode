@@ -1,6 +1,6 @@
 //
 //  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ：1357127436
+//      QQ群：429899752
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGQRCode.git
 //
@@ -19,9 +19,10 @@
 @required
 /** 图片选择控制器取消按钮的点击回调方法 */
 - (void)QRCodeAlbumManagerDidCancelWithImagePickerController:(SGQRCodeAlbumManager *)albumManager;
-/** 图片选择控制器选取图片完成之后的回调方法 (result: 获取的二维码数据) */
+/** 图片选择控制器读取图片二维码信息成功的回调方法 (result: 获取的二维码数据) */
 - (void)QRCodeAlbumManager:(SGQRCodeAlbumManager *)albumManager didFinishPickingMediaWithResult:(NSString *)result;
-
+/** 图片选择控制器读取图片二维码信息失败的回调函数 */
+- (void)QRCodeAlbumManagerDidReadQRCodeFailure:(SGQRCodeAlbumManager *)albumManager;
 @end
 
 @interface SGQRCodeAlbumManager : NSObject

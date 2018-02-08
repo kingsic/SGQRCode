@@ -1,6 +1,6 @@
 //
 //  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ：1357127436
+//      QQ群：429899752
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGQRCode.git
 //
@@ -47,8 +47,7 @@
     self.currentVC = currentController;
     
     if (currentController == nil) {
-        NSException *excp = [NSException exceptionWithName:@"SGQRCode" reason:@"readQRCodeFromAlbumWithCurrentController: 方法中的 currentController 参数不能为空" userInfo:nil];
-        [excp raise];
+        @throw [NSException exceptionWithName:@"SGQRCode" reason:@"readQRCodeFromAlbumWithCurrentController: 方法中的 currentController 参数不能为空" userInfo:nil];
     }
     
     // 1、 获取摄像设备
@@ -122,7 +121,9 @@
     
     if (features.count == 0) {
         if (self.isOpenLog) {
-            SGQRCodeLog(@"暂未识别出扫描的二维码 - - %@", features);
+            if (self.delegate && [self.delegate respondsToSelector:@selector(QRCodeAlbumManagerDidReadQRCodeFailure:)]) {
+                [self.delegate QRCodeAlbumManagerDidReadQRCodeFailure:self];
+            }
         }
         [self.currentVC dismissViewControllerAnimated:YES completion:nil];
         return;
