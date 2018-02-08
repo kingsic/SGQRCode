@@ -99,8 +99,11 @@ imageView.image = [SGQRCodeGenerateManager generateWithColorQRCodeData:@"https:/
 /// 图片选择控制器取消按钮的点击回调方法
 - (void)QRCodeAlbumManagerDidCancelWithImagePickerController:(SGQRCodeAlbumManager *)albumManager；
 
-/// 图片选择控制器选取图片完成之后的回调方法
+/// 图片选择控制器读取图片二维码信息成功的回调方法
 - (void)QRCodeAlbumManager:(SGQRCodeAlbumManager *)albumManager didFinishPickingMediaWithResult:(NSString *)result；
+
+/// 图片选择控制器读取图片二维码信息失败的回调函数
+- (void)QRCodeAlbumManagerDidReadQRCodeFailure:(SGQRCodeAlbumManager *)albumManager;
 ```
 
 
@@ -120,25 +123,27 @@ imageView.image = [SGQRCodeGenerateManager generateWithColorQRCodeData:@"https:/
 
 ## 更新介绍
 
-* 2016-9-30 ：新增从相册中读取二维码功能
+* 2016-09-30 ：新增从相册中读取二维码功能
 
-* 2016-10-27：解决从相册中读取二维码，取消选择返回时，图层卡死问题（修改了创建扫描边框问题）
+* 2016-10-27 ：解决从相册中读取二维码，取消选择返回时，图层卡死问题（修改了创建扫描边框问题）
 
-* 2017-1-29 ：对扫描二维码部分代码的封装；扫描视图布局采用 CALayer
+* 2017-01-29 ：对扫描二维码部分代码的封装；扫描视图布局采用 CALayer
 
-* 2017-2-14 ：相机访问权限崩溃问题处理
+* 2017-02-14 ：相机访问权限崩溃问题处理
 
-* 2017-3-21 ：v2.0.0 使用继承的思想进行二维码扫描管理
+* 2017-03-21 ：v2.0.0 使用继承的思想进行二维码扫描管理
 
-* 2017-5-16 ：v2.0.5 使用封装的思想进行二维码扫描管理
+* 2017-05-16 ：v2.0.5 使用封装的思想进行二维码扫描管理
 
-* 2017-6-26 ：v2.1.0 加入 CocoaPods 管理
+* 2017-06-26 ：v2.1.0 加入 CocoaPods 管理
 
-* 2017-8-17 ：v2.1.5 新增根据光线强弱判断是否打开手电筒
+* 2017-08-17 ：v2.1.5 新增根据光线强弱判断是否打开手电筒
 
-* 2017-8-23 ：v2.1.6 扫描界面使用 UIBezierPath 布局且可根据不同需求实现自定义（扫描线条以及网格样式）
+* 2017-08-23 ：v2.1.6 扫描界面使用 UIBezierPath 布局且可根据不同需求实现自定义（扫描线条以及网格样式）
 
-* 2017-9-6  ：v2.1.7 根据光线强弱值代理方法性能优化以及解决与第三方[MMDrawerController](https://github.com/mutualmobile/MMDrawerController)产生的图层尺寸问题
+* 2017-09-06  ：v2.1.7 根据光线强弱值代理方法性能优化以及解决与第三方[MMDrawerController](https://github.com/mutualmobile/MMDrawerController)产生的图层尺寸问题
+
+* 2018-02-08  ：v2.1.9 新增从相册中读取二维码失败回调函数以及新增新浪微博示例
 
 
 ## Concluding remarks
