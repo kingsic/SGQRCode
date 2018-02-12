@@ -12,7 +12,6 @@
 //
 
 #import "SGQRCodeScanManager.h"
-#import <ImageIO/ImageIO.h>
 
 @interface SGQRCodeScanManager () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 @property (nonatomic, strong) AVCaptureSession *session;

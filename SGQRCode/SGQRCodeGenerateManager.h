@@ -12,7 +12,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 
 @interface SGQRCodeGenerateManager : NSObject
 /** 生成一张普通的二维码 */

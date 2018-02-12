@@ -28,6 +28,7 @@
 - (void)configuration {
     _dataList = @[@"生成二维码", @"WBQRCode (popVC 逻辑处理）", @"WCQRCode (popToRootVC 逻辑处理)"];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

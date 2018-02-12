@@ -19,7 +19,7 @@
 @implementation UIImage (SGImageSize)
 
 /// 返回一张不超过屏幕尺寸的 image
-+ (UIImage *)imageSizeWithScreenImage:(UIImage *)image {
++ (UIImage *)SG_imageSizeWithScreenImage:(UIImage *)image {
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
     CGFloat screenWidth = SGQRCodeScreenWidth;
