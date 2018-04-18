@@ -106,7 +106,12 @@ static SGQRCodeScanManager *_instance;
     [currentController.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
     
     // 9、启动会话
-    [_session startRunning];
+    // 这里解决二维码扫描白屏问题
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [weakSelf.session startRunning];
+    });
 }
 
 #pragma mark - - - AVCaptureMetadataOutputObjectsDelegate
