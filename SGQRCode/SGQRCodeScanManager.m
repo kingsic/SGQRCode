@@ -154,16 +154,12 @@ static SGQRCodeScanManager *_instance;
 
 - (void)playSoundName:(NSString *)name {
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:name ofType:nil];
-    if(audioFile == nil){ //如果为nil，说明使用的方式是Pod，需要用以下方法访问，bundle的资源,pod 0.36以后的特效
-        audioFile =  [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
-    }
-    if(audioFile) {
-        NSURL *fileUrl = [NSURL fileURLWithPath:audioFile];
-        SystemSoundID soundID = 0;
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)(fileUrl), &soundID);
-        AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundCompleteCallback, NULL);
-        AudioServicesPlaySystemSound(soundID); // 播放音效
-    }
+    NSURL *fileUrl = [NSURL fileURLWithPath:audioFile];
+    
+    SystemSoundID soundID = 0;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)(fileUrl), &soundID);
+    AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundCompleteCallback, NULL);
+    AudioServicesPlaySystemSound(soundID); // 播放音效
 }
 void soundCompleteCallback(SystemSoundID soundID, void *clientData){
 
