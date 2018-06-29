@@ -17,4 +17,6 @@
 /** 返回一张不超过屏幕尺寸的 image */
 + (UIImage *)SG_imageSizeWithScreenImage:(UIImage *)image;
 
+/**根据bundle路径获取图片*/
++ (UIImage *)sg_imageNamed:(NSString *)name inBundle:(NSBundle *)bundle;
 @end
