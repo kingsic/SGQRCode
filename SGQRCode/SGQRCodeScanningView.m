@@ -12,7 +12,6 @@
 //
 
 #import "SGQRCodeScanningView.h"
-#import "UIImage+SGImageSize.h"
 
 /** 扫描内容的 W 值 */
 #define scanBorderW 0.7 * self.frame.size.width
@@ -279,8 +278,7 @@
 - (UIImageView *)scanningline {
     if (!_scanningline) {
         _scanningline = [[UIImageView alloc] init];
-        _scanningline.image = [UIImage sg_imageNamed:self.scanningImageName inBundle:[NSBundle bundleForClass:[self class]]];
-
+        _scanningline.image = [UIImage imageNamed:self.scanningImageName];
     }
     return _scanningline;
 }
