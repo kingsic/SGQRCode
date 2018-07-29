@@ -4,15 +4,15 @@
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGQRCode
 //
-//  SGQRCodeScanningView.m
+//  SGQRCodeScanView.m
 //  SGQRCodeExample
 //
 //  Created by kingsic on 2017/8/23.
 //  Copyright © 2017年 kingsic All rights reserved.
 //
 
-#import "SGQRCodeScanningView.h"
-#import "UIImage+SGImageSize.h"
+#import "SGQRCodeScanView.h"
+#import "UIImage+SGQRCode.h"
 
 /** 扫描内容的 W 值 */
 #define scanBorderW 0.7 * self.frame.size.width
@@ -21,13 +21,13 @@
 /** 扫描内容的 Y 值 */
 #define scanBorderY 0.5 * (self.frame.size.height - scanBorderW)
 
-@interface SGQRCodeScanningView ()
+@interface SGQRCodeScanView ()
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) UIImageView *scanningline;
 @end
 
-@implementation SGQRCodeScanningView
+@implementation SGQRCodeScanView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -44,14 +44,14 @@
 }
 
 - (void)initialization {
-    _scanningAnimationStyle = ScanningAnimationStyleDefault;
+    _scanAnimationStyle = ScanAnimationStyleDefault;
     _borderColor = [UIColor whiteColor];
     _cornerLocation = CornerLoactionDefault;
     _cornerColor = [UIColor colorWithRed:85/255.0f green:183/255.0 blue:55/255.0 alpha:1.0];
     _cornerWidth = 2.0;
     _backgroundAlpha = 0.5;
     _animationTimeInterval = 0.02;
-    _scanningImageName = @"SGQRCode.bundle/QRCodeScanningLine";
+    _scanImageName = @"SGQRCode.bundle/QRCodeScanLine";
 }
 
 - (UIView *)contentView {
@@ -188,7 +188,7 @@
     CGFloat scanninglineY = 0;
     CGFloat scanninglineW = 0;
     CGFloat scanninglineH = 0;
-    if (self.scanningAnimationStyle == ScanningAnimationStyleGrid) {
+    if (self.scanAnimationStyle == ScanAnimationStyleGrid) {
         [self addSubview:self.contentView];
         [_contentView addSubview:self.scanningline];
         scanninglineW = scanBorderW;
@@ -221,7 +221,7 @@
     __block CGRect frame = _scanningline.frame;
     static BOOL flag = YES;
 
-    if (self.scanningAnimationStyle == ScanningAnimationStyleGrid) {
+    if (self.scanAnimationStyle == ScanAnimationStyleGrid) {
         if (flag) {
             frame.origin.y = - scanBorderW;
             flag = NO;
@@ -279,19 +279,18 @@
 - (UIImageView *)scanningline {
     if (!_scanningline) {
         _scanningline = [[UIImageView alloc] init];
-        _scanningline.image = [UIImage sg_imageNamed:self.scanningImageName inBundle:[NSBundle bundleForClass:[self class]]];
-
+        _scanningline.image = [UIImage SG_imageNamed:self.scanImageName inBundle:[NSBundle bundleForClass:[self class]]];
     }
     return _scanningline;
 }
 
 #pragma mark - - - set
-- (void)setScanningAnimationStyle:(ScanningAnimationStyle)scanningAnimationStyle {
-    _scanningAnimationStyle = scanningAnimationStyle;
+- (void)setScanAnimationStyle:(ScanAnimationStyle)scanAnimationStyle {
+    _scanAnimationStyle = scanAnimationStyle;
 }
 
-- (void)setScanningImageName:(NSString *)scanningImageName {
-    _scanningImageName = scanningImageName;
+- (void)setScanImageName:(NSString *)scanImageName {
+    _scanImageName = scanImageName;
 }
 
 - (void)setBorderColor:(UIColor *)borderColor {
@@ -320,4 +319,3 @@
 
 
 @end
-

@@ -8,9 +8,8 @@
 
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "QRCodeGenerateVC.h"
-#import "WBQRCodeScanningVC.h"
-#import "WCQRCodeScanningVC.h"
+#import "WBQRCodeVC.h"
+#import "WCQRCodeVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,7 +25,7 @@
 }
 
 - (void)configuration {
-    _dataList = @[@"生成二维码", @"WBQRCode (popVC 逻辑处理）", @"WCQRCode (popToRootVC 逻辑处理)"];
+    _dataList = @[@"WBQRCodeVC (pop 逻辑处理）", @"WCQRCodeVC (popToRoot 逻辑处理)"];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
@@ -44,18 +43,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        QRCodeGenerateVC *VC = [[QRCodeGenerateVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    }
     
-    if (indexPath.row == 1) {
-        WBQRCodeScanningVC *WBVC = [[WBQRCodeScanningVC alloc] init];
+    if (indexPath.row == 0) {
+        WBQRCodeVC *WBVC = [[WBQRCodeVC alloc] init];
         [self QRCodeScanVC:WBVC];
     }
     
-    if (indexPath.row == 2) {
-        WCQRCodeScanningVC *WCVC = [[WCQRCodeScanningVC alloc] init];
+    if (indexPath.row == 1) {
+        WCQRCodeVC *WCVC = [[WCQRCodeVC alloc] init];
         [self QRCodeScanVC:WCVC];
     }
 }

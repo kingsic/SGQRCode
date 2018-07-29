@@ -1,5 +1,5 @@
 //
-//  WBQRCodeScanningVC.h
+//  WBQRCodeVC.h
 //  SGQRCodeExample
 //
 //  Created by kingsic on 2018/2/8.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WBQRCodeScanningVC : UIViewController
+@interface WBQRCodeVC : UIViewController
 
 @end

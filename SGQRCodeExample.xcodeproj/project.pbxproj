@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		180E360E1F01F33E00A53E7A /* QRCodeGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E36061F01F33E00A53E7A /* QRCodeGenerateVC.m */; };
 		180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E36081F01F33E00A53E7A /* ScanSuccessJumpVC.m */; };
-		180E36101F01F33E00A53E7A /* WCQRCodeScanningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E360A1F01F33E00A53E7A /* WCQRCodeScanningVC.m */; };
+		180E36101F01F33E00A53E7A /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E360A1F01F33E00A53E7A /* WCQRCodeVC.m */; };
 		180E36111F01F33E00A53E7A /* SGWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E360D1F01F33E00A53E7A /* SGWebView.m */; };
-		183A1A351E893B3800186578 /* UIImage+SGImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A1A341E893B3800186578 /* UIImage+SGImageSize.m */; };
+		183A1A351E893B3800186578 /* UIImage+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A1A341E893B3800186578 /* UIImage+SGQRCode.m */; };
 		18479ECF1E80F92500F7F225 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479ECE1E80F92500F7F225 /* main.m */; };
 		18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479ED11E80F92500F7F225 /* AppDelegate.m */; };
 		18479EDA1E80F92500F7F225 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18479ED91E80F92500F7F225 /* Assets.xcassets */; };
@@ -21,12 +20,10 @@
 		18479F0B1E80F97700F7F225 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479F071E80F97700F7F225 /* ViewController.m */; };
 		18479F1A1E80F98F00F7F225 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18479F101E80F98F00F7F225 /* SGQRCode.bundle */; };
 		18479F1F1E80F9CA00F7F225 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18479F1E1E80F9CA00F7F225 /* Main.storyboard */; };
-		18CD01B81F02557100320B3D /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B31F02557100320B3D /* SGQRCodeAlbumManager.m */; };
-		18CD01B91F02557100320B3D /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */; };
-		18CD01BA1F02557100320B3D /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD01B71F02557100320B3D /* SGQRCodeScanManager.m */; };
-		8D39353F202C07C500992249 /* WBQRCodeScanningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D39353E202C07C500992249 /* WBQRCodeScanningVC.m */; };
-		8D8999271F4DB6EA00E9E09D /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8999261F4DB6EA00E9E09D /* SGQRCodeScanningView.m */; };
-		8D96500B1F44BAE2004E8B2C /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */; };
+		8D192729210DFEE7002AE63A /* SGQRCodeObtain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D192724210DFEE7002AE63A /* SGQRCodeObtain.m */; };
+		8D19272A210DFEE7002AE63A /* SGQRCodeScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D192725210DFEE7002AE63A /* SGQRCodeScanView.m */; };
+		8D19272B210DFEE7002AE63A /* SGQRCodeObtainConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D192728210DFEE7002AE63A /* SGQRCodeObtainConfigure.m */; };
+		8D19272E210DFF88002AE63A /* WBQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D19272D210DFF88002AE63A /* WBQRCodeVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,16 +44,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		180E36051F01F33E00A53E7A /* QRCodeGenerateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerateVC.h; sourceTree = "<group>"; };
-		180E36061F01F33E00A53E7A /* QRCodeGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerateVC.m; sourceTree = "<group>"; };
 		180E36071F01F33E00A53E7A /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
 		180E36081F01F33E00A53E7A /* ScanSuccessJumpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanSuccessJumpVC.m; sourceTree = "<group>"; };
-		180E36091F01F33E00A53E7A /* WCQRCodeScanningVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCQRCodeScanningVC.h; sourceTree = "<group>"; };
-		180E360A1F01F33E00A53E7A /* WCQRCodeScanningVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeScanningVC.m; sourceTree = "<group>"; };
+		180E36091F01F33E00A53E7A /* WCQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
+		180E360A1F01F33E00A53E7A /* WCQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
 		180E360C1F01F33E00A53E7A /* SGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebView.h; sourceTree = "<group>"; };
 		180E360D1F01F33E00A53E7A /* SGWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebView.m; sourceTree = "<group>"; };
-		183A1A331E893B3800186578 /* UIImage+SGImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SGImageSize.h"; sourceTree = "<group>"; };
-		183A1A341E893B3800186578 /* UIImage+SGImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SGImageSize.m"; sourceTree = "<group>"; };
+		183A1A331E893B3800186578 /* UIImage+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SGQRCode.h"; sourceTree = "<group>"; };
+		183A1A341E893B3800186578 /* UIImage+SGQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SGQRCode.m"; sourceTree = "<group>"; };
 		18479ECA1E80F92500F7F225 /* SGQRCodeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGQRCodeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18479ECE1E80F92500F7F225 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18479ED01E80F92500F7F225 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -75,18 +70,14 @@
 		18479F101E80F98F00F7F225 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
 		18479F111E80F98F00F7F225 /* SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCode.h; sourceTree = "<group>"; };
 		18479F1E1E80F9CA00F7F225 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		18CD01B21F02557100320B3D /* SGQRCodeAlbumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeAlbumManager.h; sourceTree = "<group>"; };
-		18CD01B31F02557100320B3D /* SGQRCodeAlbumManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeAlbumManager.m; sourceTree = "<group>"; };
-		18CD01B41F02557100320B3D /* SGQRCodeGenerateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeGenerateManager.h; sourceTree = "<group>"; };
-		18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeGenerateManager.m; sourceTree = "<group>"; };
-		18CD01B61F02557100320B3D /* SGQRCodeScanManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanManager.h; sourceTree = "<group>"; };
-		18CD01B71F02557100320B3D /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
-		8D39353D202C07C500992249 /* WBQRCodeScanningVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBQRCodeScanningVC.h; sourceTree = "<group>"; };
-		8D39353E202C07C500992249 /* WBQRCodeScanningVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBQRCodeScanningVC.m; sourceTree = "<group>"; };
-		8D8999251F4DB6EA00E9E09D /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
-		8D8999261F4DB6EA00E9E09D /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
-		8D9650091F44BAE2004E8B2C /* SGQRCodeHelperTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeHelperTool.h; sourceTree = "<group>"; };
-		8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeHelperTool.m; sourceTree = "<group>"; };
+		8D192723210DFEE6002AE63A /* SGQRCodeObtainConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtainConfigure.h; sourceTree = "<group>"; };
+		8D192724210DFEE7002AE63A /* SGQRCodeObtain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtain.m; sourceTree = "<group>"; };
+		8D192725210DFEE7002AE63A /* SGQRCodeScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanView.m; sourceTree = "<group>"; };
+		8D192726210DFEE7002AE63A /* SGQRCodeScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanView.h; sourceTree = "<group>"; };
+		8D192727210DFEE7002AE63A /* SGQRCodeObtain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtain.h; sourceTree = "<group>"; };
+		8D192728210DFEE7002AE63A /* SGQRCodeObtainConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtainConfigure.m; sourceTree = "<group>"; };
+		8D19272C210DFF87002AE63A /* WBQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBQRCodeVC.h; sourceTree = "<group>"; };
+		8D19272D210DFF88002AE63A /* WBQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBQRCodeVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,12 +108,10 @@
 		180E36041F01F33E00A53E7A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				180E36051F01F33E00A53E7A /* QRCodeGenerateVC.h */,
-				180E36061F01F33E00A53E7A /* QRCodeGenerateVC.m */,
-				8D39353D202C07C500992249 /* WBQRCodeScanningVC.h */,
-				8D39353E202C07C500992249 /* WBQRCodeScanningVC.m */,
-				180E36091F01F33E00A53E7A /* WCQRCodeScanningVC.h */,
-				180E360A1F01F33E00A53E7A /* WCQRCodeScanningVC.m */,
+				8D19272C210DFF87002AE63A /* WBQRCodeVC.h */,
+				8D19272D210DFF88002AE63A /* WBQRCodeVC.m */,
+				180E36091F01F33E00A53E7A /* WCQRCodeVC.h */,
+				180E360A1F01F33E00A53E7A /* WCQRCodeVC.m */,
 				180E36071F01F33E00A53E7A /* ScanSuccessJumpVC.h */,
 				180E36081F01F33E00A53E7A /* ScanSuccessJumpVC.m */,
 			);
@@ -141,8 +130,8 @@
 		183A1A321E893B0600186578 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				183A1A331E893B3800186578 /* UIImage+SGImageSize.h */,
-				183A1A341E893B3800186578 /* UIImage+SGImageSize.m */,
+				183A1A331E893B3800186578 /* UIImage+SGQRCode.h */,
+				183A1A341E893B3800186578 /* UIImage+SGQRCode.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -216,16 +205,12 @@
 			isa = PBXGroup;
 			children = (
 				18479F111E80F98F00F7F225 /* SGQRCode.h */,
-				18CD01B61F02557100320B3D /* SGQRCodeScanManager.h */,
-				18CD01B71F02557100320B3D /* SGQRCodeScanManager.m */,
-				18CD01B21F02557100320B3D /* SGQRCodeAlbumManager.h */,
-				18CD01B31F02557100320B3D /* SGQRCodeAlbumManager.m */,
-				18CD01B41F02557100320B3D /* SGQRCodeGenerateManager.h */,
-				18CD01B51F02557100320B3D /* SGQRCodeGenerateManager.m */,
-				8D8999251F4DB6EA00E9E09D /* SGQRCodeScanningView.h */,
-				8D8999261F4DB6EA00E9E09D /* SGQRCodeScanningView.m */,
-				8D9650091F44BAE2004E8B2C /* SGQRCodeHelperTool.h */,
-				8D96500A1F44BAE2004E8B2C /* SGQRCodeHelperTool.m */,
+				8D192723210DFEE6002AE63A /* SGQRCodeObtainConfigure.h */,
+				8D192728210DFEE7002AE63A /* SGQRCodeObtainConfigure.m */,
+				8D192727210DFEE7002AE63A /* SGQRCodeObtain.h */,
+				8D192724210DFEE7002AE63A /* SGQRCodeObtain.m */,
+				8D192726210DFEE7002AE63A /* SGQRCodeScanView.h */,
+				8D192725210DFEE7002AE63A /* SGQRCodeScanView.m */,
 				183A1A321E893B0600186578 /* Category */,
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
 			);
@@ -366,20 +351,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D39353F202C07C500992249 /* WBQRCodeScanningVC.m in Sources */,
+				8D19272E210DFF88002AE63A /* WBQRCodeVC.m in Sources */,
 				18479F0B1E80F97700F7F225 /* ViewController.m in Sources */,
+				8D192729210DFEE7002AE63A /* SGQRCodeObtain.m in Sources */,
+				8D19272A210DFEE7002AE63A /* SGQRCodeScanView.m in Sources */,
 				180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */,
-				180E36101F01F33E00A53E7A /* WCQRCodeScanningVC.m in Sources */,
-				18CD01B81F02557100320B3D /* SGQRCodeAlbumManager.m in Sources */,
-				8D8999271F4DB6EA00E9E09D /* SGQRCodeScanningView.m in Sources */,
-				18CD01BA1F02557100320B3D /* SGQRCodeScanManager.m in Sources */,
+				180E36101F01F33E00A53E7A /* WCQRCodeVC.m in Sources */,
 				18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */,
-				180E360E1F01F33E00A53E7A /* QRCodeGenerateVC.m in Sources */,
+				8D19272B210DFEE7002AE63A /* SGQRCodeObtainConfigure.m in Sources */,
 				180E36111F01F33E00A53E7A /* SGWebView.m in Sources */,
-				18CD01B91F02557100320B3D /* SGQRCodeGenerateManager.m in Sources */,
 				18479ECF1E80F92500F7F225 /* main.m in Sources */,
-				183A1A351E893B3800186578 /* UIImage+SGImageSize.m in Sources */,
-				8D96500B1F44BAE2004E8B2C /* SGQRCodeHelperTool.m in Sources */,
+				183A1A351E893B3800186578 /* UIImage+SGQRCode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
