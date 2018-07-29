@@ -220,6 +220,8 @@
 - (void)beginRefreshUI {
     __block CGRect frame = _scanningline.frame;
     static BOOL flag = YES;
+    
+    __weak typeof(self) weakSelf = self;
 
     if (self.scanAnimationStyle == ScanAnimationStyleGrid) {
         if (flag) {
@@ -227,7 +229,7 @@
             flag = NO;
             [UIView animateWithDuration:self.animationTimeInterval animations:^{
                 frame.origin.y += 2;
-                _scanningline.frame = frame;
+                weakSelf.scanningline.frame = frame;
             } completion:nil];
         } else {
             if (_scanningline.frame.origin.y >= - scanBorderW) {
@@ -235,13 +237,13 @@
                 if (_scanningline.frame.origin.y >= scanContent_MaxY) {
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         frame.origin.y = - scanBorderW;
-                        _scanningline.frame = frame;
+                        weakSelf.scanningline.frame = frame;
                         flag = YES;
                     });
                 } else {
                     [UIView animateWithDuration:self.animationTimeInterval animations:^{
                         frame.origin.y += 2;
-                        _scanningline.frame = frame;
+                        weakSelf.scanningline.frame = frame;
                     } completion:nil];
                 }
             } else {
@@ -254,19 +256,19 @@
             flag = NO;
             [UIView animateWithDuration:self.animationTimeInterval animations:^{
                 frame.origin.y += 2;
-                _scanningline.frame = frame;
+                weakSelf.scanningline.frame = frame;
             } completion:nil];
         } else {
             if (_scanningline.frame.origin.y >= scanBorderY) {
                 CGFloat scanContent_MaxY = scanBorderY + self.frame.size.width - 2 * scanBorderX;
                 if (_scanningline.frame.origin.y >= scanContent_MaxY - 10) {
                     frame.origin.y = scanBorderY;
-                    _scanningline.frame = frame;
+                    weakSelf.scanningline.frame = frame;
                     flag = YES;
                 } else {
                     [UIView animateWithDuration:self.animationTimeInterval animations:^{
                         frame.origin.y += 2;
-                        _scanningline.frame = frame;
+                        weakSelf.scanningline.frame = frame;
                     } completion:nil];
                 }
             } else {

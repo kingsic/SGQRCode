@@ -59,6 +59,7 @@
     __weak typeof(self) weakSelf = self;
 
     SGQRCodeObtainConfigure *configure = [SGQRCodeObtainConfigure QRCodeObtainConfigure];
+    configure.openLog = YES;
     [obtain establishQRCodeObtainScanWithController:self configure:configure];
     [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
         if (result) {

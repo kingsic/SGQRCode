@@ -60,9 +60,8 @@
     [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     
     // 设置扫描范围（每一个取值0～1，以屏幕右上角为坐标原点）
-    // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）;
-    // 如需限制扫描框范围，打开下一句注释代码并进行相应调整
-//    metadataOutput.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
+    // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）
+    // metadataOutput.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     if (configure.rectOfInterest.origin.x == 0 && configure.rectOfInterest.origin.y == 0 && configure.rectOfInterest.size.width == 0 && configure.rectOfInterest.size.height == 0) {
     } else {
         metadataOutput.rectOfInterest = configure.rectOfInterest;
@@ -170,16 +169,15 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         [self P_enterImagePickerController];
                     });
-                    if (_configure.openLog == YES) {
+                    if (self.configure.openLog == YES) {
                         NSLog(@"用户第一次同意了访问相册权限");
                     }
                 } else { // 用户第一次拒绝了访问相机权限
-                    if (_configure.openLog == YES) {
+                    if (self.configure.openLog == YES) {
                         NSLog(@"用户第一次拒绝了访问相册权限");
                     }
                 }
             }];
-            
         } else if (status == PHAuthorizationStatusAuthorized) { // 用户允许当前应用访问相册
             self.isPHAuthorization = YES;
             if (_configure.openLog == YES) {
@@ -237,8 +235,8 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
     NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
     if (features.count == 0) {
         [_controller dismissViewControllerAnimated:YES completion:^{
-            if (_albumResultBlock) {
-                _albumResultBlock(self, nil);
+            if (self.albumResultBlock) {
+                self.albumResultBlock(self, nil);
             }
         }];
         return;
@@ -253,8 +251,8 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
             self.detectorString = resultStr;
         }
         [_controller dismissViewControllerAnimated:YES completion:^{
-            if (_albumResultBlock) {
-                _albumResultBlock(self, _detectorString);
+            if (self.albumResultBlock) {
+                self.albumResultBlock(self, self.detectorString);
             }
         }];
     }
