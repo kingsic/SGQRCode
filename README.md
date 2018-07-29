@@ -4,26 +4,18 @@
 
 ## 前沿
 
-* 项目中的二维码扫描逻辑仿微信二维码逻辑；具体扫描业务逻辑设置请参考 SGQRCodeScanManager.h 方法中 api 进行相应处理
-
-* 关于根据光线强弱值打开手电筒的 delegate 方法，是时刻调用的，且不对内存产生影响（可自行调试看看昂），尽请放心使用，如若不需要根据光线强弱值打开手电筒，调用 cancelSampleBufferDelegate 方法即可
-
 * v2.0.0 使用继承的思想进行二维码扫描管理（只需接收通知获取到数据即可；如果你想使用继承，那么可在 releases 中下载 v2.0.0 版本）；之后使用封装的思想进行二维码扫描管理（由于使用继承，设备输入流、数据输出流、会话对象、预览图层及代理方法的代码全部书写在控制器中，导致了代码的可读性较差以及耦合性较高）
+
+* v2.5.0 Block 取代 delegate
 
 
 ## 主要内容的介绍
 
-* `普通二维码生成`<br>
-
-* `彩色二维码生成`<br>
-
-* `带有小图标二维码生成`<br>
-
-* `根据光线强弱开启手电筒`<br>
-
 * `从相册中读取二维码`<br>
 
 * `扫描成功之后提示音`<br>
+
+* `根据光线强弱开启手电筒`<br>
 
 * `扫描成功之后界面之间的跳转`<br>
 
@@ -34,7 +26,7 @@
 
 ## SGQRCode 集成
 
-* 1、CocoaPods 导入 pod 'SGQRCode', '~> 2.2.0'
+* 1、CocoaPods 导入 pod 'SGQRCode', '~> 2.5.0'
 
 * 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 
@@ -47,63 +39,32 @@
 
 * `NSPhotoLibraryUsageDescription (相册权限访问)`<br>
 
-#### 2、二维码生成
 
-* 普通二维码生成
-```Objective-C
-imageView.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:@"https://github.com/kingsic" imageViewWidth:imageViewW];
-```
-
-* logo 二维码生成
-```Objective-C
-imageView.image = [SGQRCodeGenerateManager generateWithLogoQRCodeData:@"https://github.com/kingsic" logoImageName:@"icon_image" logoScaleToSuperView:scale];
-```
-
-* 彩色二维码生成
-```Objective-C
-imageView.image = [SGQRCodeGenerateManager generateWithColorQRCodeData:@"https://github.com/kingsic" backgroundColor:[CIColor colorWithRed:1 green:0 blue:0.8] mainColor:[CIColor colorWithRed:0.3 green:0.2 blue:0.4]];
-```
-
-#### 3、二维码扫描
+#### 2、二维码扫描
 
 ```Objective-C
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    /// 扫描二维码创建
-    SGQRCodeScanManager *scanManager = [SGQRCodeScanManager sharedManager];
-    NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
-    // AVCaptureSessionPreset1920x1080 推荐使用，对于小型的二维码读取率较高
-    [scanManager setupSessionPreset:AVCaptureSessionPreset1920x1080 metadataObjectTypes:arr currentController:self];
-    scanManager.delegate = self;
+    __weak typeof(self) weakSelf = self;
+
+    /// 扫描二维码
+    SGQRCodeObtainConfigure *configure = [SGQRCodeObtainConfigure QRCodeObtainConfigure];
+    [obtain establishQRCodeObtainScanWithController:self configure:configure];
+    // 二维码扫描回调方法
+    [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
+        <#code#>
+    }];
+    // 根据外界光线值判断是否自动打开手电筒
+    [obtain setBlockWithQRCodeObtainScanBrightness:^(SGQRCodeObtain *obtain, CGFloat brightness) {
+        <#code#>
+    }];
     
     
-    /// 从相册中读取二维码方法
-    SGQRCodeAlbumManager *albumManager = [SGQRCodeAlbumManager sharedManager];
-    [albumManager readQRCodeFromAlbumWithCurrentController:self];
-    albumManager.delegate = self;
+    /// 从相册中读取二维码    
+    [obtain establishAuthorizationQRCodeObtainAlbumWithController:self];
+    // 从相册中读取图片上的二维码数据回调方法
+    [obtain setBlockWithQRCodeObtainAlbumResult:^(SGQRCodeObtain *obtain, NSString *result) {
+        <#code#>
+    }];
 }
-```
-
-* * 扫面二维码的代理方法
-```Objective-C
-/// 二维码扫描获取数据的回调方法
-- (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects；
-
-/// 根据光线强弱值打开手电筒的回调方法
-- (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager brightnessValue:(CGFloat)brightnessValue;
-```
-
-* * 从相册中读取二维码的代理方法
-```Objective-C
-/// 图片选择控制器取消按钮的点击回调方法
-- (void)QRCodeAlbumManagerDidCancelWithImagePickerController:(SGQRCodeAlbumManager *)albumManager；
-
-/// 图片选择控制器读取图片二维码信息成功的回调方法
-- (void)QRCodeAlbumManager:(SGQRCodeAlbumManager *)albumManager didFinishPickingMediaWithResult:(NSString *)result；
-
-/// 图片选择控制器读取图片二维码信息失败的回调函数
-- (void)QRCodeAlbumManagerDidReadQRCodeFailure:(SGQRCodeAlbumManager *)albumManager;
 ```
 
 
@@ -144,6 +105,8 @@ imageView.image = [SGQRCodeGenerateManager generateWithColorQRCodeData:@"https:/
 * 2017-09-06  ：v2.1.7 根据光线强弱值代理方法性能优化以及解决与第三方[MMDrawerController](https://github.com/mutualmobile/MMDrawerController)产生的图层尺寸问题
 
 * 2018-02-08  ：v2.2.0 新增新浪微博示例、新增从相册中读取二维码失败回调函数以及分类名称的更换
+
+* 2018-07-29  ：v2.5.0 版本升级【Block 取代 delegate 以及代码整合与优化】
 
 
 ## Concluding remarks
