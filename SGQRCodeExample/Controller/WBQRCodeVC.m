@@ -47,6 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = [UIColor blackColor];
     obtain = [SGQRCodeObtain QRCodeObtain];
     
     [self setupQRCodeScan];
@@ -60,6 +61,7 @@
 
     SGQRCodeObtainConfigure *configure = [SGQRCodeObtainConfigure QRCodeObtainConfigure];
     configure.openLog = YES;
+    configure.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     [obtain establishQRCodeObtainScanWithController:self configure:configure];
     [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
         if (result) {

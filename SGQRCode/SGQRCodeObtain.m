@@ -94,7 +94,9 @@
     [controller.view.layer insertSublayer:videoPreviewLayer atIndex:0];
     
     // 7、启动会话
-    [_session startRunning];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_session startRunning];
+    });
 }
 #pragma mark - - - AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
@@ -156,7 +158,6 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
         _controller = controller;
     }
     
-    // 1、 获取摄像设备
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if (device) {
         // 判断授权状态

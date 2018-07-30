@@ -47,6 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = [UIColor blackColor];
     obtain = [SGQRCodeObtain QRCodeObtain];
     
     [self setupQRCodeScan];
