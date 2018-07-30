@@ -20,7 +20,7 @@
 @interface SGQRCodeObtain () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, weak) UIViewController *controller;
 @property (nonatomic, strong) SGQRCodeObtainConfigure *configure;
-@property (nonatomic, strong) AVCaptureSession *session;
+@property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, copy) SGQRCodeObtainScanResultBlock scanResultBlock;
 @property (nonatomic, copy) SGQRCodeObtainScanBrightnessBlock scanBrightnessBlock;
 @property (nonatomic, copy) SGQRCodeObtainAlbumDidCancelImagePickerControllerBlock albumDidCancelImagePickerControllerBlock;
@@ -67,37 +67,57 @@
         metadataOutput.rectOfInterest = configure.rectOfInterest;
     }
 
-    // 3、创建会话对象
-    _session = [[AVCaptureSession alloc] init];
-    // 设置会话采集率
-    _session.sessionPreset = configure.sessionPreset;
+    // 3、设置会话采集率
+    self.captureSession.sessionPreset = configure.sessionPreset;
     
     // 4(1)、添加捕获元数据输出流到会话对象
-    [_session addOutput:metadataOutput];
+    [_captureSession addOutput:metadataOutput];
     // 4(2)、添加捕获输出流到会话对象；构成识了别光线强弱
     if (configure.sampleBufferDelegate == YES) {
         AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
         [videoDataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
-        [_session addOutput:videoDataOutput];
+        [_captureSession addOutput:videoDataOutput];
     }
     // 4(3)、添加捕获设备输入流到会话对象
-    [_session addInput:deviceInput];
+    [_captureSession addInput:deviceInput];
     
     // 5、设置数据输出类型，需要将数据输出添加到会话后，才能指定元数据类型，否则会报错
     metadataOutput.metadataObjectTypes = configure.metadataObjectTypes;
     
     // 6、预览图层
-    AVCaptureVideoPreviewLayer *videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
+    AVCaptureVideoPreviewLayer *videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_captureSession];
     // 保持纵横比，填充层边界
     videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     videoPreviewLayer.frame = controller.view.frame;
     [controller.view.layer insertSublayer:videoPreviewLayer atIndex:0];
-    
-    // 7、启动会话
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_session startRunning];
+}
+
+- (AVCaptureSession *)captureSession {
+    if (!_captureSession) {
+        _captureSession = [[AVCaptureSession alloc] init];
+    }
+    return _captureSession;
+}
+
+- (void)startRunningWithBefore:(void (^)(void))before completion:(void (^)(void))completion {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        if (before) {
+            before();
+        }
+        [_captureSession startRunning];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion) {
+                completion();
+            }
+        });
     });
 }
+- (void)stopRunning {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [_captureSession stopRunning];
+    });
+}
+
 #pragma mark - - - AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     NSString *resultString = nil;
@@ -126,13 +146,6 @@
 }
 - (void)setBlockWithQRCodeObtainScanBrightness:(SGQRCodeObtainScanBrightnessBlock)block {
     _scanBrightnessBlock = block;
-}
-
-- (void)startRunning {
-    [_session startRunning];
-}
-- (void)stopRunning {
-    [_session stopRunning];
 }
 
 - (void)playSoundName:(NSString *)name {

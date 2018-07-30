@@ -30,12 +30,13 @@ typedef void(^SGQRCodeObtainAlbumResultBlock)(SGQRCodeObtain *obtain, NSString *
 - (void)setBlockWithQRCodeObtainScanResult:(SGQRCodeObtainScanResultBlock)block;
 /** 扫描二维码光线强弱回调方法；调用之前配置属性 sampleBufferDelegate 必须为 YES */
 - (void)setBlockWithQRCodeObtainScanBrightness:(SGQRCodeObtainScanBrightnessBlock)block;
-/** 开启扫描 */
-- (void)startRunning;
+/** 开启扫描回调方法 */
+- (void)startRunningWithBefore:(void (^)(void))before completion:(void (^)(void))completion;
 /** 停止扫描 */
 - (void)stopRunning;
 /** 播放音效文件 */
 - (void)playSoundName:(NSString *)name;
+
 
 #pragma mark - - 相册中读取二维码相关方法
 /** 获取相册授权方法 */

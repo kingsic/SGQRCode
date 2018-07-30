@@ -24,7 +24,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [obtain startRunning];
+
+    /// 二维码开启方法
+    [obtain startRunningWithBefore:^{
+        // 微信并没有处理
+        // 在此可添加加在提示HUD
+    } completion:^{
+        // 在此可移除加在提示HUD
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

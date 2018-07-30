@@ -12,6 +12,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface SGQRCodeObtainConfigure : NSObject
 /** 类方法创建 */

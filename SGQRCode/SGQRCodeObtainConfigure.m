@@ -12,7 +12,6 @@
 //
 
 #import "SGQRCodeObtainConfigure.h"
-#import <AVFoundation/AVFoundation.h>
 
 @implementation SGQRCodeObtainConfigure
 

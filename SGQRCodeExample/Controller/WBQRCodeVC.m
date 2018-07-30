@@ -25,7 +25,11 @@
     [super viewWillAppear:animated];
     
     if (_stop) {
-        [obtain startRunning];
+        [obtain startRunningWithBefore:^{
+            // 在此可添加加在提示HUD
+        } completion:^{
+            // 在此可移除加在提示HUD
+        }];
     }
 }
 
@@ -62,7 +66,16 @@
     SGQRCodeObtainConfigure *configure = [SGQRCodeObtainConfigure QRCodeObtainConfigure];
     configure.openLog = YES;
     configure.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
+    // 这里只是提供了几种作为参考（共：13）；需什么类型添加什么类型即可
+    NSArray *arr = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
+    configure.metadataObjectTypes = arr;
+    
     [obtain establishQRCodeObtainScanWithController:self configure:configure];
+    [obtain startRunningWithBefore:^{
+        // 在此可添加加在提示HUD
+    } completion:^{
+        // 在此可移除加在提示HUD
+    }];
     [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
         if (result) {
             [obtain stopRunning];
