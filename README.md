@@ -70,9 +70,9 @@
 
 ## 效果图
 
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle3.png)       ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle4.png)
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle1.png)       ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle2.png)
 
-![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle5.png)       ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle6.png)
+![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle3.png)       ![](https://github.com/kingsic/SGQRCode/raw/master/Picture/sorgle4.png)
 
 
 ## 问题及解决方案
