@@ -13,31 +13,31 @@
 
 #import "UIImage+SGQRCode.h"
 
-#define SGQRCodeScreenWidth [UIScreen mainScreen].bounds.size.width
-#define SGQRCodeScreenHeight [UIScreen mainScreen].bounds.size.height
-
 @implementation UIImage (SGQRCode)
 
-/// 返回一张不超过屏幕尺寸的 image
-+ (UIImage *)SG_imageSizeWithScreenImage:(UIImage *)image {
+/**
+ *  根据传入的 UIImage 返回一张不超过屏幕尺寸的 UIImage
+ *
+ *  @param image     传入的 UIImage
+ *  @return newImage
+ */
++ (UIImage *)SG_imageScaleWithImage:(UIImage *)image {
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
-    CGFloat screenWidth = SGQRCodeScreenWidth;
-    CGFloat screenHeight = SGQRCodeScreenHeight;
-    
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     if (imageWidth <= screenWidth && imageHeight <= screenHeight) {
         return image;
     }
     
-    CGFloat max = MAX(imageWidth, imageHeight);
-    CGFloat scale = max / (screenHeight * 2.0);
-    
+    CGFloat widthScale = imageWidth / screenWidth;
+    CGFloat heightScale = imageHeight / screenHeight;
+    CGFloat scale = MAX(widthScale, heightScale);
     CGSize size = CGSizeMake(imageWidth / scale, imageHeight / scale);
     UIGraphicsBeginImageContext(size);
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     return newImage;
 }
 
@@ -57,4 +57,3 @@
 
 
 @end
-

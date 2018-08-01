@@ -14,8 +14,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (SGQRCode)
-/** 返回一张不超过屏幕尺寸的 image */
-+ (UIImage *)SG_imageSizeWithScreenImage:(UIImage *)image;
+/** 若传入的图片尺寸(宽与高)小于屏幕尺寸直接返回否则返回一张等比缩放等于屏幕尺寸的图片 */
++ (UIImage *)SG_imageScaleWithImage:(UIImage *)image;
 
 /** 根据bundle路径获取图片 */
 + (UIImage *)SG_imageNamed:(NSString *)name inBundle:(NSBundle *)bundle;

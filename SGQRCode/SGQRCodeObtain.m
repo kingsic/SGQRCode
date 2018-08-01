@@ -240,8 +240,7 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    // 对选取照片的处理，如果选取的图片尺寸过大，则压缩选取图片，否则不作处理
-    UIImage *image = [UIImage SG_imageSizeWithScreenImage:info[UIImagePickerControllerOriginalImage]];
+    UIImage *image = [UIImage SG_imageScaleWithImage:info[UIImagePickerControllerOriginalImage]];
     // CIDetector(CIDetector 可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
     // 声明一个 CIDetector，并设定识别类型 CIDetectorTypeQRCode
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];

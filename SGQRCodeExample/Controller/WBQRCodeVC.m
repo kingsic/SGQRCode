@@ -130,6 +130,7 @@
         _scanView = [[SGQRCodeScanView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         _scanView.scanImageName = @"SGQRCode.bundle/QRCodeScanLineGrid";
         _scanView.scanAnimationStyle = ScanAnimationStyleGrid;
+        _scanView.cornerLocation = CornerLoactionOutside;
         _scanView.cornerColor = [UIColor orangeColor];
     }
     return _scanView;
