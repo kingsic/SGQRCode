@@ -281,7 +281,11 @@
 - (UIImageView *)scanningline {
     if (!_scanningline) {
         _scanningline = [[UIImageView alloc] init];
-        _scanningline.image = [UIImage SG_imageNamed:self.scanImageName inBundle:[NSBundle bundleForClass:[self class]]];
+        UIImage *imageScanningline=[UIImage SG_imageNamed:self.scanImageName inBundle:[NSBundle bundleForClass:[self class]]];
+        if (!imageScanningline) {
+            imageScanningline=[UIImage imageNamed:self.scanImageName];
+        }
+        _scanningline.image = imageScanningline;
     }
     return _scanningline;
 }
