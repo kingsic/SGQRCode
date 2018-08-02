@@ -26,9 +26,9 @@
     
     if (_stop) {
         [obtain startRunningWithBefore:^{
-            // 在此可添加加在提示HUD
+            // 在此可添加 HUD
         } completion:^{
-            // 在此可移除加在提示HUD
+            // 在此可移除 HUD
         }];
     }
 }
@@ -72,9 +72,9 @@
     
     [obtain establishQRCodeObtainScanWithController:self configure:configure];
     [obtain startRunningWithBefore:^{
-        // 在此可添加加在提示HUD
+        // 在此可添加 HUD
     } completion:^{
-        // 在此可移除加在提示HUD
+        // 在此可移除 HUD
     }];
     [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
         if (result) {

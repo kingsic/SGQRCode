@@ -104,7 +104,7 @@
         if (before) {
             before();
         }
-        [_captureSession startRunning];
+        [self.captureSession startRunning];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
                 completion();
@@ -114,11 +114,11 @@
 }
 - (void)stopRunning {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [_captureSession stopRunning];
+        [self.captureSession stopRunning];
     });
 }
 
-#pragma mark - - - AVCaptureMetadataOutputObjectsDelegate
+#pragma mark - - AVCaptureMetadataOutputObjectsDelegate 的方法
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     NSString *resultString = nil;
     if (metadataObjects != nil && metadataObjects.count > 0) {
@@ -129,7 +129,7 @@
         }
     }
 }
-#pragma mark - - - AVCaptureVideoDataOutputSampleBufferDelegate的方法
+#pragma mark - - AVCaptureVideoDataOutputSampleBufferDelegate 的方法
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     CFDictionaryRef metadataDict = CMCopyDictionaryOfAttachments(NULL,sampleBuffer, kCMAttachmentMode_ShouldPropagate);
     NSDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:(__bridge NSDictionary*)metadataDict];
@@ -232,17 +232,17 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
     [_controller presentViewController:imagePicker animated:YES completion:nil];
 }
 
+#pragma mark - - UIImagePickerControllerDelegate 的方法
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [_controller dismissViewControllerAnimated:YES completion:nil];
     if (_albumDidCancelImagePickerControllerBlock) {
         _albumDidCancelImagePickerControllerBlock(self);
     }
 }
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    // 图片处理：避免选取图片尺寸过大而引起程序崩溃
     UIImage *image = [UIImage SG_imageScaleWithImage:info[UIImagePickerControllerOriginalImage]];
-    // CIDetector(CIDetector 可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
-    // 声明一个 CIDetector，并设定识别类型 CIDetectorTypeQRCode
+    // 创建 CIDetector，并设定识别类型：CIDetectorTypeQRCode
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
     // 取得识别结果
     NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];

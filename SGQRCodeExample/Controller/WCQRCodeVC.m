@@ -28,9 +28,9 @@
     /// 二维码开启方法
     [obtain startRunningWithBefore:^{
         // 微信并没有处理
-        // 在此可添加加在提示HUD
+        // 在此可添加 HUD
     } completion:^{
-        // 在此可移除加在提示HUD
+        // 在此可移除 HUD
     }];
 }
 

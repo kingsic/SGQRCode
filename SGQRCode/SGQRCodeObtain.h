@@ -37,9 +37,8 @@ typedef void(^SGQRCodeObtainAlbumResultBlock)(SGQRCodeObtain *obtain, NSString *
 /** 播放音效文件 */
 - (void)playSoundName:(NSString *)name;
 
-
 #pragma mark - - 相册中读取二维码相关方法
-/** 获取相册授权方法 */
+/** 创建相册并获取相册授权方法 */
 - (void)establishAuthorizationQRCodeObtainAlbumWithController:(UIViewController *)controller;
 /** 判断相册访问权限是否授权 */
 @property (nonatomic, assign) BOOL isPHAuthorization;
