@@ -42,6 +42,4 @@
 /** 刷新数据 */
 - (void)reloadData;
 
-
 @end
-

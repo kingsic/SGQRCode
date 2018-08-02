@@ -145,4 +145,3 @@ static CGFloat const progressViewHeight = 2;
 
 
 @end
-

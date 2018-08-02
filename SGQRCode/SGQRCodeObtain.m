@@ -60,7 +60,6 @@
     
     // 设置扫描范围（每一个取值0～1，以屏幕右上角为坐标原点）
     // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）
-    // metadataOutput.rectOfInterest = CGRectMake(0.05, 0.2, 0.7, 0.6);
     if (configure.rectOfInterest.origin.x == 0 && configure.rectOfInterest.origin.y == 0 && configure.rectOfInterest.size.width == 0 && configure.rectOfInterest.size.height == 0) {
     } else {
         metadataOutput.rectOfInterest = configure.rectOfInterest;
@@ -165,7 +164,6 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
     if (controller == nil && _controller == nil) {
         @throw [NSException exceptionWithName:@"SGQRCode" reason:@"SGQRCodeObtain 中 establishAuthorizationQRCodeObtainAlbumWithController: 方法的 controller 参数不能为空" userInfo:nil];
     }
-    
     if (_controller == nil) {
         _controller = controller;
     }
@@ -251,7 +249,6 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
             }
         }];
         return;
-        
     } else {
         for (int index = 0; index < [features count]; index ++) {
             CIQRCodeFeature *feature = [features objectAtIndex:index];
