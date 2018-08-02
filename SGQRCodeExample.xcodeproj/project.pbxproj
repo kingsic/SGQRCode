@@ -10,7 +10,6 @@
 		180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E36081F01F33E00A53E7A /* ScanSuccessJumpVC.m */; };
 		180E36101F01F33E00A53E7A /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E360A1F01F33E00A53E7A /* WCQRCodeVC.m */; };
 		180E36111F01F33E00A53E7A /* SGWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E360D1F01F33E00A53E7A /* SGWebView.m */; };
-		183A1A351E893B3800186578 /* UIImage+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A1A341E893B3800186578 /* UIImage+SGQRCode.m */; };
 		18479ECF1E80F92500F7F225 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479ECE1E80F92500F7F225 /* main.m */; };
 		18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479ED11E80F92500F7F225 /* AppDelegate.m */; };
 		18479EDA1E80F92500F7F225 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18479ED91E80F92500F7F225 /* Assets.xcassets */; };
@@ -50,8 +49,6 @@
 		180E360A1F01F33E00A53E7A /* WCQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
 		180E360C1F01F33E00A53E7A /* SGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebView.h; sourceTree = "<group>"; };
 		180E360D1F01F33E00A53E7A /* SGWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebView.m; sourceTree = "<group>"; };
-		183A1A331E893B3800186578 /* UIImage+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SGQRCode.h"; sourceTree = "<group>"; };
-		183A1A341E893B3800186578 /* UIImage+SGQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SGQRCode.m"; sourceTree = "<group>"; };
 		18479ECA1E80F92500F7F225 /* SGQRCodeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGQRCodeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18479ECE1E80F92500F7F225 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18479ED01E80F92500F7F225 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -125,15 +122,6 @@
 				180E360D1F01F33E00A53E7A /* SGWebView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		183A1A321E893B0600186578 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				183A1A331E893B3800186578 /* UIImage+SGQRCode.h */,
-				183A1A341E893B3800186578 /* UIImage+SGQRCode.m */,
-			);
-			path = Category;
 			sourceTree = "<group>";
 		};
 		18479EC11E80F92500F7F225 = {
@@ -211,7 +199,6 @@
 				8D192724210DFEE7002AE63A /* SGQRCodeObtain.m */,
 				8D192726210DFEE7002AE63A /* SGQRCodeScanView.h */,
 				8D192725210DFEE7002AE63A /* SGQRCodeScanView.m */,
-				183A1A321E893B0600186578 /* Category */,
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
 			);
 			path = SGQRCode;
@@ -361,7 +348,6 @@
 				8D19272B210DFEE7002AE63A /* SGQRCodeObtainConfigure.m in Sources */,
 				180E36111F01F33E00A53E7A /* SGWebView.m in Sources */,
 				18479ECF1E80F92500F7F225 /* main.m in Sources */,
-				183A1A351E893B3800186578 /* UIImage+SGQRCode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

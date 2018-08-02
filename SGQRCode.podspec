@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
 s.name         = 'SGQRCode'
-s.version      = '2.5.1'
+s.version      = '2.5.2'
 s.summary      = 'iOS native two-dimensional code scanning'
 s.homepage     = 'https://github.com/kingsic/SGQRCode'
 s.license      = 'Apache-2.0'

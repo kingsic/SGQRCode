@@ -13,7 +13,6 @@
 
 #import "SGQRCodeObtain.h"
 #import "SGQRCodeObtainConfigure.h"
-#import "UIImage+SGQRCode.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
 
@@ -240,11 +239,10 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
     }
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    // 图片处理：避免选取图片尺寸过大而引起程序崩溃
-    UIImage *image = [UIImage SG_imageScaleWithImage:info[UIImagePickerControllerOriginalImage]];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     // 创建 CIDetector，并设定识别类型：CIDetectorTypeQRCode
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
-    // 取得识别结果
+    // 获取识别结果
     NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
     if (features.count == 0) {
         [_controller dismissViewControllerAnimated:YES completion:^{

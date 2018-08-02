@@ -12,7 +12,6 @@
 //
 
 #import "SGQRCodeScanView.h"
-#import "UIImage+SGQRCode.h"
 
 /** 扫描内容的 W 值 */
 #define scanBorderW 0.7 * self.frame.size.width
@@ -51,7 +50,7 @@
     _cornerWidth = 2.0;
     _backgroundAlpha = 0.5;
     _animationTimeInterval = 0.02;
-    _scanImageName = @"SGQRCode.bundle/QRCodeScanLine";
+    _scanImageName = @"QRCodeScanLine";
 }
 
 - (UIView *)contentView {
@@ -213,8 +212,8 @@
 - (void)removeTimer {
     [self.timer invalidate];
     self.timer = nil;
-    [self.scanningline removeFromSuperview];
-    self.scanningline = nil;
+    [_scanningline removeFromSuperview];
+    _scanningline = nil;
 }
 #pragma mark - - - 执行定时器方法
 - (void)beginRefreshUI {
@@ -281,11 +280,13 @@
 - (UIImageView *)scanningline {
     if (!_scanningline) {
         _scanningline = [[UIImageView alloc] init];
-        UIImage *imageScanningline = [UIImage SG_imageNamed:self.scanImageName inBundle:[NSBundle bundleForClass:[self class]]];
-        if (!imageScanningline) {
-            imageScanningline = [UIImage imageNamed:self.scanImageName];
+        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"SGQRCode" withExtension:@"bundle"];
+        NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
+        UIImage *image = [UIImage imageNamed:self.scanImageName inBundle:bundle compatibleWithTraitCollection:nil];
+        if (!image) {
+            image = [UIImage imageNamed:self.scanImageName];
         }
-        _scanningline.image = imageScanningline;
+        _scanningline.image = image;
     }
     return _scanningline;
 }

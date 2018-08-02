@@ -114,13 +114,13 @@
         } else {
             if ([result hasPrefix:@"http"]) {
                 ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-                jumpVC.comeFromVC = ScanSuccessJumpComeFromWB;
+                jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
                 jumpVC.jump_URL = result;
                 [weakSelf.navigationController pushViewController:jumpVC animated:YES];
                 
             } else {
                 ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-                jumpVC.comeFromVC = ScanSuccessJumpComeFromWB;
+                jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
                 jumpVC.jump_bar_code = result;
                 [weakSelf.navigationController pushViewController:jumpVC animated:YES];
             }

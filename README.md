@@ -26,7 +26,7 @@
 
 ## SGQRCode 集成
 
-* 1、CocoaPods 导入 pod 'SGQRCode', '~> 2.5.1'
+* 1、CocoaPods 导入 pod 'SGQRCode', '~> 2.5.2'
 
 * 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 
@@ -116,11 +116,9 @@
 
 * 2018-07-29  ：v2.5.0 版本升级【Block 取代 delegate 以及代码整合与优化】
 
-* 2018-08-02  ：v2.5.1 二维码扫描需手动开启以及对分类中图片缩放代码优化处理
+* 2018-08-02  ：v2.5.2 二维码扫描需手动开启以及优化从相册中识别二维码
 
 
 ## Concluding remarks
 
 * 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGQRCode/issues) 或 kingsic@126.com 邮箱联系我
-
-* 感谢邮箱号为：notifications@github.com 的这位朋友提供的从相册中读取二维码照片的优化方案
