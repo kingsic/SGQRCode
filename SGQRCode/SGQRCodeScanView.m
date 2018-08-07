@@ -280,7 +280,7 @@
 - (UIImageView *)scanningline {
     if (!_scanningline) {
         _scanningline = [[UIImageView alloc] init];
-        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"SGQRCode" withExtension:@"bundle"];
+        NSURL *bundleURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"SGQRCode" withExtension:@"bundle"];
         NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
         UIImage *image = [UIImage imageNamed:self.scanImageName inBundle:bundle compatibleWithTraitCollection:nil];
         if (!image) {
