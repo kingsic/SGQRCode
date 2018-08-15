@@ -26,7 +26,7 @@
 
 ## SGQRCode 集成
 
-* 1、CocoaPods 导入 pod 'SGQRCode', '~> 2.5.2'
+* 1、CocoaPods 导入 pod 'SGQRCode', '~> 2.5.3'
 
 * 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 
@@ -115,6 +115,8 @@
 * 2018-07-29  ：v2.5.0 版本升级【Block 取代 delegate 以及代码整合与优化】
 
 * 2018-08-02  ：v2.5.2 二维码扫描需手动开启以及优化从相册中识别二维码
+
+* 2018-08-15  ：v2.5.3 开启扫描回调方法及停止扫描方法内部优化处理
 
 
 ## Concluding remarks

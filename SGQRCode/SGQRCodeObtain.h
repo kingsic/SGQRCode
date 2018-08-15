@@ -32,8 +32,9 @@ typedef void(^SGQRCodeObtainAlbumResultBlock)(SGQRCodeObtain *obtain, NSString *
 - (void)setBlockWithQRCodeObtainScanBrightness:(SGQRCodeObtainScanBrightnessBlock)block;
 /** 开启扫描回调方法 */
 - (void)startRunningWithBefore:(void (^)(void))before completion:(void (^)(void))completion;
-/** 停止扫描 */
+/** 停止扫描方法 */
 - (void)stopRunning;
+
 /** 播放音效文件 */
 - (void)playSoundName:(NSString *)name;
 

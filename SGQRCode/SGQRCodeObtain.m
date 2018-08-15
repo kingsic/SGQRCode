@@ -13,7 +13,6 @@
 
 #import "SGQRCodeObtain.h"
 #import "SGQRCodeObtainConfigure.h"
-#import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
 
 @interface SGQRCodeObtain () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -98,10 +97,10 @@
 }
 
 - (void)startRunningWithBefore:(void (^)(void))before completion:(void (^)(void))completion {
+    if (before) {
+        before();
+    }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        if (before) {
-            before();
-        }
         [self.captureSession startRunning];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
@@ -111,9 +110,7 @@
     });
 }
 - (void)stopRunning {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [self.captureSession stopRunning];
-    });
+    [self.captureSession stopRunning];
 }
 
 #pragma mark - - AVCaptureMetadataOutputObjectsDelegate 的方法

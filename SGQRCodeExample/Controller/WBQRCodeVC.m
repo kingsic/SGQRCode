@@ -10,6 +10,7 @@
 #import "SGQRCode.h"
 #import "ScanSuccessJumpVC.h"
 #import "SGQRCodeScanView.h"
+#import "MBProgressHUD+SGQRCode.h"
 
 @interface WBQRCodeVC () {
     SGQRCodeObtain *obtain;
@@ -72,9 +73,9 @@
     
     [obtain establishQRCodeObtainScanWithController:self configure:configure];
     [obtain startRunningWithBefore:^{
-        // 在此可添加 HUD
+        [MBProgressHUD SG_showMBProgressHUDWithModifyStyleMessage:@"正在加载..." toView:weakSelf.view];
     } completion:^{
-        // 在此可移除 HUD
+        [MBProgressHUD SG_hideHUDForView:weakSelf.view];
     }];
     [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
         if (result) {

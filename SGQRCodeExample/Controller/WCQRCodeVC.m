@@ -9,6 +9,7 @@
 #import "WCQRCodeVC.h"
 #import "SGQRCode.h"
 #import "ScanSuccessJumpVC.h"
+#import "MBProgressHUD+SGQRCode.h"
 
 @interface WCQRCodeVC () {
     SGQRCodeObtain *obtain;
@@ -26,18 +27,14 @@
     [super viewWillAppear:animated];
 
     /// 二维码开启方法
-    [obtain startRunningWithBefore:^{
-        // 微信并没有处理
-        // 在此可添加 HUD
-    } completion:^{
-        // 在此可移除 HUD
-    }];
+    [obtain startRunningWithBefore:nil completion:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self.scanView addTimer];
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -73,13 +70,17 @@
     [obtain establishQRCodeObtainScanWithController:self configure:configure];
     [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
         if (result) {
+            [MBProgressHUD SG_showMBProgressHUDWithModifyStyleMessage:@"正在处理..." toView:weakSelf.view];
             [obtain stopRunning];
             [obtain playSoundName:@"SGQRCode.bundle/sound.caf"];
             
             ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
             jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
             jumpVC.jump_URL = result;
-            [weakSelf.navigationController pushViewController:jumpVC animated:YES];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD SG_hideHUDForView:weakSelf.view];
+                [weakSelf.navigationController pushViewController:jumpVC animated:YES];
+            });
         }
     }];
     [obtain setBlockWithQRCodeObtainScanBrightness:^(SGQRCodeObtain *obtain, CGFloat brightness) {
@@ -109,25 +110,28 @@
         [weakSelf.view addSubview:weakSelf.scanView];
     }];
     [obtain setBlockWithQRCodeObtainAlbumResult:^(SGQRCodeObtain *obtain, NSString *result) {
+        [MBProgressHUD SG_showMBProgressHUDWithModifyStyleMessage:@"正在处理..." toView:weakSelf.view];
         if (result == nil) {
             NSLog(@"暂未识别出二维码");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD SG_hideHUDForView:weakSelf.view];
+                [MBProgressHUD SG_showMBProgressHUDWithOnlyMessage:@"未发现二维码/条形码" delayTime:1.0];
+            });
         } else {
+            ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+            jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
             if ([result hasPrefix:@"http"]) {
-                ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-                jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
                 jumpVC.jump_URL = result;
-                [weakSelf.navigationController pushViewController:jumpVC animated:YES];
-                
             } else {
-                ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-                jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
                 jumpVC.jump_bar_code = result;
-                [weakSelf.navigationController pushViewController:jumpVC animated:YES];
             }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD SG_hideHUDForView:weakSelf.view];
+                [weakSelf.navigationController pushViewController:jumpVC animated:YES];
+            });
         }
     }];
 }
-
 
 - (SGQRCodeScanView *)scanView {
     if (!_scanView) {

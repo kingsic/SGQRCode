@@ -23,6 +23,9 @@
 		8D19272A210DFEE7002AE63A /* SGQRCodeScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D192725210DFEE7002AE63A /* SGQRCodeScanView.m */; };
 		8D19272B210DFEE7002AE63A /* SGQRCodeObtainConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D192728210DFEE7002AE63A /* SGQRCodeObtainConfigure.m */; };
 		8D19272E210DFF88002AE63A /* WBQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D19272D210DFF88002AE63A /* WBQRCodeVC.m */; };
+		8D1E052F212442610093EA25 /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E052C212442610093EA25 /* MBProgressHUD+SGQRCode.m */; };
+		8D1E0530212442610093EA25 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8D1E052E212442610093EA25 /* MBProgressHUD.bundle */; };
+		8D1E0536212443E00093EA25 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E0535212443E00093EA25 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,11 @@
 		8D192728210DFEE7002AE63A /* SGQRCodeObtainConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtainConfigure.m; sourceTree = "<group>"; };
 		8D19272C210DFF87002AE63A /* WBQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBQRCodeVC.h; sourceTree = "<group>"; };
 		8D19272D210DFF88002AE63A /* WBQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBQRCodeVC.m; sourceTree = "<group>"; };
+		8D1E052C212442610093EA25 /* MBProgressHUD+SGQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+SGQRCode.m"; sourceTree = "<group>"; };
+		8D1E052D212442610093EA25 /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
+		8D1E052E212442610093EA25 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		8D1E0534212443E00093EA25 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		8D1E0535212443E00093EA25 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +162,7 @@
 				18479F071E80F97700F7F225 /* ViewController.m */,
 				180E36041F01F33E00A53E7A /* Controller */,
 				180E360B1F01F33E00A53E7A /* View */,
+				8D1E052A212442610093EA25 /* ThirdParty */,
 				18479F1E1E80F9CA00F7F225 /* Main.storyboard */,
 				18479ED91E80F92500F7F225 /* Assets.xcassets */,
 				18479EDB1E80F92500F7F225 /* LaunchScreen.storyboard */,
@@ -202,6 +211,26 @@
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
 			);
 			path = SGQRCode;
+			sourceTree = "<group>";
+		};
+		8D1E052A212442610093EA25 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				8D1E052B212442610093EA25 /* MBProgressHUD */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		8D1E052B212442610093EA25 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				8D1E0534212443E00093EA25 /* MBProgressHUD.h */,
+				8D1E0535212443E00093EA25 /* MBProgressHUD.m */,
+				8D1E052D212442610093EA25 /* MBProgressHUD+SGQRCode.h */,
+				8D1E052C212442610093EA25 /* MBProgressHUD+SGQRCode.m */,
+				8D1E052E212442610093EA25 /* MBProgressHUD.bundle */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +341,7 @@
 			files = (
 				18479EDD1E80F92500F7F225 /* LaunchScreen.storyboard in Resources */,
 				18479EDA1E80F92500F7F225 /* Assets.xcassets in Resources */,
+				8D1E0530212442610093EA25 /* MBProgressHUD.bundle in Resources */,
 				18479F1A1E80F98F00F7F225 /* SGQRCode.bundle in Resources */,
 				18479F1F1E80F9CA00F7F225 /* Main.storyboard in Resources */,
 			);
@@ -344,6 +374,8 @@
 				8D19272A210DFEE7002AE63A /* SGQRCodeScanView.m in Sources */,
 				180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */,
 				180E36101F01F33E00A53E7A /* WCQRCodeVC.m in Sources */,
+				8D1E052F212442610093EA25 /* MBProgressHUD+SGQRCode.m in Sources */,
+				8D1E0536212443E00093EA25 /* MBProgressHUD.m in Sources */,
 				18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */,
 				8D19272B210DFEE7002AE63A /* SGQRCodeObtainConfigure.m in Sources */,
 				180E36111F01F33E00A53E7A /* SGWebView.m in Sources */,
