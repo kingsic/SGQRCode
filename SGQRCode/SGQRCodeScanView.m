@@ -275,15 +275,19 @@
 - (UIImageView *)scanningline {
     if (!_scanningline) {
         _scanningline = [[UIImageView alloc] init];
-        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"SGQRCode" withExtension:@"bundle"];
-        NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
-        UIImage *image = [UIImage imageNamed:self.scanImageName inBundle:bundle compatibleWithTraitCollection:nil];
+        NSURL *bundleURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"SGQRCode" withExtension:@"bundle"];
+        NSBundle *bundle = bundleURL ? [NSBundle bundleWithURL:bundleURL] : nil;
+        UIImage *image = bundle ? [UIImage imageNamed:self.scanImageName inBundle:bundle compatibleWithTraitCollection:nil] : nil;
         if (!image) {
             image = [UIImage imageNamed:self.scanImageName];
         }
         _scanningline.image = image;
     }
     return _scanningline;
+}
+
+- (UIImage *)scanImage{
+    return self.scanningline.image;
 }
 
 #pragma mark - - - set
@@ -293,6 +297,10 @@
 
 - (void)setScanImageName:(NSString *)scanImageName {
     _scanImageName = scanImageName;
+}
+
+- (void)setScanImage:(UIImage *)scanImage{
+    self.scanningline.image = scanImage;
 }
 
 - (void)setBorderColor:(UIColor *)borderColor {

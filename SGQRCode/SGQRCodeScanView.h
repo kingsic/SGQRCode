@@ -29,6 +29,9 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) ScanAnimationStyle scanAnimationStyle;
 /** 扫描线名 */
 @property (nonatomic, copy) NSString *scanImageName;
+/** 扫描线图片 */
+@property (nonatomic, strong) UIImage *scanImage;
+
 /** 边框颜色，默认白色 */
 @property (nonatomic, strong) UIColor *borderColor;
 /** 边角位置，默认 CornerLoactionDefault */
