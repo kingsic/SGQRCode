@@ -275,8 +275,15 @@
 - (UIImageView *)scanningline {
     if (!_scanningline) {
         _scanningline = [[UIImageView alloc] init];
-        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"SGQRCode" withExtension:@"bundle"];
-        NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
+        
+        /// 静态库 url 的获取
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"SGQRCode" withExtension:@"bundle"];
+        if (!url) {
+            /// 动态库 url 的获取
+            url = [[NSBundle bundleForClass:[self class]] URLForResource:@"SGQRCode" withExtension:@"bundle"];
+        }
+        NSBundle *bundle = [NSBundle bundleWithURL:url];
+        
         UIImage *image = [UIImage imageNamed:self.scanImageName inBundle:bundle compatibleWithTraitCollection:nil];
         if (!image) {
             image = [UIImage imageNamed:self.scanImageName];

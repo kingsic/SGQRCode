@@ -139,8 +139,13 @@
 }
 
 - (void)playSoundName:(NSString *)name {
-    NSString *audioFile = [[NSBundle mainBundle] pathForResource:name ofType:nil];
-    NSURL *fileUrl = [NSURL fileURLWithPath:audioFile];
+    /// 静态库 path 的获取
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:nil];
+    if (!path) {
+        /// 动态库 path 的获取
+        path = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
+    }
+    NSURL *fileUrl = [NSURL fileURLWithPath:path];
     
     SystemSoundID soundID = 0;
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)(fileUrl), &soundID);

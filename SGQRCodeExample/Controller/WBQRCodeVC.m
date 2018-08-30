@@ -129,6 +129,8 @@
 - (SGQRCodeScanView *)scanView {
     if (!_scanView) {
         _scanView = [[SGQRCodeScanView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        // 静态库加载 bundle 里面的资源使用 SGQRCode.bundle/QRCodeScanLineGrid
+        // 动态库加载直接使用 QRCodeScanLineGrid
         _scanView.scanImageName = @"SGQRCode.bundle/QRCodeScanLineGrid";
         _scanView.scanAnimationStyle = ScanAnimationStyleGrid;
         _scanView.cornerLocation = CornerLoactionOutside;
