@@ -8,8 +8,6 @@
 
 * v2.5.0 Block 取代 Delegate（无须设置代理、遵守协议；代码管理更加简洁舒适）
 
-* SGQRCode 技术交流群：825339547
-
 
 ## 主要内容的介绍
 
@@ -121,6 +119,9 @@
 * 2018-08-30  ：v2.5.4 解决 Podfile 配置 use_frameworks! 情况下，资源找不到而导致程序崩溃问题
 
 
-## Concluding remarks
+## Author
 
-* 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGQRCode/issues) 或 kingsic@126.com 邮箱联系我
+* Email：kingsic@126.com
+
+* QQ群：(付费群)<br>
+![](https://github.com/kingsic/Kar98k/blob/master/Source/QQGroup_qrcode.png)
