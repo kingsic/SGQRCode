@@ -2,7 +2,7 @@
 # SGQRCode
 
 
-#### 温馨提示：v3.0.0 Block 取代 Delegate
+*  `温馨提示：v3.0.0 Block 取代 Delegate`
 
 
 ## 主要内容的介绍
@@ -22,7 +22,7 @@
 
 ## SGQRCode 集成
 
-* 1、CocoaPods 导入 pod 'SGQRCode', '~> 2.5.4'
+* 1、CocoaPods 导入 pod 'SGQRCode', '~> 3.0.0'
 
 * 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 

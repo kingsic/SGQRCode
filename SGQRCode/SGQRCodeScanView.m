@@ -193,7 +193,6 @@
 
     } else {
         [self addSubview:self.scanningline];
-
         scanninglineW = scanBorderW;
         scanninglineH = 12;
         scanninglineX = scanBorderX;

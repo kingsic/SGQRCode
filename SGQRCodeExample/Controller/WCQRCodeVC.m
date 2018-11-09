@@ -35,7 +35,6 @@
     [self.scanView addTimer];
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.scanView removeTimer];
