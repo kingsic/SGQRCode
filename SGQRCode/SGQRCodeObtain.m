@@ -188,7 +188,7 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
             }];
         } else if (status == PHAuthorizationStatusAuthorized) { // 用户允许当前应用访问相册
             self.isPHAuthorization = YES;
-            if (_configure.openLog == YES) {
+            if (self.configure.openLog == YES) {
                 NSLog(@"用户允许访问相册权限");
             }
             [self P_enterImagePickerController];

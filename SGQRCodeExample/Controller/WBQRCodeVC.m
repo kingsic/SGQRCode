@@ -26,11 +26,7 @@
     [super viewWillAppear:animated];
     
     if (_stop) {
-        [obtain startRunningWithBefore:^{
-            // 在此可添加 HUD
-        } completion:^{
-            // 在此可移除 HUD
-        }];
+        [obtain startRunningWithBefore:nil completion:nil];
     }
 }
 

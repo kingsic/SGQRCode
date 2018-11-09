@@ -1,6 +1,6 @@
 //
 //  SGQRCode.h
-//  Version 2.5.4
+//  Version 3.0.0
 //  https://github.com/kingsic/SGQRCode
 //
 //  Created by kingsic on 2016/8/16.
