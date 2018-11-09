@@ -4,9 +4,7 @@
 
 ## 前沿
 
-* v2.0.0 使用继承的思想进行二维码扫描管理（只需接收通知获取到数据即可；如果你想使用继承，那么可在 releases 中下载 v2.0.0 版本）；之后使用封装的思想进行二维码扫描管理（由于使用继承，设备输入流、数据输出流、会话对象、预览图层及代理方法的代码全部书写在控制器中，导致了代码的可读性较差以及耦合性较高）
-
-* v2.5.0 Block 取代 Delegate（无须设置代理、遵守协议；代码管理更加简洁舒适）
+#### 温馨提示：v3.0.0 Block 取代 Delegate；（无须设置代理、遵守协议；代码管理更加简洁舒适）
 
 
 ## 主要内容的介绍
@@ -33,7 +31,7 @@
 
 ## 代码介绍 (详细使用，请参考 Demo)
 
-#### 1、在 info.plist 中添加以下字段
+#### 1、在 info.plist 中添加以下字段（iOS 10 之后需添加的字段）
 
 * `NSCameraUsageDescription (相机权限访问)`<br>
 
@@ -108,15 +106,9 @@
 
 * 2017-08-23 ：v2.1.6 扫描界面使用 UIBezierPath 布局且可根据不同需求实现自定义（扫描线条以及网格样式）
 
-* 2018-02-08  ：v2.2.0 新增新浪微博示例、新增从相册中读取二维码失败回调函数以及分类名称的更换
+* 2018-02-08 ：v2.2.0 新增新浪微博示例、新增从相册中读取二维码失败回调函数以及分类名称的更换
 
-* 2018-07-29  ：v2.5.0 版本升级【Block 取代 Delegate 以及代码整合与优化】
-
-* 2018-08-02  ：v2.5.2 二维码扫描需手动开启以及优化从相册中识别二维码
-
-* 2018-08-15  ：v2.5.3 开启扫描回调方法及停止扫描方法内部优化处理
-
-* 2018-08-30  ：v2.5.4 解决 Podfile 配置 use_frameworks! 情况下，资源找不到而导致程序崩溃问题
+* 2018-11-09 ：v3.0.0 版本升级 Block 取代 Delegate（具体相关信息介绍请在 [releases](https://github.com/kingsic/SGQRCode/releases) 中查看）
 
 
 ## Author
@@ -125,3 +117,7 @@
 
 * QQ群：(付费群)<br>
 ![](https://github.com/kingsic/Kar98k/blob/master/Source/QQGroup_qrcode.png)
+
+
+## License
+SGQRCode is released under the Apache License 2.0. See [LICENSE](https://github.com/kingsic/SGQRCode/blob/master/LICENSE) for details.
