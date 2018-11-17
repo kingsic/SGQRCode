@@ -94,6 +94,4 @@
     self.title = webView.navigationItemTitle;
 }
 
-
 @end
-

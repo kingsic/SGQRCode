@@ -41,20 +41,20 @@
 ```Objective-C
     __weak typeof(self) weakSelf = self;
 
-    /// 扫描二维码
+    /// 创建二维码扫描
     SGQRCodeObtainConfigure *configure = [SGQRCodeObtainConfigure QRCodeObtainConfigure];
     [obtain establishQRCodeObtainScanWithController:self configure:configure];
     // 二维码扫描回调方法
     [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
         <#code#>
     }];
-    // 二维码开启方法: 需手动开启扫描
+    // 二维码扫描开启方法: 需手动开启
     [obtain startRunningWithBefore:^{
         // 在此可添加 HUD
     } completion:^{
         // 在此可移除 HUD
     }];
-    // 根据外界光线值判断是否自动打开手电筒
+    // 根据外界光线强弱值判断是否自动开启手电筒
     [obtain setBlockWithQRCodeObtainScanBrightness:^(SGQRCodeObtain *obtain, CGFloat brightness) {
         <#code#>
     }];

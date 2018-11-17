@@ -325,5 +325,4 @@
     _animationTimeInterval = animationTimeInterval;
 }
 
-
 @end

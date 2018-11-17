@@ -9,7 +9,6 @@
 #import "WBQRCodeVC.h"
 #import "SGQRCode.h"
 #import "ScanSuccessJumpVC.h"
-#import "SGQRCodeScanView.h"
 #import "MBProgressHUD+SGQRCode.h"
 
 @interface WBQRCodeVC () {
@@ -156,6 +155,5 @@
     }
     return _promptLabel;
 }
-
 
 @end
