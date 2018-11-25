@@ -7,6 +7,8 @@
 
 ## 主要内容的介绍
 
+* `生成二维码`<br>
+
 * `扫描二维码`<br>
 
 * `从相册中读取二维码`<br>
@@ -35,7 +37,6 @@
 
 * `NSPhotoLibraryUsageDescription (相册权限访问)`<br>
 
-
 #### 2、二维码扫描
 
 ```Objective-C
@@ -59,14 +60,22 @@
         <#code#>
     }];
     
-    
     /// 从相册中读取二维码    
     [obtain establishAuthorizationQRCodeObtainAlbumWithController:self];
     // 从相册中读取图片上的二维码回调方法
     [obtain setBlockWithQRCodeObtainAlbumResult:^(SGQRCodeObtain *obtain, NSString *result) {
         <#code#>
     }];
-}
+```
+
+#### 3、二维码生成
+
+```Objective-C
+    /// 常规二维码
+    _imageView.image = [SGQRCodeObtain generateQRCodeWithData:@"https://github.com/kingsic" size:size];
+    
+    /// 带 logo 的二维码
+    _imageView.image = [SGQRCodeObtain generateQRCodeWithData:@"https://github.com/kingsic" size:size logoImage:logoImage ratio:ratio];
 ```
 
 

@@ -39,7 +39,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat cornerWidth;
 /** 扫描区周边颜色的 alpha 值，默认 0.2f */
 @property (nonatomic, assign) CGFloat backgroundAlpha;
-/** 扫描线动画时间，默认 0.02 */
+/** 扫描线动画时间，默认 0.02s */
 @property (nonatomic, assign) NSTimeInterval animationTimeInterval;
 
 /** 添加定时器 */
