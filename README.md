@@ -24,7 +24,7 @@
 
 ## SGQRCode 集成
 
-* 1、CocoaPods 导入 pod 'SGQRCode', '~> 3.0.0'
+* 1、CocoaPods 导入 pod 'SGQRCode', '~> 3.0.1'
 
 * 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 
@@ -116,6 +116,8 @@
 * 2018-02-08 ：v2.2.0 新增新浪微博示例、新增从相册中读取二维码失败回调函数以及分类名称的更换
 
 * 2018-11-09 ：v3.0.0 版本升级 Block 取代 Delegate（具体相关信息介绍请在 [releases](https://github.com/kingsic/SGQRCode/releases) 中查看）
+
+* 2018-11-27 ：v3.0.1 SGQRCodeObtain 类中新增添加二维码生成方法
 
 
 ## Author
