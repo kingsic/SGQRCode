@@ -2,7 +2,9 @@
 # SGQRCode
 
 
-*  `温馨提示：v3.0.0 Block 取代 Delegate`
+* `QQ群：429899752`
+
+* `温馨提示：v3.0.0 Block 取代 Delegate`
 
 
 ## 主要内容的介绍
@@ -117,15 +119,7 @@
 
 * 2018-11-09 ：v3.0.0 版本升级 Block 取代 Delegate（具体相关信息介绍请在 [releases](https://github.com/kingsic/SGQRCode/releases) 中查看）
 
-* 2018-11-27 ：v3.0.1 SGQRCodeObtain 类中新增添加二维码生成方法
-
-
-## Author
-
-* Email：kingsic@126.com
-
-* QQ群：(付费群)<br>
-![](https://github.com/kingsic/Kar98k/blob/master/Source/QQGroup_qrcode.png)
+* 2018-11-27 ：v3.0.1 SGQRCodeObtain 类中新增二维码生成方法
 
 
 ## License
