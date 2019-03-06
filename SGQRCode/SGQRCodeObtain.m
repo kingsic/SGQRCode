@@ -135,6 +135,14 @@
     _controller = controller;
     _configure = configure;
     
+    while (self.captureSession.inputs.count > 0) {
+        [self.captureSession removeInput:[self.captureSession.inputs firstObject]];
+    }
+    
+    while (self.captureSession.outputs.count > 0) {
+        [self.captureSession removeOutput:[self.captureSession.outputs firstObject]];
+    }
+    
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     // 1、捕获设备输入流
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
