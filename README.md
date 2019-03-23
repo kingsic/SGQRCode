@@ -2,7 +2,7 @@
 # SGQRCode
 
 
-* `QQ群：429899752`
+* `QQ群：825339547`
 
 * `温馨提示：v3.0.0 Block 取代 Delegate`
 
