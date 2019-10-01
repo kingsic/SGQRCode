@@ -202,12 +202,13 @@
 
 #pragma mark - - AVCaptureMetadataOutputObjectsDelegate 的方法
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    NSString *resultString = nil;
+    NSMutableArray *resultArr = [NSMutableArray array];
     if (metadataObjects != nil && metadataObjects.count > 0) {
-        AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
-        resultString = [obj stringValue];
+        for (id object in metadataObjects) {
+            [resultArr addObject:[object stringValue]];
+        }
         if (_scanResultBlock) {
-            _scanResultBlock(self, resultString);
+            _scanResultBlock(self, [resultArr copy]);
         }
     }
 }

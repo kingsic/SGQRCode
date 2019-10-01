@@ -72,7 +72,7 @@
     } completion:^{
         [MBProgressHUD SG_hideHUDForView:weakSelf.view];
     }];
-    [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
+    [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSArray *result) {
         if (result) {
             [obtain stopRunning];
             weakSelf.stop = YES;
@@ -80,7 +80,7 @@
 
             ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
             jumpVC.comeFromVC = ScanSuccessJumpComeFromWB;
-            jumpVC.jump_URL = result;
+            jumpVC.jump_URL = result[0];
             [weakSelf.navigationController pushViewController:jumpVC animated:YES];
         }
     }];

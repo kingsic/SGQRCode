@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class SGQRCodeObtainConfigure, SGQRCodeObtain;
 
-typedef void(^SGQRCodeObtainScanResultBlock)(SGQRCodeObtain *obtain, NSString *result);
+typedef void(^SGQRCodeObtainScanResultBlock)(SGQRCodeObtain *obtain, NSArray *result);
 typedef void(^SGQRCodeObtainScanBrightnessBlock)(SGQRCodeObtain *obtain, CGFloat brightness);
 typedef void(^SGQRCodeObtainAlbumDidCancelImagePickerControllerBlock)(SGQRCodeObtain *obtain);
 typedef void(^SGQRCodeObtainAlbumResultBlock)(SGQRCodeObtain *obtain, NSString *result);

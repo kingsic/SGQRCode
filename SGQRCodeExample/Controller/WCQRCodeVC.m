@@ -67,7 +67,7 @@
     SGQRCodeObtainConfigure *configure = [SGQRCodeObtainConfigure QRCodeObtainConfigure];
     configure.sampleBufferDelegate = YES;
     [obtain establishQRCodeObtainScanWithController:self configure:configure];
-    [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
+    [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSArray *result) {
         if (result) {
             [MBProgressHUD SG_showMBProgressHUDWithModifyStyleMessage:@"正在处理..." toView:weakSelf.view];
             [obtain stopRunning];
@@ -75,7 +75,7 @@
             
             ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
             jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
-            jumpVC.jump_URL = result;
+            jumpVC.jump_URL = result[0];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD SG_hideHUDForView:weakSelf.view];
                 [weakSelf.navigationController pushViewController:jumpVC animated:YES];
