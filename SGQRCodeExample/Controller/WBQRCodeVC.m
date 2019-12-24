@@ -128,7 +128,7 @@
         // 动态库加载直接使用 QRCodeScanLineGrid
         _scanView.scanImageName = @"SGQRCode.bundle/QRCodeScanLineGrid";
         _scanView.scanAnimationStyle = ScanAnimationStyleGrid;
-        _scanView.cornerLocation = CornerLoactionOutside;
+        _scanView.cornerLocation = CornerLocationOutside;
         _scanView.cornerColor = [UIColor orangeColor];
     }
     return _scanView;
