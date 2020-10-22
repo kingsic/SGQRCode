@@ -92,9 +92,13 @@
 
 * 若在使用 CocoaPods 安装第三方时，出现 [!] Unable to find a specification for SGQRCode 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
 
-* [iOS 从相册中读取条形码/二维码遇到的问题](https://blog.csdn.net/gaomingyangc/article/details/54017879)
+* 参考资料 [iOS 从相册中读取条形码/二维码遇到的问题](https://blog.csdn.net/gaomingyangc/article/details/54017879)
 
 * iOS 扫描支持 7.0+；从相册中读取二维码支持 8.0+；因此，CocoaPods 版本最低支持 8.0+
+
+* 关于条形码扫不出来的问题   
+    * 参考案例 WBQRCodeVC 中的代码，设置支持条形码扫描识别类型的属性 ‘metadataObjectTypes’ 即可
+    * WBQRCodeVC 中的代码，只是没有对扫描出来的条形码数字做业务逻辑处理而已，即扫描成功回调数据 ‘result’
 
 
 ## 更新介绍
