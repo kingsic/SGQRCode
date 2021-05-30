@@ -4,7 +4,7 @@
 
 * `QQ群：825339547`
 
-* `注意：3.5.0 版本进行了重构`
+* `注意：3.5.0 版本重构：API 功能的拓展及扫码识别优化`
 
 ## 主要内容的介绍
 
@@ -90,7 +90,7 @@
 
 * 参考资料 [iOS 从相册中读取条形码/二维码遇到的问题](https://blog.csdn.net/gaomingyangc/article/details/54017879)
 
-* iOS 扫描支持 7.0+；从相册中读取二维码支持 8.0+；因此，CocoaPods 版本最低支持 8.0+，本库由于内部方法的使用，最低支持系统 9.0
+* iOS 扫描支持 7.0+；从相册中读取二维码支持 8.0+；因此，CocoaPods 版本最低支持 8.0+，但本库由于内部方法的使用，最低支持系统是：9.0
 
 * 关于条形码扫不出来的问题   
     * 参考案例 WBQRCodeVC 中的代码，设置支持条形码扫描识别类型的属性 ‘metadataObjectTypes’ 即可
@@ -117,11 +117,11 @@
 
 * 2018-02-08 ：v2.2.0 新增新浪微博示例、新增从相册中读取二维码失败回调函数以及分类名称的更换
 
-* 2018-11-09 ：v3.0.0 版本升级 Block 取代 Delegate（具体相关信息介绍请在 [releases](https://github.com/kingsic/SGQRCode/releases) 中查看）
+* 2018-11-09 ：v3.0.0 版本升级 Block 取代 Delegate，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases) 中查看
 
 * 2018-11-27 ：v3.0.1 SGQRCodeObtain 类中新增二维码生成方法
 
-* 2021-05-30 ：v3.5.0 删除了配置类及管理类名的更换，API 的拓展及扫码优化
+* 2021-05-30 ：v3.5.0 版本重构：API 功能的拓展及扫码识别优化，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases/tag/3.5.0) 中查看
 
 
 ## License
