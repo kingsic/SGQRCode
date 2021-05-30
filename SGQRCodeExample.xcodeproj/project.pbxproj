@@ -19,13 +19,12 @@
 		18479F0B1E80F97700F7F225 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479F071E80F97700F7F225 /* ViewController.m */; };
 		18479F1A1E80F98F00F7F225 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18479F101E80F98F00F7F225 /* SGQRCode.bundle */; };
 		18479F1F1E80F9CA00F7F225 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18479F1E1E80F9CA00F7F225 /* Main.storyboard */; };
-		8D192729210DFEE7002AE63A /* SGQRCodeObtain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D192724210DFEE7002AE63A /* SGQRCodeObtain.m */; };
 		8D19272A210DFEE7002AE63A /* SGQRCodeScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D192725210DFEE7002AE63A /* SGQRCodeScanView.m */; };
-		8D19272B210DFEE7002AE63A /* SGQRCodeObtainConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D192728210DFEE7002AE63A /* SGQRCodeObtainConfigure.m */; };
 		8D19272E210DFF88002AE63A /* WBQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D19272D210DFF88002AE63A /* WBQRCodeVC.m */; };
 		8D1E052F212442610093EA25 /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E052C212442610093EA25 /* MBProgressHUD+SGQRCode.m */; };
 		8D1E0530212442610093EA25 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8D1E052E212442610093EA25 /* MBProgressHUD.bundle */; };
 		8D1E0536212443E00093EA25 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E0535212443E00093EA25 /* MBProgressHUD.m */; };
+		8D3DFEFE2662984800E02474 /* SGQRCodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3DFEFD2662984800E02474 /* SGQRCodeManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,12 +69,8 @@
 		18479F101E80F98F00F7F225 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
 		18479F111E80F98F00F7F225 /* SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCode.h; sourceTree = "<group>"; };
 		18479F1E1E80F9CA00F7F225 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		8D192723210DFEE6002AE63A /* SGQRCodeObtainConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtainConfigure.h; sourceTree = "<group>"; };
-		8D192724210DFEE7002AE63A /* SGQRCodeObtain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtain.m; sourceTree = "<group>"; };
 		8D192725210DFEE7002AE63A /* SGQRCodeScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanView.m; sourceTree = "<group>"; };
 		8D192726210DFEE7002AE63A /* SGQRCodeScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanView.h; sourceTree = "<group>"; };
-		8D192727210DFEE7002AE63A /* SGQRCodeObtain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtain.h; sourceTree = "<group>"; };
-		8D192728210DFEE7002AE63A /* SGQRCodeObtainConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtainConfigure.m; sourceTree = "<group>"; };
 		8D19272C210DFF87002AE63A /* WBQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBQRCodeVC.h; sourceTree = "<group>"; };
 		8D19272D210DFF88002AE63A /* WBQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBQRCodeVC.m; sourceTree = "<group>"; };
 		8D1E052C212442610093EA25 /* MBProgressHUD+SGQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+SGQRCode.m"; sourceTree = "<group>"; };
@@ -83,6 +78,8 @@
 		8D1E052E212442610093EA25 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		8D1E0534212443E00093EA25 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		8D1E0535212443E00093EA25 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		8D3DFEFC2662984800E02474 /* SGQRCodeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeManager.h; sourceTree = "<group>"; };
+		8D3DFEFD2662984800E02474 /* SGQRCodeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,10 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				18479F111E80F98F00F7F225 /* SGQRCode.h */,
-				8D192723210DFEE6002AE63A /* SGQRCodeObtainConfigure.h */,
-				8D192728210DFEE7002AE63A /* SGQRCodeObtainConfigure.m */,
-				8D192727210DFEE7002AE63A /* SGQRCodeObtain.h */,
-				8D192724210DFEE7002AE63A /* SGQRCodeObtain.m */,
+				8D3DFEFC2662984800E02474 /* SGQRCodeManager.h */,
+				8D3DFEFD2662984800E02474 /* SGQRCodeManager.m */,
 				8D192726210DFEE7002AE63A /* SGQRCodeScanView.h */,
 				8D192725210DFEE7002AE63A /* SGQRCodeScanView.m */,
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
@@ -295,7 +290,7 @@
 		18479EC21E80F92500F7F225 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = Sorgle;
 				TargetAttributes = {
 					18479EC91E80F92500F7F225 = {
@@ -316,7 +311,7 @@
 			};
 			buildConfigurationList = 18479EC51E80F92500F7F225 /* Build configuration list for PBXProject "SGQRCodeExample" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -370,14 +365,13 @@
 			files = (
 				8D19272E210DFF88002AE63A /* WBQRCodeVC.m in Sources */,
 				18479F0B1E80F97700F7F225 /* ViewController.m in Sources */,
-				8D192729210DFEE7002AE63A /* SGQRCodeObtain.m in Sources */,
 				8D19272A210DFEE7002AE63A /* SGQRCodeScanView.m in Sources */,
 				180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */,
 				180E36101F01F33E00A53E7A /* WCQRCodeVC.m in Sources */,
 				8D1E052F212442610093EA25 /* MBProgressHUD+SGQRCode.m in Sources */,
 				8D1E0536212443E00093EA25 /* MBProgressHUD.m in Sources */,
 				18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */,
-				8D19272B210DFEE7002AE63A /* SGQRCodeObtainConfigure.m in Sources */,
+				8D3DFEFE2662984800E02474 /* SGQRCodeManager.m in Sources */,
 				180E36111F01F33E00A53E7A /* SGWebView.m in Sources */,
 				18479ECF1E80F92500F7F225 /* main.m in Sources */,
 			);
@@ -430,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -439,6 +434,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -446,8 +442,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -472,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -483,6 +481,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -492,6 +491,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -499,8 +499,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -519,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -534,7 +536,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SGQRCodeExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SGQRCodeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -550,7 +552,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SGQRCodeExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SGQRCodeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";

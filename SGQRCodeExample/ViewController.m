@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <AVFoundation/AVFoundation.h>
+#import "SGQRCode.h"
 #import "WBQRCodeVC.h"
 #import "WCQRCodeVC.h"
 
@@ -45,68 +45,58 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
-        WBQRCodeVC *WBVC = [[WBQRCodeVC alloc] init];
-        [self QRCodeScanVC:WBVC];
+        SGQRCodeManager *manager = [SGQRCodeManager QRCodeManager];
+        [manager authorizationStatusBlock:^(SGQRCodeManager *manager, SGAuthorizationStatus authorizationStatus) {
+            if (authorizationStatus == SGAuthorizationStatusSuccess) {
+                WBQRCodeVC *WBVC = [[WBQRCodeVC alloc] init];
+                [self.navigationController pushViewController:WBVC animated:YES];
+            } else if (authorizationStatus == SGAuthorizationStatusFail) {
+                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alertC addAction:alertA];
+                [self presentViewController:alertC animated:YES completion:nil];
+            } else {
+                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alertC addAction:alertA];
+                [self presentViewController:alertC animated:YES completion:nil];
+            }
+        }];
     }
     
     if (indexPath.row == 1) {
-        WCQRCodeVC *WCVC = [[WCQRCodeVC alloc] init];
-        [self QRCodeScanVC:WCVC];
-    }
-}
-
-- (void)QRCodeScanVC:(UIViewController *)scanVC {
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if (device) {
-        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-        switch (status) {
-                case AVAuthorizationStatusNotDetermined: {
-                    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-                        if (granted) {
-                            dispatch_sync(dispatch_get_main_queue(), ^{
-                                [self.navigationController pushViewController:scanVC animated:YES];
-                            });
-                            NSLog(@"用户第一次同意了访问相机权限 - - %@", [NSThread currentThread]);
-                        } else {
-                            NSLog(@"用户第一次拒绝了访问相机权限 - - %@", [NSThread currentThread]);
-                        }
-                    }];
-                    break;
-                }
-                case AVAuthorizationStatusAuthorized: {
-                    [self.navigationController pushViewController:scanVC animated:YES];
-                    break;
-                }
-                case AVAuthorizationStatusDenied: {
-                    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
-                    UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                        
-                    }];
+        SGQRCodeManager *manager = [SGQRCodeManager QRCodeManager];
+        manager.openLog = YES;
+        [manager authorizationStatusBlock:^(SGQRCodeManager *manager, SGAuthorizationStatus authorizationStatus) {
+            if (authorizationStatus == SGAuthorizationStatusSuccess) {
+                WCQRCodeVC *WCVC = [[WCQRCodeVC alloc] init];
+                [self.navigationController pushViewController:WCVC animated:YES];
+            } else if (authorizationStatus == SGAuthorizationStatusFail) {
+                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                     
-                    [alertC addAction:alertA];
-                    [self presentViewController:alertC animated:YES completion:nil];
-                    break;
-                }
-                case AVAuthorizationStatusRestricted: {
-                    NSLog(@"因为系统原因, 无法访问相册");
-                    break;
-                }
+                }];
                 
-            default:
-                break;
-        }
-        return;
+                [alertC addAction:alertA];
+                [self presentViewController:alertC animated:YES completion:nil];
+            } else {
+                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alertC addAction:alertA];
+                [self presentViewController:alertC animated:YES completion:nil];
+            }
+        }];
     }
-    
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    
-    [alertC addAction:alertA];
-    [self presentViewController:alertC animated:YES completion:nil];
 }
 
 
 @end
-

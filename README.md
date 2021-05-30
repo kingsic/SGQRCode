@@ -4,8 +4,7 @@
 
 * `QQ群：825339547`
 
-* `温馨提示：v3.0.0 Block 取代 Delegate`
-
+* `注意：3.5.0 版本进行了重构`
 
 ## 主要内容的介绍
 
@@ -26,7 +25,7 @@
 
 ## SGQRCode 集成
 
-* 1、CocoaPods 导入 pod 'SGQRCode', '~> 3.0.1'
+* 1、CocoaPods 导入 pod 'SGQRCode', '~> 3.5.0'
 
 * 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 
@@ -42,31 +41,28 @@
 #### 2、二维码扫描
 
 ```Objective-C
-    __weak typeof(self) weakSelf = self;
-
-    /// 创建二维码扫描
-    SGQRCodeObtainConfigure *configure = [SGQRCodeObtainConfigure QRCodeObtainConfigure];
-    [obtain establishQRCodeObtainScanWithController:self configure:configure];
-    // 二维码扫描回调方法
-    [obtain setBlockWithQRCodeObtainScanResult:^(SGQRCodeObtain *obtain, NSString *result) {
-        <#code#>
+    /// 创建二维码扫描类
+    SGQRCodeManager manager = [SGQRCodeManager QRCodeManager];
+    /// 二维码扫描回调方法
+    [manager scanWithController:self resultBlock:^(SGQRCodeManager *manager, NSString *result) {
+        <#code#>
     }];
-    // 二维码扫描开启方法: 需手动开启
-    [obtain startRunningWithBefore:^{
+    
+    /// 开启二维码扫描回调方法: 需手动开启
+    [manager startRunningWithBefore:^{
         // 在此可添加 HUD
     } completion:^{
         // 在此可移除 HUD
     }];
-    // 根据外界光线强弱值判断是否自动开启手电筒
-    [obtain setBlockWithQRCodeObtainScanBrightness:^(SGQRCodeObtain *obtain, CGFloat brightness) {
+    
+    /// 外界光线强弱值回调方法
+    [manager scanWithBrightnessBlock:^(SGQRCodeManager *manager, CGFloat brightness) {
         <#code#>
     }];
     
-    /// 从相册中读取二维码    
-    [obtain establishAuthorizationQRCodeObtainAlbumWithController:self];
-    // 从相册中读取图片上的二维码回调方法
-    [obtain setBlockWithQRCodeObtainAlbumResult:^(SGQRCodeObtain *obtain, NSString *result) {
-        <#code#>
+    /// 从相册中读取二维码回调方法    
+    [manager readWithResultBlock:^(SGQRCodeManager *manager, NSString *result) {
+        <#code#>
     }];
 ```
 
@@ -94,7 +90,7 @@
 
 * 参考资料 [iOS 从相册中读取条形码/二维码遇到的问题](https://blog.csdn.net/gaomingyangc/article/details/54017879)
 
-* iOS 扫描支持 7.0+；从相册中读取二维码支持 8.0+；因此，CocoaPods 版本最低支持 8.0+
+* iOS 扫描支持 7.0+；从相册中读取二维码支持 8.0+；因此，CocoaPods 版本最低支持 8.0+，本库由于内部方法的使用，最低支持系统 9.0
 
 * 关于条形码扫不出来的问题   
     * 参考案例 WBQRCodeVC 中的代码，设置支持条形码扫描识别类型的属性 ‘metadataObjectTypes’ 即可
@@ -124,6 +120,8 @@
 * 2018-11-09 ：v3.0.0 版本升级 Block 取代 Delegate（具体相关信息介绍请在 [releases](https://github.com/kingsic/SGQRCode/releases) 中查看）
 
 * 2018-11-27 ：v3.0.1 SGQRCodeObtain 类中新增二维码生成方法
+
+* 2021-05-30 ：v3.5.0 删除了配置类及管理类名的更换，API 的拓展及扫码优化
 
 
 ## License
