@@ -1,7 +1,6 @@
 
 # SGQRCode
 
-
 * `QQ群：825339547`
 
 * `注意：3.5.0 版本重构：API 功能的拓展及扫码识别优化`
@@ -42,7 +41,8 @@
 
 ```Objective-C
     /// 创建二维码扫描类
-    SGQRCodeManager manager = [SGQRCodeManager QRCodeManager];
+    manager = [SGQRCodeManager QRCodeManager];
+    
     /// 二维码扫描回调方法
     [manager scanWithController:self resultBlock:^(SGQRCodeManager *manager, NSString *result) {
         <#code#>
@@ -90,11 +90,7 @@
 
 * 参考资料 [iOS 从相册中读取条形码/二维码遇到的问题](https://blog.csdn.net/gaomingyangc/article/details/54017879)
 
-* iOS 扫描支持 7.0+；从相册中读取二维码支持 8.0+；因此，CocoaPods 版本最低支持 8.0+，但本库由于内部方法的使用，最低支持系统是：9.0
-
-* 关于条形码扫不出来的问题   
-    * 参考案例 WBQRCodeVC 中的代码，设置支持条形码扫描识别类型的属性 ‘metadataObjectTypes’ 即可
-    * WBQRCodeVC 中的代码，只是没有对扫描出来的条形码数字做业务逻辑处理而已，即扫描成功回调数据 ‘result’
+* 3.5.0 版本支持 9.0+，之前的版本支持 8.0+（iOS 扫描支持 7.0+；从相册中读取二维码支持 8.0+）
 
 
 ## 更新介绍
@@ -117,7 +113,7 @@
 
 * 2018-02-08 ：v2.2.0 新增新浪微博示例、新增从相册中读取二维码失败回调函数以及分类名称的更换
 
-* 2018-11-09 ：v3.0.0 版本升级 Block 取代 Delegate，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases) 中查看
+* 2018-11-09 ：v3.0.0 版本重构：Block 取代 Delegate，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases) 中查看
 
 * 2018-11-27 ：v3.0.1 SGQRCodeObtain 类中新增二维码生成方法
 
