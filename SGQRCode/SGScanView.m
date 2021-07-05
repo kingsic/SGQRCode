@@ -1,12 +1,12 @@
 //
-//  SGQRCodeScanView.m
+//  SGScanView.m
 //  SGQRCodeExample
 //
 //  Created by kingsic on 2017/8/23.
 //  Copyright © 2017年 kingsic All rights reserved.
 //
 
-#import "SGQRCodeScanView.h"
+#import "SGScanView.h"
 
 /** 扫描内容的 W 值 */
 #define scanBorderW 0.7 * self.frame.size.width
@@ -15,19 +15,20 @@
 /** 扫描内容的 Y 值 */
 #define scanBorderY 0.5 * (self.frame.size.height - scanBorderW)
 
-@interface SGQRCodeScanView ()
+@interface SGScanView ()
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) UIImageView *scanningline;
 @end
 
-@implementation SGQRCodeScanView
+@implementation SGScanView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
         
         [self initialization];
+        [self addSubview:self.contentView];
     }
     return self;
 }
@@ -35,17 +36,18 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self initialization];
+    [self addSubview:self.contentView];
 }
 
 - (void)initialization {
-    _scanAnimationStyle = ScanAnimationStyleDefault;
+    _scanStyle = ScanStyleDefault;
     _borderColor = [UIColor whiteColor];
     _cornerLocation = CornerLoactionDefault;
     _cornerColor = [UIColor colorWithRed:85/255.0f green:183/255.0 blue:55/255.0 alpha:1.0];
     _cornerWidth = 2.0;
     _backgroundAlpha = 0.5;
     _animationTimeInterval = 0.02;
-    _scanImageName = @"QRCodeScanLine";
+    _scanLineName = @"scanLine";
 }
 
 - (UIView *)contentView {
@@ -177,20 +179,18 @@
 }
 
 #pragma mark - - - 添加定时器
-- (void)addTimer {
+- (void)startScanning {
     CGFloat scanninglineX = 0;
     CGFloat scanninglineY = 0;
     CGFloat scanninglineW = 0;
     CGFloat scanninglineH = 0;
-    if (self.scanAnimationStyle == ScanAnimationStyleGrid) {
-        [self addSubview:self.contentView];
+    if (self.scanStyle == ScanStyleGrid) {
         [_contentView addSubview:self.scanningline];
         scanninglineW = scanBorderW;
         scanninglineH = scanBorderW;
         scanninglineX = 0;
         scanninglineY = - scanBorderW;
         _scanningline.frame = CGRectMake(scanninglineX, scanninglineY, scanninglineW, scanninglineH);
-
     } else {
         [self addSubview:self.scanningline];
         scanninglineW = scanBorderW;
@@ -199,15 +199,20 @@
         scanninglineY = scanBorderY;
         _scanningline.frame = CGRectMake(scanninglineX, scanninglineY, scanninglineW, scanninglineH);
     }
+    
+    [self removeTimer];
     self.timer = [NSTimer timerWithTimeInterval:self.animationTimeInterval target:self selector:@selector(beginRefreshUI) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+}
+- (void)stopScanning {
+    [self removeTimer];
+    [_scanningline removeFromSuperview];
+    _scanningline = nil;
 }
 #pragma mark - - - 移除定时器
 - (void)removeTimer {
     [self.timer invalidate];
     self.timer = nil;
-    [_scanningline removeFromSuperview];
-    _scanningline = nil;
 }
 #pragma mark - - - 执行定时器方法
 - (void)beginRefreshUI {
@@ -216,7 +221,7 @@
     
     __weak typeof(self) weakSelf = self;
 
-    if (self.scanAnimationStyle == ScanAnimationStyleGrid) {
+    if (self.scanStyle == ScanStyleGrid) {
         if (flag) {
             frame.origin.y = - scanBorderW;
             flag = NO;
@@ -283,9 +288,9 @@
         }
         NSBundle *bundle = [NSBundle bundleWithURL:url];
         
-        UIImage *image = [UIImage imageNamed:self.scanImageName inBundle:bundle compatibleWithTraitCollection:nil];
+        UIImage *image = [UIImage imageNamed:self.scanLineName inBundle:bundle compatibleWithTraitCollection:nil];
         if (!image) {
-            image = [UIImage imageNamed:self.scanImageName];
+            image = [UIImage imageNamed:self.scanLineName];
         }
         _scanningline.image = image;
     }
@@ -293,12 +298,12 @@
 }
 
 #pragma mark - - - set
-- (void)setScanAnimationStyle:(ScanAnimationStyle)scanAnimationStyle {
-    _scanAnimationStyle = scanAnimationStyle;
+- (void)setScanStyle:(ScanStyle)scanStyle {
+    _scanStyle = scanStyle;
 }
 
-- (void)setScanImageName:(NSString *)scanImageName {
-    _scanImageName = scanImageName;
+- (void)setScanLineName:(NSString *)scanLineName {
+    _scanLineName = scanLineName;
 }
 
 - (void)setBorderColor:(UIColor *)borderColor {

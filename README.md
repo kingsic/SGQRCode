@@ -3,7 +3,7 @@
 
 * `QQ群：825339547`
 
-* `注意：3.5.0 版本重构：API 功能的拓展及扫码识别优化`
+* `注意：3.5.1 版本重构：API 功能的拓展及扫码识别优化`
 
 ## 主要内容的介绍
 
@@ -24,7 +24,7 @@
 
 ## SGQRCode 集成
 
-* 1、CocoaPods 导入 pod 'SGQRCode', '~> 3.5.0'
+* 1、CocoaPods 导入 pod 'SGQRCode', '~> 3.5.1'
 
 * 2、下载、拖拽 “SGQRCode” 文件夹到工程中
 
@@ -41,27 +41,27 @@
 
 ```Objective-C
     /// 创建二维码扫描类
-    manager = [SGQRCodeManager QRCodeManager];
+    scanCode = [SGScanCode scanCode];
     
     /// 二维码扫描回调方法
-    [manager scanWithController:self resultBlock:^(SGQRCodeManager *manager, NSString *result) {
+    [scanCode scanWithController:self resultBlock:^(SGScanCode *scanCode, NSString *result) {
         <#code#>
     }];
     
     /// 开启二维码扫描回调方法: 需手动开启
-    [manager startRunningWithBefore:^{
+    [scanCode startRunningWithBefore:^{
         // 在此可添加 HUD
     } completion:^{
         // 在此可移除 HUD
     }];
     
     /// 外界光线强弱值回调方法
-    [manager scanWithBrightnessBlock:^(SGQRCodeManager *manager, CGFloat brightness) {
+    [scanCode scanWithBrightnessBlock:^(SGScanCode *scanCode, CGFloat brightness) {
         <#code#>
     }];
     
     /// 从相册中读取二维码回调方法    
-    [manager readWithResultBlock:^(SGQRCodeManager *manager, NSString *result) {
+    [scanCode readWithResultBlock:^(SGScanCode *scanCode, NSString *result) {
         <#code#>
     }];
 ```
@@ -70,10 +70,10 @@
 
 ```Objective-C
     /// 常规二维码
-    _imageView.image = [SGQRCodeObtain generateQRCodeWithData:@"https://github.com/kingsic" size:size];
+    _imageView.image = [SGCreateCode createQRCodeWithData:@"https://github.com/kingsic" size:size];
     
     /// 带 logo 的二维码
-    _imageView.image = [SGQRCodeObtain generateQRCodeWithData:@"https://github.com/kingsic" size:size logoImage:logoImage ratio:ratio];
+    _imageView.image = [SGCreateCode createQRCodeWithData:@"https://github.com/kingsic" size:size logoImage:logoImage ratio:ratio];
 ```
 
 
@@ -118,6 +118,8 @@
 * 2018-11-27 ：v3.0.1 SGQRCodeObtain 类中新增二维码生成方法
 
 * 2021-05-30 ：v3.5.0 版本重构：API 功能的拓展及扫码识别优化，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases/tag/3.5.0) 中查看
+
+* 2021-05-30 ：v3.5.1 版本重构：修复 [#163] 问题，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases/tag/3.5.1) 中查看
 
 
 ## License

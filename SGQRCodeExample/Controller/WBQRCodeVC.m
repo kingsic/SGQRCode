@@ -12,9 +12,9 @@
 #import "MBProgressHUD+SGQRCode.h"
 
 @interface WBQRCodeVC () {
-    SGQRCodeManager *manager;
+    SGScanCode *scanCode;
 }
-@property (nonatomic, strong) SGQRCodeScanView *scanView;
+@property (nonatomic, strong) SGScanView *scanView;
 @property (nonatomic, strong) UILabel *promptLabel;
 @property (nonatomic, assign) BOOL stop;
 @end
@@ -25,18 +25,8 @@
     [super viewWillAppear:animated];
     
     if (_stop) {
-        [manager startRunningWithBefore:nil completion:nil];
+        [scanCode startRunningWithBefore:nil completion:nil];
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.scanView addTimer];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.scanView removeTimer];
 }
 
 - (void)dealloc {
@@ -49,30 +39,36 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor blackColor];
     
-    manager = [SGQRCodeManager QRCodeManager];
+    scanCode = [SGScanCode scanCode];
     
     [self setupQRCodeScan];
     [self setupNavigationBar];
     [self.view addSubview:self.scanView];
+    [self.scanView startScanning];
     [self.view addSubview:self.promptLabel];
 }
 
 - (void)setupQRCodeScan {
     __weak typeof(self) weakSelf = self;
     
-    [manager scanWithController:self resultBlock:^(SGQRCodeManager *manager, NSString *result) {
+    [scanCode scanWithController:self resultBlock:^(SGScanCode *scanCode, NSString *result) {
         if (result) {
-            [manager stopRunning];
+            [scanCode stopRunning];
             weakSelf.stop = YES;
-            [manager playSoundName:@"SGQRCode.bundle/QRCodeScanEndSound.caf"];
-
+            [scanCode playSoundName:@"SGQRCode.bundle/scanEndSound.caf"];
             ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-            jumpVC.comeFromVC = ScanSuccessJumpComeFromWB;
-            jumpVC.jump_URL = result;
             [weakSelf.navigationController pushViewController:jumpVC animated:YES];
+            
+            if ([result hasPrefix:@"http"]) {
+                jumpVC.comeFromVC = ScanSuccessJumpComeFromWB;
+                jumpVC.jump_URL = result;
+            } else {
+                jumpVC.comeFromVC = ScanSuccessJumpComeFromWB;
+                jumpVC.jump_bar_code = result;
+            }
         }
     }];
-    [manager startRunningWithBefore:^{
+    [scanCode startRunningWithBefore:^{
         [MBProgressHUD SG_showMBProgressHUDWithModifyStyleMessage:@"正在加载..." toView:weakSelf.view];
     } completion:^{
         [MBProgressHUD SG_hideHUDForView:weakSelf.view];
@@ -86,7 +82,8 @@
 
 - (void)rightBarButtonItenAction {
     __weak typeof(self) weakSelf = self;
-    [manager readWithResultBlock:^(SGQRCodeManager *manager, NSString *result) {
+    
+    [scanCode readWithResultBlock:^(SGScanCode *scanCode, NSString *result) {
         if (result == nil) {
             NSLog(@"暂未识别出二维码");
         } else {
@@ -106,18 +103,18 @@
     }];
 }
 
-- (SGQRCodeScanView *)scanView {
+- (SGScanView *)scanView {
     if (!_scanView) {
-        _scanView = [[SGQRCodeScanView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        _scanView.scanImageName = @"SGQRCode.bundle/QRCodeScanLineGrid";
-        _scanView.scanAnimationStyle = ScanAnimationStyleGrid;
+        _scanView = [[SGScanView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        _scanView.scanLineName = @"SGQRCode.bundle/scanLineGrid";
+        _scanView.scanStyle = ScanStyleGrid;
         _scanView.cornerLocation = CornerLoactionOutside;
         _scanView.cornerColor = [UIColor orangeColor];
     }
     return _scanView;
 }
 - (void)removeScanningView {
-    [self.scanView removeTimer];
+    [self.scanView stopScanning];
     [self.scanView removeFromSuperview];
     self.scanView = nil;
 }

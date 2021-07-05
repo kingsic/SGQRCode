@@ -12,9 +12,9 @@
 #import "MBProgressHUD+SGQRCode.h"
 
 @interface WCQRCodeVC () {
-    SGQRCodeManager *manager;
+    SGScanCode *scanCode;
 }
-@property (nonatomic, strong) SGQRCodeScanView *scanView;
+@property (nonatomic, strong) SGScanView *scanView;
 @property (nonatomic, strong) UIButton *flashlightBtn;
 @property (nonatomic, strong) UILabel *promptLabel;
 @property (nonatomic, assign) BOOL isSelectedFlashlightBtn;
@@ -26,19 +26,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     /// 二维码开启方法
-    [manager startRunningWithBefore:nil completion:nil];
+    [scanCode startRunningWithBefore:nil completion:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.scanView addTimer];
+    [self.scanView startScanning];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.scanView removeTimer];
+    [self.scanView stopScanning];
     [self removeFlashlightBtn];
-    [manager stopRunning];
+    [scanCode stopRunning];
 }
 
 - (void)dealloc {
@@ -51,7 +51,7 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor blackColor];
     
-    manager = [SGQRCodeManager QRCodeManager];
+    scanCode = [SGScanCode scanCode];
     
     [self setupQRCodeScan];
     [self setupNavigationBar];
@@ -62,34 +62,33 @@
 }
 
 - (void)setupQRCodeScan {
-    BOOL isCameraDeviceRearAvailable = manager.isCameraDeviceRearAvailable;
+    BOOL isCameraDeviceRearAvailable = scanCode.isCameraDeviceRearAvailable;
     if (isCameraDeviceRearAvailable == NO) {
         return;
     }
     
     __weak typeof(self) weakSelf = self;
-    manager.openLog = YES;
-    manager.brightness = YES;
+    scanCode.openLog = YES;
+    scanCode.brightness = YES;
     
-    [manager scanWithController:self resultBlock:^(SGQRCodeManager *manager, NSString *result) {
+    [scanCode scanWithController:self resultBlock:^(SGScanCode *scanCode, NSString *result) {
         if (result) {
-            [manager stopRunning];
-            [manager playSoundName:@"SGQRCode.bundle/QRCodeScanEndSound.caf"];
+            [scanCode stopRunning];
+            [scanCode playSoundName:@"SGQRCode.bundle/scanEndSound.caf"];
+            ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+            [weakSelf.navigationController pushViewController:jumpVC animated:YES];
+            
             if ([result hasPrefix:@"http"]) {
-                ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-                jumpVC.comeFromVC = ScanSuccessJumpComeFromWB;
+                jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
                 jumpVC.jump_URL = result;
-                [weakSelf.navigationController pushViewController:jumpVC animated:YES];
-
             } else {
-                ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-                jumpVC.comeFromVC = ScanSuccessJumpComeFromWB;
-                jumpVC.jump_bar_code = result;
-                [weakSelf.navigationController pushViewController:jumpVC animated:YES];
+                jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
+                jumpVC.jump_URL = result;
             }
         }
     }];
-    [manager scanWithBrightnessBlock:^(SGQRCodeManager *manager, CGFloat brightness) {
+    
+    [scanCode scanWithBrightnessBlock:^(SGScanCode *scanCode, CGFloat brightness) {
         if (brightness < - 1) {
             [weakSelf.view addSubview:weakSelf.flashlightBtn];
         } else {
@@ -100,14 +99,14 @@
     }];
 }
 
-- (SGQRCodeScanView *)scanView {
+- (SGScanView *)scanView {
     if (!_scanView) {
-        _scanView = [[SGQRCodeScanView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.9 * self.view.frame.size.height)];
+        _scanView = [[SGScanView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.9 * self.view.frame.size.height)];
     }
     return _scanView;
 }
 - (void)removeScanningView {
-    [self.scanView removeTimer];
+    [self.scanView stopScanning];
     [self.scanView removeFromSuperview];
     self.scanView = nil;
 }
@@ -156,7 +155,7 @@
 
 - (void)flashlightBtn_action:(UIButton *)button {
     if (button.selected == NO) {
-        [manager turnOnFlashlight];
+        [scanCode turnOnFlashlight];
         self.isSelectedFlashlightBtn = YES;
         button.selected = YES;
     } else {
@@ -166,7 +165,7 @@
 
 - (void)removeFlashlightBtn {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self->manager turnOffFlashlight];
+        [self->scanCode turnOffFlashlight];
         self.isSelectedFlashlightBtn = NO;
         self.flashlightBtn.selected = NO;
         [self.flashlightBtn removeFromSuperview];
@@ -180,8 +179,7 @@
 
 - (void)rightBarButtonItenAction {
     __weak typeof(self) weakSelf = self;
-    
-    [manager readWithResultBlock:^(SGQRCodeManager *manager, NSString *result) {
+    [scanCode readWithResultBlock:^(SGScanCode *scanCode, NSString *result) {
         [MBProgressHUD SG_showMBProgressHUDWithModifyStyleMessage:@"正在处理..." toView:weakSelf.view];
         if (result == nil) {
             NSLog(@"暂未识别出二维码");
@@ -204,11 +202,11 @@
         }
     }];
     
-    if (manager.albumAuthorization == YES) {
-        [self.scanView removeTimer];
+    if (scanCode.albumAuthorization == YES) {
+        [self.scanView stopScanning];
     }
-    [manager albumDidCancelBlock:^(SGQRCodeManager *manager) {
-        [weakSelf.scanView addTimer];
+    [scanCode albumDidCancelBlock:^(SGScanCode *scanCode) {
+        [weakSelf.scanView startScanning];
     }];
 }
 

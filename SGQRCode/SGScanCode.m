@@ -1,16 +1,16 @@
 //
-//  SGQRCodeObtain.m
+//  SGScanCode.m
 //  SGQRCodeExample
 //
 //  Created by kingsic on 2016/8/16.
 //  Copyright © 2016年 kingsic. All rights reserved.
 //
 
-#import "SGQRCodeManager.h"
+#import "SGScanCode.h"
 #import <AVFoundation/AVFoundation.h>
-#import <Photos/Photos.h>
+#import "SGAuthorization.h"
 
-@interface SGQRCodeManager () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface SGScanCode () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, weak) UIViewController *tempController;
 @property (nonatomic, strong) AVCaptureDevice *device;
 @property (nonatomic, strong) AVCaptureDeviceInput *deviceInput;
@@ -19,22 +19,22 @@
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) NSArray *metadataObjectTypes;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
-@property (nonatomic, copy) SGQRCodeManagerScanResultBlock scanResultBlock;
-@property (nonatomic, copy) SGQRCodeManagerScanBrightnessBlock scanBrightnessBlock;
-@property (nonatomic, copy) SGQRCodeManagerReadResultBlock readResultBlock;
-@property (nonatomic, copy) SGQRCodeManagerAlbumDidCancelBlock albumDidCancelBlock;
+@property (nonatomic, copy) SGScanCodeScanResultBlock scanResultBlock;
+@property (nonatomic, copy) SGScanCodeScanBrightnessBlock scanBrightnessBlock;
+@property (nonatomic, copy) SGScanCodeReadResultBlock readResultBlock;
+@property (nonatomic, copy) SGScanCodeAlbumDidCancelBlock albumDidCancelBlock;
 @property (nonatomic, copy) NSString *tempDetectorResultString;
 @end
 
-@implementation SGQRCodeManager
+@implementation SGScanCode
 
 - (void)dealloc {
     if (self.openLog == YES) {
-        NSLog(@"SGQRCodeManager - - dealloc");
+        NSLog(@"SGScanCode - - dealloc");
     }
 }
 
-+ (instancetype)QRCodeManager {
++ (instancetype)scanCode {
     return [[self alloc] init];
 }
 
@@ -105,9 +105,9 @@
     return _videoPreviewLayer;
 }
 
-- (void)scanWithController:(UIViewController *)controller resultBlock:(SGQRCodeManagerScanResultBlock)blcok {
+- (void)scanWithController:(UIViewController *)controller resultBlock:(SGScanCodeScanResultBlock)blcok {
     if (controller == nil) {
-        @throw [NSException exceptionWithName:@"SGQRCode" reason:@"SGQRCodeManager 中的 scanCodeWithController: 方法中的 controller 参数不能为空" userInfo:nil];
+        @throw [NSException exceptionWithName:@"SGQRCode" reason:@"SGScanCode 中的 scanCodeWithController: 方法中的 controller 参数不能为空" userInfo:nil];
     }
     _tempController = controller;
     _scanResultBlock = blcok;
@@ -154,7 +154,7 @@
     }
 }
 
-- (void)scanWithBrightnessBlock:(SGQRCodeManagerScanBrightnessBlock)blcok {
+- (void)scanWithBrightnessBlock:(SGScanCodeScanBrightnessBlock)blcok {
     _scanBrightnessBlock = blcok;
 }
 #pragma mark - - AVCaptureVideoDataOutputSampleBufferDelegate 的方法
@@ -188,36 +188,20 @@
     }
 }
 
-- (void)readWithResultBlock:(SGQRCodeManagerReadResultBlock)block {
+- (void)readWithResultBlock:(SGScanCodeReadResultBlock)block {
     _readResultBlock = block;
     
-    if (self.device) {
-        // 判断授权状态
-        PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-        if (status == PHAuthorizationStatusNotDetermined) { 
-            // 弹框请求用户授权
-            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-                if (status == PHAuthorizationStatusAuthorized) { // 用户第一次同意了访问相册权限
-                    self.albumAuthorization = YES;
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                        [self _enterImagePickerController];
-                    });
-                    if (self.openLog == YES) {
-                        NSLog(@"用户第一次同意了访问相册权限");
-                    }
-                } else { // 用户第一次拒绝了访问相机权限
-                    if (self.openLog == YES) {
-                        NSLog(@"用户第一次拒绝了访问相册权限");
-                    }
-                }
-            }];
-        } else if (status == PHAuthorizationStatusAuthorized) { // 用户允许当前应用访问相册
+    SGAuthorization *auth = [SGAuthorization authorization];
+    if (self.openLog) {
+        auth.openLog = YES;
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    [auth PHAuthorizationBlock:^(SGAuthorization * _Nonnull authorization, SGAuthorizationStatus status) {
+        if (status == SGAuthorizationStatusSuccess) {
             self.albumAuthorization = YES;
-            if (self.openLog == YES) {
-                NSLog(@"用户允许访问相册权限");
-            }
             [self _enterImagePickerController];
-        } else if (status == PHAuthorizationStatusDenied) { // 用户拒绝当前应用访问相册
+        } else if (status == SGAuthorizationStatusFail) {
             NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
             NSString *app_Name = [infoDict objectForKey:@"CFBundleDisplayName"];
             if (app_Name == nil) {
@@ -226,25 +210,20 @@
             
             NSString *messageString = [NSString stringWithFormat:@"[前往：设置 - 隐私 - 照片 - %@] 允许应用访问", app_Name];
             UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:messageString preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
+            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:nil];
             
             [alertC addAction:alertA];
-            [_tempController presentViewController:alertC animated:YES completion:nil];
-        } else if (status == PHAuthorizationStatusRestricted) {
+            [weakSelf.tempController presentViewController:alertC animated:YES completion:nil];
+        } else {
             UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"由于系统原因, 无法访问相册" preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            
+            UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:nil];
             [alertC addAction:alertA];
-            [_tempController presentViewController:alertC animated:YES completion:nil];
+            [weakSelf.tempController presentViewController:alertC animated:YES completion:nil];
         }
-    }
+    }];
 }
 
-- (void)albumDidCancelBlock:(SGQRCodeManagerAlbumDidCancelBlock)block {
+- (void)albumDidCancelBlock:(SGScanCodeAlbumDidCancelBlock)block {
     _albumDidCancelBlock = block;
 }
 #pragma mark - - UIImagePickerControllerDelegate 的方法
@@ -282,122 +261,6 @@
             }
         }];
     }
-}
-
-- (void)authorizationStatusBlock:(SGQRCodeManagerAuthorizationBlock)block {
-    if (self.device) {
-        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-        switch (status) {
-            case AVAuthorizationStatusNotDetermined: {
-                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-                    if (granted) {
-                        if (block) {
-                            block(self, SGAuthorizationStatusSuccess);
-                        }
-                        if (self.openLog) {
-                            NSLog(@"用户第一次同意访问相机权限");
-                        }
-                    } else {
-                        if (self.openLog) {
-                            NSLog(@"用户第一次拒绝访问相机权限");
-                        }
-                    }
-                }];
-                break;
-            }
-            case AVAuthorizationStatusAuthorized: {
-                if (block) {
-                    block(self, SGAuthorizationStatusSuccess);
-                }
-                if (self.openLog) {
-                    NSLog(@"用户已同意访问相机权限");
-                }
-                break;
-            }
-            case AVAuthorizationStatusDenied: {
-                if (block) {
-                    block(self, SGAuthorizationStatusFail);
-                }
-                if (self.openLog) {
-                    NSLog(@"用户已拒绝访问相机权限");
-                }
-                break;
-            }
-            case AVAuthorizationStatusRestricted: {
-                if (block) {
-                    block(self, SGAuthorizationStatusUnknown);
-                }
-                if (self.openLog) {
-                    NSLog(@"因为系统原因, 无法访问相册");
-                }
-                break;
-            }
-            
-        default:
-            break;
-        }
-        return;
-    }
-    
-    if (block) {
-        block(self, SGAuthorizationStatusUnknown);
-    }
-}
-
-#pragma mark - - 生成二维码相关方法
-+ (UIImage *)generateQRCodeWithData:(NSString *)data size:(CGFloat)size {
-    return [self generateQRCodeWithData:data size:size color:[UIColor blackColor] backgroundColor:[UIColor whiteColor]];
-}
-+ (UIImage *)generateQRCodeWithData:(NSString *)data size:(CGFloat)size color:(UIColor *)color backgroundColor:(UIColor *)backgroundColor {
-    NSData *string_data = [data dataUsingEncoding:NSUTF8StringEncoding];
-    // 1、二维码滤镜
-    CIFilter *fileter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
-    [fileter setValue:string_data forKey:@"inputMessage"];
-    [fileter setValue:@"H" forKey:@"inputCorrectionLevel"];
-    CIImage *ciImage = fileter.outputImage;
-    // 2、颜色滤镜
-    CIFilter *color_filter = [CIFilter filterWithName:@"CIFalseColor"];
-    [color_filter setValue:ciImage forKey:@"inputImage"];
-    [color_filter setValue:[CIColor colorWithCGColor:color.CGColor] forKey:@"inputColor0"];
-    [color_filter setValue:[CIColor colorWithCGColor:backgroundColor.CGColor] forKey:@"inputColor1"];
-    // 3、生成处理
-    CIImage *outImage = color_filter.outputImage;
-    CGFloat scale = size / outImage.extent.size.width;
-    outImage = [outImage imageByApplyingTransform:CGAffineTransformMakeScale(scale, scale)];
-    return [UIImage imageWithCIImage:outImage];
-}
-+ (UIImage *)generateQRCodeWithData:(NSString *)data size:(CGFloat)size logoImage:(UIImage *)logoImage ratio:(CGFloat)ratio {
-    return [self generateQRCodeWithData:data size:size logoImage:logoImage ratio:ratio logoImageCornerRadius:5 logoImageBorderWidth:5 logoImageBorderColor:[UIColor whiteColor]];
-}
-+ (UIImage *)generateQRCodeWithData:(NSString *)data size:(CGFloat)size logoImage:(UIImage *)logoImage ratio:(CGFloat)ratio logoImageCornerRadius:(CGFloat)logoImageCornerRadius logoImageBorderWidth:(CGFloat)logoImageBorderWidth logoImageBorderColor:(UIColor *)logoImageBorderColor {
-    UIImage *image = [self generateQRCodeWithData:data size:size color:[UIColor blackColor] backgroundColor:[UIColor whiteColor]];
-    if (logoImage == nil) return image;
-    if (ratio < 0.0 || ratio > 0.5) {
-        ratio = 0.25;
-    }
-    CGFloat logoImageW = ratio * size;
-    CGFloat logoImageH = logoImageW;
-    CGFloat logoImageX = 0.5 * (image.size.width - logoImageW);
-    CGFloat logoImageY = 0.5 * (image.size.height - logoImageH);
-    CGRect logoImageRect = CGRectMake(logoImageX, logoImageY, logoImageW, logoImageH);
-    // 绘制logo
-    UIGraphicsBeginImageContextWithOptions(image.size, false, [UIScreen mainScreen].scale);
-    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
-    if (logoImageCornerRadius < 0.0 || logoImageCornerRadius > 10) {
-        logoImageCornerRadius = 5;
-    }
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:logoImageRect cornerRadius:logoImageCornerRadius];
-    if (logoImageBorderWidth < 0.0 || logoImageBorderWidth > 10) {
-        logoImageBorderWidth = 5;
-    }
-    path.lineWidth = logoImageBorderWidth;
-    [logoImageBorderColor setStroke];
-    [path stroke];
-    [path addClip];
-    [logoImage drawInRect:logoImageRect];
-    UIImage *QRCodeImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return QRCodeImage;
 }
 
 - (void)playSoundName:(NSString *)name {
@@ -441,23 +304,29 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){}
     [_tempController presentViewController:imagePicker animated:YES completion:nil];
 }
 - (NSString *)_canSetSessionPreset {
-    if ([self.session canSetSessionPreset:AVCaptureSessionPreset3840x2160]) {
+    if ([self.device supportsAVCaptureSessionPreset:AVCaptureSessionPreset3840x2160]) {
         return AVCaptureSessionPreset3840x2160;
-    } else if ([self.session canSetSessionPreset:AVCaptureSessionPreset1920x1080]) {
-        return AVCaptureSessionPreset1920x1080;
-    } else if ([self.session canSetSessionPreset:AVCaptureSessionPreset1280x720]) {
-        return AVCaptureSessionPreset1280x720;
-    }  else if ([self.session canSetSessionPreset:AVCaptureSessionPreset640x480]) {
-        return AVCaptureSessionPreset640x480;
-    } else if ([self.session canSetSessionPreset:AVCaptureSessionPreset352x288]) {
-        return AVCaptureSessionPreset352x288;
-    } else if ([self.session canSetSessionPreset:AVCaptureSessionPresetHigh]) {
-        return AVCaptureSessionPresetHigh;
-    } else if ([self.session canSetSessionPreset:AVCaptureSessionPresetMedium]) {
-        return AVCaptureSessionPresetMedium;
-    } else {
-        return AVCaptureSessionPresetLow;
     }
+    if ([self.device supportsAVCaptureSessionPreset:AVCaptureSessionPreset1920x1080]) {
+        return AVCaptureSessionPreset1920x1080;
+    }
+    if ([self.device supportsAVCaptureSessionPreset:AVCaptureSessionPreset1280x720]) {
+        return AVCaptureSessionPreset1280x720;
+    }
+    if ([self.device supportsAVCaptureSessionPreset:AVCaptureSessionPreset640x480]) {
+        return AVCaptureSessionPreset640x480;
+    }
+    if ([self.device supportsAVCaptureSessionPreset:AVCaptureSessionPreset352x288]) {
+        return AVCaptureSessionPreset352x288;
+    }
+    if ([self.device supportsAVCaptureSessionPreset:AVCaptureSessionPresetHigh]) {
+        return AVCaptureSessionPresetHigh;
+    }
+    if ([self.device supportsAVCaptureSessionPreset:AVCaptureSessionPresetMedium]) {
+        return AVCaptureSessionPresetMedium;
+    }
+    
+    return AVCaptureSessionPresetLow;
 }
 
 @end
