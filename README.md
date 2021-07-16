@@ -119,7 +119,7 @@
 
 * 2021-05-30 ：v3.5.0 版本重构：API 功能的拓展及扫码识别优化，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases/tag/3.5.0) 中查看
 
-* 2021-05-30 ：v3.5.1 版本重构：修复 [#163](https://github.com/kingsic/SGQRCode/issues/163) 问题，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases/tag/3.5.1) 中查看
+* 2021-07-05 ：v3.5.1 版本重构：修复 [#163](https://github.com/kingsic/SGQRCode/issues/163) 问题，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases/tag/3.5.1) 中查看
 
 
 ## License
