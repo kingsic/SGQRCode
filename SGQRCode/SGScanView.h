@@ -1,5 +1,5 @@
 //
-//  SGQRCodeScanView.h
+//  SGScanView.h
 //  SGQRCodeExample
 //
 //  Created by kingsic on 2017/8/23.
@@ -19,32 +19,32 @@ typedef enum : NSUInteger {
 
 typedef enum : NSUInteger {
     /// 单线扫描样式
-    ScanAnimationStyleDefault,
+    ScanStyleDefault,
     /// 网格扫描样式
-    ScanAnimationStyleGrid
-} ScanAnimationStyle;
+    ScanStyleGrid
+} ScanStyle;
 
-@interface SGQRCodeScanView : UIView
-/** 扫描样式，默认 ScanAnimationStyleDefault */
-@property (nonatomic, assign) ScanAnimationStyle scanAnimationStyle;
+@interface SGScanView : UIView
+/** 扫描样式，默认为：ScanStyleDefault */
+@property (nonatomic, assign) ScanStyle scanStyle;
 /** 扫描线名 */
-@property (nonatomic, copy) NSString *scanImageName;
-/** 边框颜色，默认白色 */
+@property (nonatomic, copy) NSString *scanLineName;
+/** 边框颜色，默认为：白色 */
 @property (nonatomic, strong) UIColor *borderColor;
-/** 边角位置，默认 CornerLoactionDefault */
+/** 边角位置，默认为：CornerLoactionDefault */
 @property (nonatomic, assign) CornerLoaction cornerLocation;
-/** 边角颜色，默认微信颜色 */
+/** 边角颜色，默认为：red:85/255.0 green:183/255.0 blue:55/255.0 alpha:1.0 */
 @property (nonatomic, strong) UIColor *cornerColor;
-/** 边角宽度，默认 2.f */
+/** 边角宽度，默认为：2.f */
 @property (nonatomic, assign) CGFloat cornerWidth;
-/** 扫描区周边颜色的 alpha 值，默认 0.2f */
+/** 扫描区周边颜色的 alpha 值，默认为：0.2f */
 @property (nonatomic, assign) CGFloat backgroundAlpha;
-/** 扫描线动画时间，默认 0.02s */
+/** 扫描线动画时间，默认为：0.02s */
 @property (nonatomic, assign) NSTimeInterval animationTimeInterval;
 
-/** 添加定时器 */
-- (void)addTimer;
-/** 移除定时器 */
-- (void)removeTimer;
+/** 扫描线开始扫描 */
+- (void)startScanning;
+/** 扫描线停止扫描 */
+- (void)stopScanning;
 
 @end
