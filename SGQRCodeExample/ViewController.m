@@ -8,8 +8,10 @@
 
 #import "ViewController.h"
 #import "SGQRCode.h"
-#import "WBQRCodeVC.h"
 #import "WCQRCodeVC.h"
+#import "WBQRCodeVC.h"
+#import "QQQRCodeVC.h"
+#import "XCQRCodeVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,11 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self configuration];
+    [self configTableView];
 }
 
-- (void)configuration {
-    _dataList = @[@"WBQRCodeVC (pop 逻辑处理）", @"WCQRCodeVC (popToRoot 逻辑处理)"];
+- (void)configTableView {
+    _dataList = @[@"微信", @"QQ", @"携程", @"原微博"];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
@@ -36,73 +38,83 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    cell.textLabel.text = _dataList[indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = _dataList[indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
-        SGAuthorization *authorization = [[SGAuthorization alloc] init];
-        authorization.openLog = YES;
-        [authorization AVAuthorizationBlock:^(SGAuthorization * _Nonnull authorization, SGAuthorizationStatus status) {
-            if (status == SGAuthorizationStatusSuccess) {
-                WBQRCodeVC *WBVC = [[WBQRCodeVC alloc] init];
-                [self.navigationController pushViewController:WBVC animated:YES];
-            } else if (status == SGAuthorizationStatusFail) {
-                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
-                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                }];
-                
-                [alertC addAction:alertA];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self presentViewController:alertC animated:YES completion:nil];
-                });
-            } else {
-                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
-                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                
-                [alertC addAction:alertA];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self presentViewController:alertC animated:YES completion:nil];
-                });
+    [SGPermission permissionWithType:SGPermissionTypeCamera completion:^(SGPermission * _Nonnull permission, SGPermissionStatus status) {
+        if (status == SGPermissionStatusNotDetermined) {
+            [permission request:^(BOOL granted) {
+                if (granted) {
+                    NSLog(@"第一次授权成功");
+                    UIViewController *VC;
+                    if (indexPath.row == 0) {
+                        VC = [[WCQRCodeVC alloc] init];
+                    } else if (indexPath.row == 1) {
+                        VC = [[QQQRCodeVC alloc] init];
+                    } else if (indexPath.row == 2) {
+                        VC = [[XCQRCodeVC alloc] init];
+                    } else if (indexPath.row == 3) {
+                        VC = [[WBQRCodeVC alloc] init];
+                    }
+                    [self.navigationController pushViewController:VC animated:YES];
+
+                } else {
+                    NSLog(@"第一次授权失败");
+                }
+            }];
+        } else if (status == SGPermissionStatusAuthorized) {
+            NSLog(@"SGPermissionStatusAuthorized");
+            UIViewController *VC;
+            if (indexPath.row == 0) {
+                VC = [[WCQRCodeVC alloc] init];
+            } else if (indexPath.row == 1) {
+                VC = [[QQQRCodeVC alloc] init];
+            } else if (indexPath.row == 2) {
+                VC = [[XCQRCodeVC alloc] init];
+            } else if (indexPath.row == 3) {
+                VC = [[WBQRCodeVC alloc] init];
             }
-        }];
-    }
+            [self.navigationController pushViewController:VC animated:YES];
+
+        } else if (status == SGPermissionStatusDenied) {
+            NSLog(@"SGPermissionStatusDenied");
+            [self failed];
+        } else if (status == SGPermissionStatusRestricted) {
+            NSLog(@"SGPermissionStatusRestricted");
+            [self unknown];
+        }
+
+    }];
     
-    if (indexPath.row == 1) {
-        SGAuthorization *authorization = [SGAuthorization authorization];
-        [authorization AVAuthorizationBlock:^(SGAuthorization * _Nonnull authorization, SGAuthorizationStatus status) {
-            if (status == SGAuthorizationStatusSuccess) {
-                WCQRCodeVC *WCVC = [[WCQRCodeVC alloc] init];
-                [self.navigationController pushViewController:WCVC animated:YES];
-            } else if (status == SGAuthorizationStatusFail) {
-                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
-                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                
-                [alertC addAction:alertA];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self presentViewController:alertC animated:YES completion:nil];
-                });
-            } else {
-                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
-                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                
-                [alertC addAction:alertA];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self presentViewController:alertC animated:YES completion:nil];
-                });
-            }
-        }];
-    }
+}
+
+- (void)failed {
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"[前往：设置 - 隐私 - 相机 - SGQRCode] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    
+    [alertC addAction:alertA];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alertC animated:YES completion:nil];
+    });
+}
+
+- (void)unknown {
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertC addAction:alertA];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alertC animated:YES completion:nil];
+    });
 }
 
 

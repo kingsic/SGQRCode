@@ -1,13 +1,21 @@
 //
 //  SGQRCode.h
-//  Version 3.5.1
+//  Version 4.0.0
 //  https://github.com/kingsic/SGQRCode
 //
 //  Created by kingsic on 2016/8/16.
 //  Copyright © 2016年 kingsic. All rights reserved.
 //
 
+#import "SGQRCodeLog.h"
+#import "SGGenerateQRCode.h"
 #import "SGScanCode.h"
+#import "SGScanCodeDelegate.h"
 #import "SGScanView.h"
-#import "SGCreateCode.h"
-#import "SGAuthorization.h"
+#import "SGScanViewConfigure.h"
+#import "SGPermission.h"
+#import "SGPermissionEnum.h"
+#import "SGSoundEffect.h"
+#import "SGTorch.h"
+#import "SGWeakProxy.h"
+#import "UIImage+SGQRCode.h"

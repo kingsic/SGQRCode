@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E36081F01F33E00A53E7A /* ScanSuccessJumpVC.m */; };
-		180E36101F01F33E00A53E7A /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E360A1F01F33E00A53E7A /* WCQRCodeVC.m */; };
-		180E36111F01F33E00A53E7A /* SGWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E360D1F01F33E00A53E7A /* SGWebView.m */; };
+		180E360F1F01F33E00A53E7A /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E36081F01F33E00A53E7A /* WebViewController.m */; };
 		18479ECF1E80F92500F7F225 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479ECE1E80F92500F7F225 /* main.m */; };
 		18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18479ED11E80F92500F7F225 /* AppDelegate.m */; };
 		18479EDA1E80F92500F7F225 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18479ED91E80F92500F7F225 /* Assets.xcassets */; };
@@ -20,13 +18,23 @@
 		18479F1A1E80F98F00F7F225 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18479F101E80F98F00F7F225 /* SGQRCode.bundle */; };
 		18479F1F1E80F9CA00F7F225 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18479F1E1E80F9CA00F7F225 /* Main.storyboard */; };
 		8D19272E210DFF88002AE63A /* WBQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D19272D210DFF88002AE63A /* WBQRCodeVC.m */; };
-		8D1E052F212442610093EA25 /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E052C212442610093EA25 /* MBProgressHUD+SGQRCode.m */; };
-		8D1E0530212442610093EA25 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8D1E052E212442610093EA25 /* MBProgressHUD.bundle */; };
-		8D1E0536212443E00093EA25 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E0535212443E00093EA25 /* MBProgressHUD.m */; };
 		8D3DFEFE2662984800E02474 /* SGScanCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3DFEFD2662984800E02474 /* SGScanCode.m */; };
-		8D97EF66269325F700F30558 /* SGAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97EF63269325F700F30558 /* SGAuthorization.m */; };
+		8D805A6B2880EC1600E91BC4 /* SGQRCodeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D805A6A2880EC1600E91BC4 /* SGQRCodeLog.m */; };
+		8D82F1FB28781C5D00B72DE9 /* SGPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F1FA28781C5D00B72DE9 /* SGPermission.m */; };
+		8D82F1FE28781DEF00B72DE9 /* SGPermissionCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F1FD28781DEF00B72DE9 /* SGPermissionCamera.m */; };
+		8D82F207287834E200B72DE9 /* SGPermissionPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F206287834E200B72DE9 /* SGPermissionPhoto.m */; };
+		8D82F20E28785C0C00B72DE9 /* SGSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F20D28785C0C00B72DE9 /* SGSoundEffect.m */; };
+		8D82F2142879166000B72DE9 /* SGScanViewConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F2132879166000B72DE9 /* SGScanViewConfigure.m */; };
+		8D82F21828794E2500B72DE9 /* SGWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F21728794E2500B72DE9 /* SGWeakProxy.m */; };
+		8D82F22928798D1F00B72DE9 /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F22728798D1F00B72DE9 /* WCQRCodeVC.m */; };
+		8D82F22C28798FEA00B72DE9 /* WCToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F22B28798FEA00B72DE9 /* WCToolBar.m */; };
+		8D82F2362879A70D00B72DE9 /* UIImage+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F2352879A70D00B72DE9 /* UIImage+SGQRCode.m */; };
+		8D82F23A2879A9EA00B72DE9 /* SGTorch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F2392879A9EA00B72DE9 /* SGTorch.m */; };
+		8D82F23F2879C2A000B72DE9 /* MyQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F23E2879C2A000B72DE9 /* MyQRCodeVC.m */; };
+		8D893AF7287BBE5600CF3D7E /* QQQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D893AF6287BBE5600CF3D7E /* QQQRCodeVC.m */; };
+		8D893AFA287BBE7000CF3D7E /* XCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D893AF9287BBE7000CF3D7E /* XCQRCodeVC.m */; };
 		8D97EF67269325F700F30558 /* SGScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97EF65269325F700F30558 /* SGScanView.m */; };
-		8D97EF6A2693272A00F30558 /* SGCreateCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97EF692693272A00F30558 /* SGCreateCode.m */; };
+		8D97EF6A2693272A00F30558 /* SGGenerateQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97EF692693272A00F30558 /* SGGenerateQRCode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,12 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		180E36071F01F33E00A53E7A /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
-		180E36081F01F33E00A53E7A /* ScanSuccessJumpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanSuccessJumpVC.m; sourceTree = "<group>"; };
-		180E36091F01F33E00A53E7A /* WCQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
-		180E360A1F01F33E00A53E7A /* WCQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
-		180E360C1F01F33E00A53E7A /* SGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebView.h; sourceTree = "<group>"; };
-		180E360D1F01F33E00A53E7A /* SGWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebView.m; sourceTree = "<group>"; };
+		180E36071F01F33E00A53E7A /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		180E36081F01F33E00A53E7A /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		18479ECA1E80F92500F7F225 /* SGQRCodeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGQRCodeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18479ECE1E80F92500F7F225 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18479ED01E80F92500F7F225 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -73,19 +77,42 @@
 		18479F1E1E80F9CA00F7F225 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8D19272C210DFF87002AE63A /* WBQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBQRCodeVC.h; sourceTree = "<group>"; };
 		8D19272D210DFF88002AE63A /* WBQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBQRCodeVC.m; sourceTree = "<group>"; };
-		8D1E052C212442610093EA25 /* MBProgressHUD+SGQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+SGQRCode.m"; sourceTree = "<group>"; };
-		8D1E052D212442610093EA25 /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
-		8D1E052E212442610093EA25 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
-		8D1E0534212443E00093EA25 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		8D1E0535212443E00093EA25 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		8D3DFEFC2662984800E02474 /* SGScanCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGScanCode.h; sourceTree = "<group>"; };
 		8D3DFEFD2662984800E02474 /* SGScanCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGScanCode.m; sourceTree = "<group>"; };
+		8D805A692880EC1600E91BC4 /* SGQRCodeLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeLog.h; sourceTree = "<group>"; };
+		8D805A6A2880EC1600E91BC4 /* SGQRCodeLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeLog.m; sourceTree = "<group>"; };
+		8D82F1F928781C5D00B72DE9 /* SGPermission.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPermission.h; sourceTree = "<group>"; };
+		8D82F1FA28781C5D00B72DE9 /* SGPermission.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPermission.m; sourceTree = "<group>"; };
+		8D82F1FC28781DEF00B72DE9 /* SGPermissionCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPermissionCamera.h; sourceTree = "<group>"; };
+		8D82F1FD28781DEF00B72DE9 /* SGPermissionCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPermissionCamera.m; sourceTree = "<group>"; };
+		8D82F1FF28782C3E00B72DE9 /* SGPermissionEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPermissionEnum.h; sourceTree = "<group>"; };
+		8D82F205287834E200B72DE9 /* SGPermissionPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPermissionPhoto.h; sourceTree = "<group>"; };
+		8D82F206287834E200B72DE9 /* SGPermissionPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPermissionPhoto.m; sourceTree = "<group>"; };
+		8D82F209287859DB00B72DE9 /* SGScanCodeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGScanCodeDelegate.h; sourceTree = "<group>"; };
+		8D82F20C28785C0C00B72DE9 /* SGSoundEffect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSoundEffect.h; sourceTree = "<group>"; };
+		8D82F20D28785C0C00B72DE9 /* SGSoundEffect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSoundEffect.m; sourceTree = "<group>"; };
+		8D82F2122879166000B72DE9 /* SGScanViewConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGScanViewConfigure.h; sourceTree = "<group>"; };
+		8D82F2132879166000B72DE9 /* SGScanViewConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGScanViewConfigure.m; sourceTree = "<group>"; };
+		8D82F21628794E2500B72DE9 /* SGWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWeakProxy.h; sourceTree = "<group>"; };
+		8D82F21728794E2500B72DE9 /* SGWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWeakProxy.m; sourceTree = "<group>"; };
+		8D82F22728798D1F00B72DE9 /* WCQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
+		8D82F22828798D1F00B72DE9 /* WCQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
+		8D82F22A28798FEA00B72DE9 /* WCToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCToolBar.h; sourceTree = "<group>"; };
+		8D82F22B28798FEA00B72DE9 /* WCToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCToolBar.m; sourceTree = "<group>"; };
+		8D82F2342879A70D00B72DE9 /* UIImage+SGQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+SGQRCode.h"; sourceTree = "<group>"; };
+		8D82F2352879A70D00B72DE9 /* UIImage+SGQRCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SGQRCode.m"; sourceTree = "<group>"; };
+		8D82F2382879A9EA00B72DE9 /* SGTorch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGTorch.h; sourceTree = "<group>"; };
+		8D82F2392879A9EA00B72DE9 /* SGTorch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGTorch.m; sourceTree = "<group>"; };
+		8D82F23D2879C2A000B72DE9 /* MyQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQRCodeVC.h; sourceTree = "<group>"; };
+		8D82F23E2879C2A000B72DE9 /* MyQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyQRCodeVC.m; sourceTree = "<group>"; };
+		8D893AF5287BBE5600CF3D7E /* QQQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQQRCodeVC.h; sourceTree = "<group>"; };
+		8D893AF6287BBE5600CF3D7E /* QQQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QQQRCodeVC.m; sourceTree = "<group>"; };
+		8D893AF8287BBE7000CF3D7E /* XCQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCQRCodeVC.h; sourceTree = "<group>"; };
+		8D893AF9287BBE7000CF3D7E /* XCQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCQRCodeVC.m; sourceTree = "<group>"; };
 		8D97EF62269325F700F30558 /* SGScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGScanView.h; sourceTree = "<group>"; };
-		8D97EF63269325F700F30558 /* SGAuthorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAuthorization.m; sourceTree = "<group>"; };
-		8D97EF64269325F700F30558 /* SGAuthorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAuthorization.h; sourceTree = "<group>"; };
 		8D97EF65269325F700F30558 /* SGScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGScanView.m; sourceTree = "<group>"; };
-		8D97EF682693272A00F30558 /* SGCreateCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGCreateCode.h; sourceTree = "<group>"; };
-		8D97EF692693272A00F30558 /* SGCreateCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGCreateCode.m; sourceTree = "<group>"; };
+		8D97EF682693272A00F30558 /* SGGenerateQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGGenerateQRCode.h; sourceTree = "<group>"; };
+		8D97EF692693272A00F30558 /* SGGenerateQRCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGGenerateQRCode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,26 +140,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		180E36041F01F33E00A53E7A /* Controller */ = {
+		180E36041F01F33E00A53E7A /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				8D19272C210DFF87002AE63A /* WBQRCodeVC.h */,
-				8D19272D210DFF88002AE63A /* WBQRCodeVC.m */,
-				180E36091F01F33E00A53E7A /* WCQRCodeVC.h */,
-				180E360A1F01F33E00A53E7A /* WCQRCodeVC.m */,
-				180E36071F01F33E00A53E7A /* ScanSuccessJumpVC.h */,
-				180E36081F01F33E00A53E7A /* ScanSuccessJumpVC.m */,
+				180E36071F01F33E00A53E7A /* WebViewController.h */,
+				180E36081F01F33E00A53E7A /* WebViewController.m */,
 			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		180E360B1F01F33E00A53E7A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				180E360C1F01F33E00A53E7A /* SGWebView.h */,
-				180E360D1F01F33E00A53E7A /* SGWebView.m */,
-			);
-			path = View;
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		18479EC11E80F92500F7F225 = {
@@ -163,9 +177,12 @@
 				18479ED11E80F92500F7F225 /* AppDelegate.m */,
 				18479F061E80F97600F7F225 /* ViewController.h */,
 				18479F071E80F97700F7F225 /* ViewController.m */,
-				180E36041F01F33E00A53E7A /* Controller */,
-				180E360B1F01F33E00A53E7A /* View */,
-				8D1E052A212442610093EA25 /* ThirdParty */,
+				8D82F21E28798C5E00B72DE9 /* WC */,
+				8D893AF1287BBE0F00CF3D7E /* QQ */,
+				8D893AF2287BBE1F00CF3D7E /* XC */,
+				8D82F240287A59A200B72DE9 /* WB */,
+				8D82F23C2879C28000B72DE9 /* MyQRCode */,
+				180E36041F01F33E00A53E7A /* WebView */,
 				18479F1E1E80F9CA00F7F225 /* Main.storyboard */,
 				18479ED91E80F92500F7F225 /* Assets.xcassets */,
 				18479EDB1E80F92500F7F225 /* LaunchScreen.storyboard */,
@@ -205,37 +222,170 @@
 			isa = PBXGroup;
 			children = (
 				18479F111E80F98F00F7F225 /* SGQRCode.h */,
+				8D805A692880EC1600E91BC4 /* SGQRCodeLog.h */,
+				8D805A6A2880EC1600E91BC4 /* SGQRCodeLog.m */,
 				8D3DFEFC2662984800E02474 /* SGScanCode.h */,
 				8D3DFEFD2662984800E02474 /* SGScanCode.m */,
-				8D97EF62269325F700F30558 /* SGScanView.h */,
-				8D97EF65269325F700F30558 /* SGScanView.m */,
-				8D97EF682693272A00F30558 /* SGCreateCode.h */,
-				8D97EF692693272A00F30558 /* SGCreateCode.m */,
-				8D97EF64269325F700F30558 /* SGAuthorization.h */,
-				8D97EF63269325F700F30558 /* SGAuthorization.m */,
+				8D82F209287859DB00B72DE9 /* SGScanCodeDelegate.h */,
+				8D97EF682693272A00F30558 /* SGGenerateQRCode.h */,
+				8D97EF692693272A00F30558 /* SGGenerateQRCode.m */,
+				8D82F2152879168000B72DE9 /* SGScanView */,
+				8D82F2082878381000B72DE9 /* SGPermission */,
+				8D82F211287860BF00B72DE9 /* SGSoundEffect */,
+				8D82F2372879A9D600B72DE9 /* SGTorch */,
+				8D82F23B2879B5E900B72DE9 /* SGWeakProxy */,
+				8D82F2332879A6F400B72DE9 /* Category */,
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
 			);
 			path = SGQRCode;
 			sourceTree = "<group>";
 		};
-		8D1E052A212442610093EA25 /* ThirdParty */ = {
+		8D82F2082878381000B72DE9 /* SGPermission */ = {
 			isa = PBXGroup;
 			children = (
-				8D1E052B212442610093EA25 /* MBProgressHUD */,
+				8D82F1F928781C5D00B72DE9 /* SGPermission.h */,
+				8D82F1FA28781C5D00B72DE9 /* SGPermission.m */,
+				8D82F1FF28782C3E00B72DE9 /* SGPermissionEnum.h */,
+				8D82F1FC28781DEF00B72DE9 /* SGPermissionCamera.h */,
+				8D82F1FD28781DEF00B72DE9 /* SGPermissionCamera.m */,
+				8D82F205287834E200B72DE9 /* SGPermissionPhoto.h */,
+				8D82F206287834E200B72DE9 /* SGPermissionPhoto.m */,
 			);
-			path = ThirdParty;
+			path = SGPermission;
 			sourceTree = "<group>";
 		};
-		8D1E052B212442610093EA25 /* MBProgressHUD */ = {
+		8D82F211287860BF00B72DE9 /* SGSoundEffect */ = {
 			isa = PBXGroup;
 			children = (
-				8D1E0534212443E00093EA25 /* MBProgressHUD.h */,
-				8D1E0535212443E00093EA25 /* MBProgressHUD.m */,
-				8D1E052D212442610093EA25 /* MBProgressHUD+SGQRCode.h */,
-				8D1E052C212442610093EA25 /* MBProgressHUD+SGQRCode.m */,
-				8D1E052E212442610093EA25 /* MBProgressHUD.bundle */,
+				8D82F20C28785C0C00B72DE9 /* SGSoundEffect.h */,
+				8D82F20D28785C0C00B72DE9 /* SGSoundEffect.m */,
 			);
-			path = MBProgressHUD;
+			path = SGSoundEffect;
+			sourceTree = "<group>";
+		};
+		8D82F2152879168000B72DE9 /* SGScanView */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F2122879166000B72DE9 /* SGScanViewConfigure.h */,
+				8D82F2132879166000B72DE9 /* SGScanViewConfigure.m */,
+				8D97EF62269325F700F30558 /* SGScanView.h */,
+				8D97EF65269325F700F30558 /* SGScanView.m */,
+			);
+			path = SGScanView;
+			sourceTree = "<group>";
+		};
+		8D82F21E28798C5E00B72DE9 /* WC */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F22628798D1900B72DE9 /* Controller */,
+				8D82F21F28798C7900B72DE9 /* View */,
+			);
+			path = WC;
+			sourceTree = "<group>";
+		};
+		8D82F21F28798C7900B72DE9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F22A28798FEA00B72DE9 /* WCToolBar.h */,
+				8D82F22B28798FEA00B72DE9 /* WCToolBar.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8D82F22628798D1900B72DE9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F22828798D1F00B72DE9 /* WCQRCodeVC.h */,
+				8D82F22728798D1F00B72DE9 /* WCQRCodeVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8D82F2332879A6F400B72DE9 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F2342879A70D00B72DE9 /* UIImage+SGQRCode.h */,
+				8D82F2352879A70D00B72DE9 /* UIImage+SGQRCode.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		8D82F2372879A9D600B72DE9 /* SGTorch */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F2382879A9EA00B72DE9 /* SGTorch.h */,
+				8D82F2392879A9EA00B72DE9 /* SGTorch.m */,
+			);
+			path = SGTorch;
+			sourceTree = "<group>";
+		};
+		8D82F23B2879B5E900B72DE9 /* SGWeakProxy */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F21628794E2500B72DE9 /* SGWeakProxy.h */,
+				8D82F21728794E2500B72DE9 /* SGWeakProxy.m */,
+			);
+			path = SGWeakProxy;
+			sourceTree = "<group>";
+		};
+		8D82F23C2879C28000B72DE9 /* MyQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F23D2879C2A000B72DE9 /* MyQRCodeVC.h */,
+				8D82F23E2879C2A000B72DE9 /* MyQRCodeVC.m */,
+			);
+			path = MyQRCode;
+			sourceTree = "<group>";
+		};
+		8D82F240287A59A200B72DE9 /* WB */ = {
+			isa = PBXGroup;
+			children = (
+				8D82F241287A59BC00B72DE9 /* Controller */,
+			);
+			path = WB;
+			sourceTree = "<group>";
+		};
+		8D82F241287A59BC00B72DE9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8D19272C210DFF87002AE63A /* WBQRCodeVC.h */,
+				8D19272D210DFF88002AE63A /* WBQRCodeVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8D893AF1287BBE0F00CF3D7E /* QQ */ = {
+			isa = PBXGroup;
+			children = (
+				8D893AF3287BBE3500CF3D7E /* Controller */,
+			);
+			path = QQ;
+			sourceTree = "<group>";
+		};
+		8D893AF2287BBE1F00CF3D7E /* XC */ = {
+			isa = PBXGroup;
+			children = (
+				8D893AF4287BBE3B00CF3D7E /* Controller */,
+			);
+			path = XC;
+			sourceTree = "<group>";
+		};
+		8D893AF3287BBE3500CF3D7E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8D893AF5287BBE5600CF3D7E /* QQQRCodeVC.h */,
+				8D893AF6287BBE5600CF3D7E /* QQQRCodeVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8D893AF4287BBE3B00CF3D7E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8D893AF8287BBE7000CF3D7E /* XCQRCodeVC.h */,
+				8D893AF9287BBE7000CF3D7E /* XCQRCodeVC.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,7 +496,6 @@
 			files = (
 				18479EDD1E80F92500F7F225 /* LaunchScreen.storyboard in Resources */,
 				18479EDA1E80F92500F7F225 /* Assets.xcassets in Resources */,
-				8D1E0530212442610093EA25 /* MBProgressHUD.bundle in Resources */,
 				18479F1A1E80F98F00F7F225 /* SGQRCode.bundle in Resources */,
 				18479F1F1E80F9CA00F7F225 /* Main.storyboard in Resources */,
 			);
@@ -374,18 +523,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D19272E210DFF88002AE63A /* WBQRCodeVC.m in Sources */,
+				8D82F1FE28781DEF00B72DE9 /* SGPermissionCamera.m in Sources */,
 				18479F0B1E80F97700F7F225 /* ViewController.m in Sources */,
-				180E360F1F01F33E00A53E7A /* ScanSuccessJumpVC.m in Sources */,
-				180E36101F01F33E00A53E7A /* WCQRCodeVC.m in Sources */,
-				8D1E052F212442610093EA25 /* MBProgressHUD+SGQRCode.m in Sources */,
-				8D97EF66269325F700F30558 /* SGAuthorization.m in Sources */,
-				8D97EF6A2693272A00F30558 /* SGCreateCode.m in Sources */,
-				8D1E0536212443E00093EA25 /* MBProgressHUD.m in Sources */,
+				180E360F1F01F33E00A53E7A /* WebViewController.m in Sources */,
+				8D82F21828794E2500B72DE9 /* SGWeakProxy.m in Sources */,
+				8D82F23F2879C2A000B72DE9 /* MyQRCodeVC.m in Sources */,
+				8D805A6B2880EC1600E91BC4 /* SGQRCodeLog.m in Sources */,
+				8D893AF7287BBE5600CF3D7E /* QQQRCodeVC.m in Sources */,
+				8D82F22C28798FEA00B72DE9 /* WCToolBar.m in Sources */,
+				8D82F22928798D1F00B72DE9 /* WCQRCodeVC.m in Sources */,
+				8D82F2362879A70D00B72DE9 /* UIImage+SGQRCode.m in Sources */,
+				8D97EF6A2693272A00F30558 /* SGGenerateQRCode.m in Sources */,
+				8D82F1FB28781C5D00B72DE9 /* SGPermission.m in Sources */,
 				18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */,
+				8D82F20E28785C0C00B72DE9 /* SGSoundEffect.m in Sources */,
+				8D82F2142879166000B72DE9 /* SGScanViewConfigure.m in Sources */,
 				8D3DFEFE2662984800E02474 /* SGScanCode.m in Sources */,
+				8D82F23A2879A9EA00B72DE9 /* SGTorch.m in Sources */,
 				8D97EF67269325F700F30558 /* SGScanView.m in Sources */,
-				180E36111F01F33E00A53E7A /* SGWebView.m in Sources */,
+				8D82F207287834E200B72DE9 /* SGPermissionPhoto.m in Sources */,
 				18479ECF1E80F92500F7F225 /* main.m in Sources */,
+				8D893AFA287BBE7000CF3D7E /* XCQRCodeVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,10 +734,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SGQRCodeExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGQRCodeExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SGQRCodeExample.app/SGQRCodeExample";
 			};
 			name = Debug;
@@ -588,10 +752,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SGQRCodeExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGQRCodeExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SGQRCodeExample.app/SGQRCodeExample";
 			};
 			name = Release;

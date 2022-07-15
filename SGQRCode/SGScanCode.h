@@ -7,50 +7,43 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SGScanCode;
-
-typedef void(^SGScanCodeScanResultBlock)(SGScanCode *scanCode, NSString *result);
-typedef void(^SGScanCodeScanBrightnessBlock)(SGScanCode *scanCode, CGFloat brightness);
-typedef void(^SGScanCodeReadResultBlock)(SGScanCode *scanCode, NSString *result);
-typedef void(^SGScanCodeAlbumDidCancelBlock)(SGScanCode *scanCode);
+#import "SGScanCodeDelegate.h"
 
 @interface SGScanCode : NSObject
-/** 扫描区域，默认为整个视图，取值范围：0～1（以屏幕右上角为坐标原点）*/
-@property (nonatomic, assign) CGRect scanArea;
-/** 捕获外界光线亮度，默认为：NO */
-@property (nonatomic, assign) BOOL brightness;
-/** 判断相册访问权限是否授权 */
-@property (nonatomic, assign) BOOL albumAuthorization;
-/** 打印信息，默认为：NO */
-@property (nonatomic, assign) BOOL openLog;
-
-/** 类方法创建 */
+/// 类方法创建
 + (instancetype)scanCode;
 
-/** 后置摄像头是否可用 */
-- (BOOL)isCameraDeviceRearAvailable;
+/// 预览视图，必须设置（传外界控制器视图）
+@property (nonatomic, strong) UIView *preview;
 
-/** 扫码回调方法 */
-- (void)scanWithController:(UIViewController *)controller resultBlock:(SGScanCodeScanResultBlock)blcok;
-/** 扫码时，捕获外界光线强弱回调方法（brightness = YES 时，此回调方法才有效）*/
-- (void)scanWithBrightnessBlock:(SGScanCodeScanBrightnessBlock)blcok;
+/// 扫描区域，以屏幕右上角为坐标原点，取值范围：0～1，默认为整个屏幕
+@property (nonatomic, assign) CGRect rectOfInterest;
 
-/** 从相册中读码回调方法 */
-- (void)readWithResultBlock:(SGScanCodeReadResultBlock)block;
-/** 相册选择控制器取消按钮的点击回调方法 */
-- (void)albumDidCancelBlock:(SGScanCodeAlbumDidCancelBlock)block;
+/// 扫描二维码数据代理
+@property (nonatomic, weak) id<SGScanCodeDelegate> delegate;
 
-/** 开启扫描回调 */
-- (void)startRunningWithBefore:(void (^)(void))before completion:(void (^)(void))completion;
-/** 停止扫描 */
+/// 采样缓冲区代理
+@property (nonatomic, weak) id<SGScanCodeSampleBufferDelegate> sampleBufferDelegate;
+
+
+/// 读取图片中的二维码
+///
+/// @param image            图片
+/// @param completion       回调方法，读取成功时，回调参数 result 等于二维码数据，否则等于 nil
+- (void)readQRCode:(UIImage *)image completion:(void (^)(NSString *result))completion;
+
+/// 设置焦距大小（焦距拉近放大）
+- (void)setVideoZoomFactor:(CGFloat)factor;
+
+/// 检测后置摄像头是否可用
+- (BOOL)checkCameraDeviceRearAvailable;
+
+/// 开启扫描
+- (void)startRunning;
+/// 停止扫描
 - (void)stopRunning;
 
-/** 播放音效文件 */
+/// 播放音效
 - (void)playSoundName:(NSString *)name;
-
-/** 打开手电筒 */
-- (void)turnOnFlashlight;
-/** 关闭手电筒 */
-- (void)turnOffFlashlight;
 
 @end
