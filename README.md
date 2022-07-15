@@ -44,41 +44,45 @@
 ## SGQRCode 集成流程
 
 **手动集成**
+
 `添加 SGQRCode 文件夹到工程中`
 
 **通过 CocoaPods 集成**
+
 `pod 'SGQRCode', '~> 4.0.0'`
 
 
 **Info.plist 添加以下字段**
+
 `NSCameraUsageDescription (相机权限访问)`<br>
 
 `NSPhotoLibraryUsageDescription (相册权限访问)`<br>
 
 
 **引用头文件**
+
 `#import <SGQRCode/SGQRCode.h>`
 
 
 **扫描二维码相关代码**
 ```Objective-C
-    // 创建二维码扫描类
-    scanCode = [SGScanCode scanCode];
-    
-    // 预览视图，必须设置
-    scanCode.preview = self.view;
+// 创建二维码扫描类
+scanCode = [SGScanCode scanCode];
 
-    // 遵循 SGScanCodeDelegate
-    scanCode.delegate = self;
+// 预览视图，必须设置
+scanCode.preview = self.view;
 
-    // 遵循 SGScanCodeSampleBufferDelegate
-    scanCode.sampleBufferDelegate = self;
-    
-    // 开启扫描
-    [scanCode startRunning];
-    
-    // 结束扫描
-    [scanCode stopRunning];
+// 遵循 SGScanCodeDelegate
+scanCode.delegate = self;
+
+// 遵循 SGScanCodeSampleBufferDelegate
+scanCode.sampleBufferDelegate = self;
+
+// 开启扫描
+[scanCode startRunning];
+
+// 结束扫描
+[scanCode stopRunning];
 ```
 
 **Delegate 方法**
@@ -103,19 +107,19 @@
 
 **生成二维码相关代码**
 ```Objective-C
-    // 普通二维码生成方法
-    [SGGenerateQRCode generateQRCodeWithData:data size:size];
-    
-    // 带 logo 的二维码生成方法
-    [SGGenerateQRCode generateQRCodeWithData:data size:size logoImage:logoImage ratio:ratio];
+// 普通二维码生成方法
+[SGGenerateQRCode generateQRCodeWithData:data size:size];
+
+// 带 logo 的二维码生成方法
+[SGGenerateQRCode generateQRCodeWithData:data size:size logoImage:logoImage ratio:ratio];
 ```
 
 
 ## 效果图
 
-<img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_1.png" width="40%" height="40%"><img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_2.png" width="40%" height="40%">
-<img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_3.png" width="40%" height="40%"><img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_4.png" width="40%" height="40%">
-<img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_5.png" width="40%" height="40%"><img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_6.png" width="40%" height="40%">
+<img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_1.png" width="40%" height="40%">  <img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_2.png" width="40%" height="40%">
+<img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_3.png" width="40%" height="40%">  <img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_4.png" width="40%" height="40%">
+<img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_5.png" width="40%" height="40%">  <img src="https://github.com/kingsic/SGQRCode/raw/master/Pictures/sgqrcode_6.png" width="40%" height="40%">
 
 
 ## 问题及解决方案
