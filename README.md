@@ -17,7 +17,7 @@
 
 `扫描二维码`<br>
 
-`手动对焦功能`<br>
+`捕获内容缩放功能`<br>
 
 `图片中识别二维码`<br>
 
@@ -34,7 +34,7 @@
 | 类名 | 说明 |
 |-----|-----|
 | SGScanCode    | 扫描二维码 |
-| SGScanViewConfigure     | 扫描视图属性配置 |
+| SGScanViewConfigure     | 扫描视图配置 |
 | SGScanView     | 扫描视图 |
 | SGPermission     | 相册、相机权限管理 |
 | SGTorch     | 手电筒管理 |
@@ -49,7 +49,7 @@
 
 **通过 CocoaPods 集成**
 
-`pod 'SGQRCode', '~> 4.0.0'`
+`pod 'SGQRCode', '~> 4.1.0'`
 
 
 **Info.plist 添加以下字段**
@@ -98,14 +98,14 @@ scanCode.sampleBufferDelegate = self;
 }
 ```
 
-**图片中识别二维码代码**
+**图片中识别二维码方法**
 ```Objective-C
 [scanCode readQRCode:image completion:^(NSString *result) {
     <#code#>
 }];
 ```
 
-**生成二维码相关代码**
+**生成二维码相关方法**
 ```Objective-C
 // 普通二维码生成方法
 [SGGenerateQRCode generateQRCodeWithData:data size:size];
@@ -134,6 +134,8 @@ scanCode.sampleBufferDelegate = self;
 * 2021-07-05 ：v3.5.1 版本重构：修复 [#163](https://github.com/kingsic/SGQRCode/issues/163) 问题，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases/tag/3.5.1) 中查看
 
 * 2022-07-16 ：v4.0.0 版本重构：Delegate 取代 Block，新增手动对焦功能，优化拓展扫描视图，更多内容请在 [releases](https://github.com/kingsic/SGQRCode/releases/tag/4.0.0) 中查看
+
+* 2022-07-16 ：v4.1.0 优化SGScanView内部代码逻辑，修复无扫描线时，导致程序崩溃问题
 
 
 ## License

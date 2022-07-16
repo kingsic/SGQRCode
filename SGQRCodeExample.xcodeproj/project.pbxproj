@@ -28,7 +28,6 @@
 		8D82F21828794E2500B72DE9 /* SGWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F21728794E2500B72DE9 /* SGWeakProxy.m */; };
 		8D82F22928798D1F00B72DE9 /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F22728798D1F00B72DE9 /* WCQRCodeVC.m */; };
 		8D82F22C28798FEA00B72DE9 /* WCToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F22B28798FEA00B72DE9 /* WCToolBar.m */; };
-		8D82F2362879A70D00B72DE9 /* UIImage+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F2352879A70D00B72DE9 /* UIImage+SGQRCode.m */; };
 		8D82F23A2879A9EA00B72DE9 /* SGTorch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F2392879A9EA00B72DE9 /* SGTorch.m */; };
 		8D82F23F2879C2A000B72DE9 /* MyQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D82F23E2879C2A000B72DE9 /* MyQRCodeVC.m */; };
 		8D893AF7287BBE5600CF3D7E /* QQQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D893AF6287BBE5600CF3D7E /* QQQRCodeVC.m */; };
@@ -85,7 +84,6 @@
 		8D82F1FA28781C5D00B72DE9 /* SGPermission.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPermission.m; sourceTree = "<group>"; };
 		8D82F1FC28781DEF00B72DE9 /* SGPermissionCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPermissionCamera.h; sourceTree = "<group>"; };
 		8D82F1FD28781DEF00B72DE9 /* SGPermissionCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPermissionCamera.m; sourceTree = "<group>"; };
-		8D82F1FF28782C3E00B72DE9 /* SGPermissionEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPermissionEnum.h; sourceTree = "<group>"; };
 		8D82F205287834E200B72DE9 /* SGPermissionPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPermissionPhoto.h; sourceTree = "<group>"; };
 		8D82F206287834E200B72DE9 /* SGPermissionPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPermissionPhoto.m; sourceTree = "<group>"; };
 		8D82F209287859DB00B72DE9 /* SGScanCodeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGScanCodeDelegate.h; sourceTree = "<group>"; };
@@ -99,8 +97,6 @@
 		8D82F22828798D1F00B72DE9 /* WCQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
 		8D82F22A28798FEA00B72DE9 /* WCToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCToolBar.h; sourceTree = "<group>"; };
 		8D82F22B28798FEA00B72DE9 /* WCToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCToolBar.m; sourceTree = "<group>"; };
-		8D82F2342879A70D00B72DE9 /* UIImage+SGQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+SGQRCode.h"; sourceTree = "<group>"; };
-		8D82F2352879A70D00B72DE9 /* UIImage+SGQRCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SGQRCode.m"; sourceTree = "<group>"; };
 		8D82F2382879A9EA00B72DE9 /* SGTorch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGTorch.h; sourceTree = "<group>"; };
 		8D82F2392879A9EA00B72DE9 /* SGTorch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGTorch.m; sourceTree = "<group>"; };
 		8D82F23D2879C2A000B72DE9 /* MyQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQRCodeVC.h; sourceTree = "<group>"; };
@@ -224,46 +220,52 @@
 				18479F111E80F98F00F7F225 /* SGQRCode.h */,
 				8D805A692880EC1600E91BC4 /* SGQRCodeLog.h */,
 				8D805A6A2880EC1600E91BC4 /* SGQRCodeLog.m */,
-				8D3DFEFC2662984800E02474 /* SGScanCode.h */,
-				8D3DFEFD2662984800E02474 /* SGScanCode.m */,
-				8D82F209287859DB00B72DE9 /* SGScanCodeDelegate.h */,
-				8D97EF682693272A00F30558 /* SGGenerateQRCode.h */,
-				8D97EF692693272A00F30558 /* SGGenerateQRCode.m */,
-				8D82F2152879168000B72DE9 /* SGScanView */,
-				8D82F2082878381000B72DE9 /* SGPermission */,
-				8D82F211287860BF00B72DE9 /* SGSoundEffect */,
-				8D82F2372879A9D600B72DE9 /* SGTorch */,
-				8D82F23B2879B5E900B72DE9 /* SGWeakProxy */,
-				8D82F2332879A6F400B72DE9 /* Category */,
+				8D80F188288246EA00BB415B /* QRCode */,
+				8D82F2152879168000B72DE9 /* ScanView */,
+				8D82F2082878381000B72DE9 /* Permission */,
+				8D82F211287860BF00B72DE9 /* SoundEffect */,
+				8D82F2372879A9D600B72DE9 /* Torch */,
+				8D82F23B2879B5E900B72DE9 /* WeakProxy */,
 				18479F101E80F98F00F7F225 /* SGQRCode.bundle */,
 			);
 			path = SGQRCode;
 			sourceTree = "<group>";
 		};
-		8D82F2082878381000B72DE9 /* SGPermission */ = {
+		8D80F188288246EA00BB415B /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				8D97EF682693272A00F30558 /* SGGenerateQRCode.h */,
+				8D97EF692693272A00F30558 /* SGGenerateQRCode.m */,
+				8D3DFEFC2662984800E02474 /* SGScanCode.h */,
+				8D3DFEFD2662984800E02474 /* SGScanCode.m */,
+				8D82F209287859DB00B72DE9 /* SGScanCodeDelegate.h */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
+		8D82F2082878381000B72DE9 /* Permission */ = {
 			isa = PBXGroup;
 			children = (
 				8D82F1F928781C5D00B72DE9 /* SGPermission.h */,
 				8D82F1FA28781C5D00B72DE9 /* SGPermission.m */,
-				8D82F1FF28782C3E00B72DE9 /* SGPermissionEnum.h */,
 				8D82F1FC28781DEF00B72DE9 /* SGPermissionCamera.h */,
 				8D82F1FD28781DEF00B72DE9 /* SGPermissionCamera.m */,
 				8D82F205287834E200B72DE9 /* SGPermissionPhoto.h */,
 				8D82F206287834E200B72DE9 /* SGPermissionPhoto.m */,
 			);
-			path = SGPermission;
+			path = Permission;
 			sourceTree = "<group>";
 		};
-		8D82F211287860BF00B72DE9 /* SGSoundEffect */ = {
+		8D82F211287860BF00B72DE9 /* SoundEffect */ = {
 			isa = PBXGroup;
 			children = (
 				8D82F20C28785C0C00B72DE9 /* SGSoundEffect.h */,
 				8D82F20D28785C0C00B72DE9 /* SGSoundEffect.m */,
 			);
-			path = SGSoundEffect;
+			path = SoundEffect;
 			sourceTree = "<group>";
 		};
-		8D82F2152879168000B72DE9 /* SGScanView */ = {
+		8D82F2152879168000B72DE9 /* ScanView */ = {
 			isa = PBXGroup;
 			children = (
 				8D82F2122879166000B72DE9 /* SGScanViewConfigure.h */,
@@ -271,7 +273,7 @@
 				8D97EF62269325F700F30558 /* SGScanView.h */,
 				8D97EF65269325F700F30558 /* SGScanView.m */,
 			);
-			path = SGScanView;
+			path = ScanView;
 			sourceTree = "<group>";
 		};
 		8D82F21E28798C5E00B72DE9 /* WC */ = {
@@ -301,31 +303,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		8D82F2332879A6F400B72DE9 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				8D82F2342879A70D00B72DE9 /* UIImage+SGQRCode.h */,
-				8D82F2352879A70D00B72DE9 /* UIImage+SGQRCode.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		8D82F2372879A9D600B72DE9 /* SGTorch */ = {
+		8D82F2372879A9D600B72DE9 /* Torch */ = {
 			isa = PBXGroup;
 			children = (
 				8D82F2382879A9EA00B72DE9 /* SGTorch.h */,
 				8D82F2392879A9EA00B72DE9 /* SGTorch.m */,
 			);
-			path = SGTorch;
+			path = Torch;
 			sourceTree = "<group>";
 		};
-		8D82F23B2879B5E900B72DE9 /* SGWeakProxy */ = {
+		8D82F23B2879B5E900B72DE9 /* WeakProxy */ = {
 			isa = PBXGroup;
 			children = (
 				8D82F21628794E2500B72DE9 /* SGWeakProxy.h */,
 				8D82F21728794E2500B72DE9 /* SGWeakProxy.m */,
 			);
-			path = SGWeakProxy;
+			path = WeakProxy;
 			sourceTree = "<group>";
 		};
 		8D82F23C2879C28000B72DE9 /* MyQRCode */ = {
@@ -532,7 +525,6 @@
 				8D893AF7287BBE5600CF3D7E /* QQQRCodeVC.m in Sources */,
 				8D82F22C28798FEA00B72DE9 /* WCToolBar.m in Sources */,
 				8D82F22928798D1F00B72DE9 /* WCQRCodeVC.m in Sources */,
-				8D82F2362879A70D00B72DE9 /* UIImage+SGQRCode.m in Sources */,
 				8D97EF6A2693272A00F30558 /* SGGenerateQRCode.m in Sources */,
 				8D82F1FB28781C5D00B72DE9 /* SGPermission.m in Sources */,
 				18479ED21E80F92500F7F225 /* AppDelegate.m in Sources */,

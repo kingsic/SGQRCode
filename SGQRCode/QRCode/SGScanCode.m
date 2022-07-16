@@ -135,7 +135,7 @@
     }
 }
 
-- (void)playSoundName:(NSString *)name {
+- (void)playSoundEffect:(NSString *)name {
     /// 静态库 path 的获取
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:nil];
     if (!path) {

@@ -93,7 +93,7 @@
 - (UIButton *)torchBtn {
     if (!_torchBtn) {
         _torchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_torchBtn setBackgroundImage:[UIImage SG_imageWithResource:@"SGQRCode" imageName:@"wc_scan_torch"] forState:(UIControlStateNormal)];
+        [_torchBtn setBackgroundImage:[UIImage imageNamed:@"wc_scan_torch"] forState:(UIControlStateNormal)];
         [_torchBtn addTarget:self action:@selector(torchBtn_action:) forControlEvents:(UIControlEventTouchUpInside)];
         _torchBtn.hidden = YES;
     }
@@ -115,12 +115,12 @@
 - (void)torchBtn_action:(UIButton *)btn {
     if (btn.selected) {
         btn.selected = NO;
-        [btn setBackgroundImage:[UIImage SG_imageWithResource:@"SGQRCode" imageName:@"wc_scan_torch"] forState:(UIControlStateNormal)];
+        [btn setBackgroundImage:[UIImage imageNamed:@"wc_scan_torch"] forState:(UIControlStateNormal)];
         [SGTorch turnOffTorch];
         self.torchLab.text = @"轻触照亮";
     } else {
         btn.selected = YES;
-        [btn setBackgroundImage:[UIImage SG_imageWithResource:@"SGQRCode" imageName:@"wc_scan_torch_hl"] forState:(UIControlStateNormal)];
+        [btn setBackgroundImage:[UIImage imageNamed:@"wc_scan_torch_hl"] forState:(UIControlStateNormal)];
         self.torchLab.text = @"轻触关闭";
         [SGTorch turnOnTorch];
     }

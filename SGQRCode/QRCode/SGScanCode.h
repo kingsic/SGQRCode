@@ -32,7 +32,7 @@
 /// @param completion       回调方法，读取成功时，回调参数 result 等于二维码数据，否则等于 nil
 - (void)readQRCode:(UIImage *)image completion:(void (^)(NSString *result))completion;
 
-/// 设置焦距大小（焦距拉近放大）
+/// 设置视频缩放因子（捕获内容）
 - (void)setVideoZoomFactor:(CGFloat)factor;
 
 /// 检测后置摄像头是否可用
@@ -44,6 +44,6 @@
 - (void)stopRunning;
 
 /// 播放音效
-- (void)playSoundName:(NSString *)name;
+- (void)playSoundEffect:(NSString *)name;
 
 @end

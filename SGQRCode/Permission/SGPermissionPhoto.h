@@ -6,7 +6,8 @@
 //  Copyright © 2022 kingsic. All rights reserved.
 //
 
-#import "SGPermissionEnum.h"
+#import <Foundation/Foundation.h>
+#import "SGPermission.h"
 
 @class SGPermissionPhoto;
 

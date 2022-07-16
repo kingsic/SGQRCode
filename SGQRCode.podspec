@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
     s.name         = 'SGQRCode'
-    s.version      = '4.0.0'
+    s.version      = '4.1.0'
     s.summary      = 'The easy to use bar code and QR code scan library for iOS'
     s.homepage     = 'https://github.com/kingsic/SGQRCode'
     s.license      = 'Apache-2.0'

@@ -81,7 +81,7 @@
 - (void)scanCode:(SGScanCode *)scanCode result:(NSString *)result {
     [self stop];
     
-    [scanCode playSoundName:@"SGQRCode.bundle/scan_end_sound.caf"];
+    [scanCode playSoundEffect:@"SGQRCode.bundle/scan_end_sound.caf"];
     
     WebViewController *jumpVC = [[WebViewController alloc] init];
     jumpVC.comeFromVC = ComeFromWC;
@@ -165,7 +165,6 @@
                 }
             }];
         } else if (status == SGPermissionStatusAuthorized) {
-            NSLog(@"SGPermissionStatusAuthorized - - %@", [NSThread currentThread]);
             [self _enterImagePickerController];
         } else if (status == SGPermissionStatusDenied) {
             NSLog(@"SGPermissionStatusDenied");
@@ -216,6 +215,8 @@
             [self dismissViewControllerAnimated:YES completion:nil];
             [self start];
         } else {
+            [self->scanCode playSoundEffect:@"SGQRCode.bundle/scan_end_sound.caf"];
+
             [self dismissViewControllerAnimated:YES completion:^{
                 WebViewController *jumpVC = [[WebViewController alloc] init];
                 jumpVC.comeFromVC = ComeFromWC;

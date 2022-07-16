@@ -23,7 +23,7 @@
 
 - (NSString *)scanline {
     if (!_scanline) {
-        return @"SGQRCode.bundle/scan_scanline_wc";
+        return @"scan_scanline_wc";
     }
     return _scanline;
 }

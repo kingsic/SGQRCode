@@ -90,7 +90,9 @@
         }
         _scanlineImgView.image = image;
         
-        [self updateScanLineFrame];
+        if (image) {
+            [self updateScanLineFrame];
+        }
     }
     return _scanlineImgView;
 }
@@ -256,7 +258,9 @@
     
     self.contentView.frame = scanFrame;
     
-    [self updateScanLineFrame];
+    if (self.scanlineImgView.image) {
+        [self updateScanLineFrame];
+    }
 }
     
 - (void)updateScanLineFrame {
@@ -268,6 +272,10 @@
 }
 
 - (void)startScanning {
+    if (self.scanlineImgView.image == nil) {
+        return;
+    }
+    
     [self.contentView addSubview:self.scanlineImgView];
     
     if (self.link == nil) {
@@ -277,6 +285,15 @@
 }
 
 - (void)stopScanning {
+    if (self.scanlineImgView.image == nil) {
+        return;
+    }
+    
+    // 此代码防止由于外界逻辑，可能会导致多次停止
+    if (self.link == nil) {
+        return;
+    }
+    
     [self.scanlineImgView removeFromSuperview];
     self.scanlineImgView = nil;
     

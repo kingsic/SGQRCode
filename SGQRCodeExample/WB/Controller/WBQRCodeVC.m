@@ -74,8 +74,8 @@
 - (void)scanCode:(SGScanCode *)scanCode result:(NSString *)result {
     [self stop];
     
-    [scanCode playSoundName:@"SGQRCode.bundle/scanEndSound.caf"];
-    
+    [scanCode playSoundEffect:@"SGQRCode.bundle/scan_end_sound.caf"];
+
     WebViewController *jumpVC = [[WebViewController alloc] init];
     jumpVC.comeFromVC = ComeFromWB;
     [self.navigationController pushViewController:jumpVC animated:YES];
