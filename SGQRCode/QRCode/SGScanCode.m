@@ -38,7 +38,7 @@
 }
 
 - (instancetype)init {
-    if ([super init]) {
+    if (self = [super init]) {
         self.captureQueue = dispatch_queue_create("com.SGQRCode.captureQueue", DISPATCH_QUEUE_CONCURRENT);
         
         /// 将设备输入对象添加到会话对象中
