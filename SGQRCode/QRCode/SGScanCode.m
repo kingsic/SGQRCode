@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSArray *metadataObjectTypes;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @property (nonatomic, strong) dispatch_queue_t captureQueue;
+@property (nonatomic, strong) dispatch_queue_t runQueue;
+
 @end
 
 @implementation SGScanCode
@@ -40,7 +42,7 @@
 - (instancetype)init {
     if ([super init]) {
         self.captureQueue = dispatch_queue_create("com.SGQRCode.captureQueue", DISPATCH_QUEUE_CONCURRENT);
-        
+        self.runQueue = dispatch_queue_create("com.SGQRCode.runqueue", DISPATCH_QUEUE_SERIAL);
         /// 将设备输入对象添加到会话对象中
         if ([self.session canAddInput:self.deviceInput]) {
             [self.session addInput:self.deviceInput];
@@ -124,15 +126,19 @@
 }
 
 - (void)startRunning {
+  dispatch_async(self.runQueue, ^{
     if (![self.session isRunning]) {
         [self.session startRunning];
     }
+  });
 }
 
 - (void)stopRunning {
+  dispatch_async(self.runQueue, ^{
     if ([self.session isRunning]) {
         [self.session stopRunning];
     }
+  });
 }
 
 - (void)playSoundEffect:(NSString *)name {
@@ -159,7 +165,20 @@
 
 - (AVCaptureDevice *)device {
     if (!_device) {
-        _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+      _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+      if (@available(iOS 13.0, *)) {
+        AVCaptureDeviceDiscoverySession *discoverySession = [AVCaptureDeviceDiscoverySession
+                                                             discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInDualWideCamera]
+                                                             mediaType:AVMediaTypeVideo
+                                                             position:AVCaptureDevicePositionBack];
+        // 获取发现的设备数组
+        NSArray<AVCaptureDevice *> *devices = discoverySession.devices;
+        // 选择其中一个摄像头设备，例如第一个
+        if (devices.count > 0) {
+          AVCaptureDevice *selectedDevice = devices.firstObject;
+          _device = selectedDevice;
+        }
+      }
     }
     return _device;
 }
