@@ -55,8 +55,9 @@
 
 #pragma mark - - .h公开的属性
 - (void)setPreview:(UIView *)preview {
-    _preview = preview;
-    [preview.layer insertSublayer:self.videoPreviewLayer atIndex:0];
+  _preview = preview;
+  [preview.layer insertSublayer:self.videoPreviewLayer atIndex:0];
+  [self addEventObserver];
 }
 
 - (void)setDelegate:(id<SGScanCodeDelegate>)delegate {
@@ -153,6 +154,19 @@
     [soundEffect play];
 }
 
+#pragma mark - 屏幕旋转
+- (void)addEventObserver{
+  __weak typeof(self) weakSelf = self;
+  void(^result)(NSNotification* ) = ^(NSNotification* notification){
+    if(nil == weakSelf){return;}
+    AVCaptureConnection* connection = weakSelf.videoPreviewLayer.connection;
+    if(NO == connection.isVideoOrientationSupported){return;}
+    [connection setVideoOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+    weakSelf.videoPreviewLayer.frame = weakSelf.preview.bounds;
+  };
+  [[NSNotificationCenter defaultCenter]addObserverForName:@"SGScanViewBoundUpdate" object:nil queue:[NSOperationQueue mainQueue] usingBlock:result];
+  [[NSNotificationCenter defaultCenter]addObserverForName:UIApplicationDidChangeStatusBarOrientationNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:result];
+}
 
 #pragma mark - - 内部属性
 - (AVCaptureSession *)session {
@@ -210,7 +224,6 @@
     if (!_videoPreviewLayer) {
         _videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
         _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        _videoPreviewLayer.frame = self.preview.frame;
     }
     return _videoPreviewLayer;
 }

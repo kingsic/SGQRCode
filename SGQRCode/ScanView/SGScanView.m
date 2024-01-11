@@ -335,4 +335,10 @@
     }
 }
 
+
+- (void)layoutSubviews{
+  [super layoutSubviews];
+  [[NSNotificationCenter defaultCenter]postNotificationName:@"SGScanViewBoundUpdate" object:NSStringFromCGRect(self.bounds)];
+}
+
 @end
