@@ -154,6 +154,28 @@
     [soundEffect play];
 }
 
+
+- (void)turnOnTorch {
+    AVCaptureDevice *device = self.device;
+    if ([device hasTorch]) {
+        BOOL locked = [device lockForConfiguration:nil];
+        if (locked) {
+            [device setTorchMode:AVCaptureTorchModeOn];
+            [device unlockForConfiguration];
+        }
+    }
+}
+
+- (void)turnOffTorch {
+  AVCaptureDevice *device = self.device;
+    if ([device hasTorch]) {
+        [device lockForConfiguration:nil];
+        [device setTorchMode:AVCaptureTorchModeOff];
+        [device unlockForConfiguration];
+    }
+}
+
+
 #pragma mark - 屏幕旋转
 - (void)addEventObserver{
   __weak typeof(self) weakSelf = self;
