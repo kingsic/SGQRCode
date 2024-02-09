@@ -46,4 +46,9 @@
 /// 播放音效
 - (void)playSoundEffect:(NSString *)name;
 
+///打开手电筒
+- (void)turnOnTorch;
+
+- (void)turnOffTorch;
+
 @end

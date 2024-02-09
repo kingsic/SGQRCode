@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSArray *metadataObjectTypes;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @property (nonatomic, strong) dispatch_queue_t captureQueue;
+@property (nonatomic, strong) dispatch_queue_t runQueue;
+
 @end
 
 @implementation SGScanCode
@@ -40,7 +42,7 @@
 - (instancetype)init {
     if ([super init]) {
         self.captureQueue = dispatch_queue_create("com.SGQRCode.captureQueue", DISPATCH_QUEUE_CONCURRENT);
-        
+        self.runQueue = dispatch_queue_create("com.SGQRCode.runqueue", DISPATCH_QUEUE_SERIAL);
         /// 将设备输入对象添加到会话对象中
         if ([self.session canAddInput:self.deviceInput]) {
             [self.session addInput:self.deviceInput];
@@ -53,8 +55,9 @@
 
 #pragma mark - - .h公开的属性
 - (void)setPreview:(UIView *)preview {
-    _preview = preview;
-    [preview.layer insertSublayer:self.videoPreviewLayer atIndex:0];
+  _preview = preview;
+  [preview.layer insertSublayer:self.videoPreviewLayer atIndex:0];
+  [self addEventObserver];
 }
 
 - (void)setDelegate:(id<SGScanCodeDelegate>)delegate {
@@ -124,15 +127,19 @@
 }
 
 - (void)startRunning {
+  dispatch_async(self.runQueue, ^{
     if (![self.session isRunning]) {
         [self.session startRunning];
     }
+  });
 }
 
 - (void)stopRunning {
+  dispatch_async(self.runQueue, ^{
     if ([self.session isRunning]) {
         [self.session stopRunning];
     }
+  });
 }
 
 - (void)playSoundEffect:(NSString *)name {
@@ -148,6 +155,41 @@
 }
 
 
+- (void)turnOnTorch {
+    AVCaptureDevice *device = self.device;
+    if ([device hasTorch]) {
+        BOOL locked = [device lockForConfiguration:nil];
+        if (locked) {
+            [device setTorchMode:AVCaptureTorchModeOn];
+            [device unlockForConfiguration];
+        }
+    }
+}
+
+- (void)turnOffTorch {
+  AVCaptureDevice *device = self.device;
+    if ([device hasTorch]) {
+        [device lockForConfiguration:nil];
+        [device setTorchMode:AVCaptureTorchModeOff];
+        [device unlockForConfiguration];
+    }
+}
+
+
+#pragma mark - 屏幕旋转
+- (void)addEventObserver{
+  __weak typeof(self) weakSelf = self;
+  void(^result)(NSNotification* ) = ^(NSNotification* notification){
+    if(nil == weakSelf){return;}
+    AVCaptureConnection* connection = weakSelf.videoPreviewLayer.connection;
+    if(NO == connection.isVideoOrientationSupported){return;}
+    [connection setVideoOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+    weakSelf.videoPreviewLayer.frame = weakSelf.preview.bounds;
+  };
+  [[NSNotificationCenter defaultCenter]addObserverForName:@"SGScanViewBoundUpdate" object:nil queue:[NSOperationQueue mainQueue] usingBlock:result];
+  [[NSNotificationCenter defaultCenter]addObserverForName:UIApplicationDidChangeStatusBarOrientationNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:result];
+}
+
 #pragma mark - - 内部属性
 - (AVCaptureSession *)session {
     if (!_session) {
@@ -159,7 +201,20 @@
 
 - (AVCaptureDevice *)device {
     if (!_device) {
-        _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+      _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+      if (@available(iOS 13.0, *)) {
+        AVCaptureDeviceDiscoverySession *discoverySession = [AVCaptureDeviceDiscoverySession
+                                                             discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInDualWideCamera]
+                                                             mediaType:AVMediaTypeVideo
+                                                             position:AVCaptureDevicePositionBack];
+        // 获取发现的设备数组
+        NSArray<AVCaptureDevice *> *devices = discoverySession.devices;
+        // 选择其中一个摄像头设备，例如第一个
+        if (devices.count > 0) {
+          AVCaptureDevice *selectedDevice = devices.firstObject;
+          _device = selectedDevice;
+        }
+      }
     }
     return _device;
 }
@@ -191,7 +246,6 @@
     if (!_videoPreviewLayer) {
         _videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
         _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        _videoPreviewLayer.frame = self.preview.frame;
     }
     return _videoPreviewLayer;
 }
